@@ -5,13 +5,14 @@
 2. Go to our project repository: https://github.com/Pointe-Blank/Point-Blank
 3. Fork the Point-Blank repository to your own Github account.
 4. Clone the Point-Blank repository from your Github account to your local machine.
-  - git clone https://github.com/Pointe-Blank/Point-Blank
-5. Add a remote upstream. 
+  - git clone https://github.com/<your-github-username>/Point-Blank
+5. cd into cloned repo.
+6. Add a remote upstream. 
   - git remote add central https://github.com/Pointe-Blank/Point-Blank
   - **central** is an alias for our Point Blank's central repository. You can name it anything you want. 
   - **upstream** is actually the most commonly used alias, but **central** makes more semantic sense for now.
   - Now we have an easy way to **pull** from our central repository to keep our local repository up-to-date.
-6. Switch to the dev branch.
+7. Switch to the dev branch.
   - git checkout dev
   - ***IMPORTANT***: Never ever work on the master branch!
 
@@ -21,7 +22,7 @@
   - **central** is the alias we set for our central repository.
   - **dev** means we are only pulling in the code from central's **dev** branch to our local **dev** branch. 
 2. Create and switch to a feature branch.
-  - git checkout -b feat/feature-name
+  - git checkout -b feat/<feature-name>
   - Use dashes to replace spaces for the feature name.
   - Prefix the branch with **feat/**.
   - The **-b** flag means **create a new branch and switch to that branch**.
@@ -31,23 +32,25 @@
 5. When you're done with the feature:
   - git add .
   - git commit -m "..."
-6. Switch back to dev branch.
+6. Push the feature branch to your personal Github repository that's in the cloud.
+  - git push origin feat/<feature-name>
+7. Switch back to dev branch.
   - git checkout dev
-7. Update your local repository with the most up-to-date code from the central repository.
+8. Update your local repository with the most up-to-date code from the central repository.
   - git pull --rebase central dev
-8. Merge your completed feature branch into the dev branch. **Let me know immediately if you encounter merge conflicts.**
-  - git merge feat/feature-name
-9. Push dev branch to your Github repository.
+9. Merge your completed feature branch into the dev branch. **Let me know immediately if you encounter merge conflicts.**
+  - git merge feat/<feature-name>
+10. Push dev branch to your Github repository.
   - git push origin dev
-10. Make a pull request to Point Blank central repository.
+11. Make a pull request to Point Blank central repository.
   - ***IMPORTANT***: Request to merge your **dev branch** into the central repository's **dev branch**.
-11. Slack the Scrum Master.
+12. Slack the Scrum Master immediately.
 
 ## Process for Continuing Work on a Previous Feature ##
 1. Update your local repository with the most up-to-date code from the central repository.
   - git pull --rebase central dev
 2. Switch to the feature branch you want to work on.
-  - git checkout feat/feature-name
+  - git checkout feat/<feature-name>
   - There is no **-b** flag because that branch now already exists.
 3. Continue development on that branch!
 4. **Commit often.**
@@ -59,7 +62,7 @@
 7. Update your local repository with the most up-to-date code from the central repository.
   - git pull --rebase central dev
 8. Merge your completed feature branch into the dev branch. **Let me know immediately if you encounter merge conflicts.**
-  - git merge feat/feature-name
+  - git merge feat/<feature-name>
 9. Push dev branch to your Github repository.
   - git push origin dev
 10. Make a pull request to Point Blank central repository.
