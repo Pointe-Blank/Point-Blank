@@ -16,16 +16,6 @@ corruption, and so on are the triggers that turn a POI into a POS (Piece of S***
   - __Scrum Master__: Bruce Liu
   - __Development Team Members__: Jose Cuchilla, Jongsoo Yoon
 
-## Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
-1. [Contributing](#contributing)
-
 ## Usage
 ```
  npm install
@@ -45,6 +35,6 @@ corruption, and so on are the triggers that turn a POI into a POS (Piece of S***
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See **CONTRIBUTING.md** for contribution guidelines.
 
 [![js-semistandard-style](https://cdn.rawgit.com/flet/semistandard/master/badge.svg)](https://github.com/Flet/semistandard)
