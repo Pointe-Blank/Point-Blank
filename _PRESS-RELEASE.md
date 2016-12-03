@@ -1,5 +1,6 @@
 # Point Blank #
 ***Go and get your point across.***
+
 Point Blank is a platform that bluntly reflects how the general populace feels about public figures. 
 
 ## Overview ##
