@@ -25,7 +25,7 @@
   - Use dashes to replace spaces for the feature name.
   - Prefix the branch with **feat/**.
   - The **-b** flag means **create a new branch and switch to that branch**.
-  -**Step Purpose**: We want to work on features on a dedicated feature branch. This prevents merge conflicts down the line.
+  - **Step Purpose**: We want to work on features on a dedicated feature branch. This prevents merge conflicts down the line.
 3. Develop on your new feature branch!
 4. **Commit often.**
 5. When you're done with the feature:
@@ -41,7 +41,7 @@
   - git push origin dev
 10. Make a pull request to Point Blank central repository.
   - ***IMPORTANT***: Request to merge your **dev branch** into the central repository's **dev branch**.
-11. Slack the scrummaster.
+11. Slack the Scrum Master.
 
 ## Process for Continuing Work on a Previous Feature ##
 1. Update your local repository with the most up-to-date code from the central repository.
