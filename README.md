@@ -35,6 +35,6 @@ corruption, and so on are the triggers that turn a POI into a POS (Piece of S***
 
 ## Contributing
 
-See **CONTRIBUTING.md** for contribution guidelines.
+See **_CONTRIBUTING.md** for contribution guidelines.
 
 [![js-semistandard-style](https://cdn.rawgit.com/flet/semistandard/master/badge.svg)](https://github.com/Flet/semistandard)
