@@ -3,8 +3,8 @@
 Point Blank is a platform that bluntly reflects how the general populace feels about public figures. 
 
 ## Overview ##
-Point Blank aims to crowdsource public opinion to gain a better understanding of society's perceptions
-toward today's Persons of Influence (POI). POI include but are not limited to celebrities, political/religious
+Point Blank aims to crowdsource public opinion to better understand how society perceives today's 
+Persons of Influence (POI). POI include but are not limited to celebrities, political/religious
 figures, scholars, and more. POI are not necessarily positive influences on society. Their status as 
 well-known public figures means their actions can always be readily scrutinized. Point Blank strives to 
 recognize POI who have made a positive impact to make the world a better place, and at the same time, 
@@ -36,4 +36,4 @@ doesn't only have one chapter.
 ## Customer Quote ##
 "Wow, Bill Cosby's approval ratings sure took a sharp turn that year."
 
-## What are you waiting for? Go and get your point across. ##
+** What are you waiting for? Go and get your point across. **
