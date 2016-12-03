@@ -1,5 +1,5 @@
 # Point Blank #
-## Go and get your point across. ##
+***Go and get your point across.***
 Point Blank is a platform that bluntly reflects how the general populace feels about public figures. 
 
 ## Overview ##
@@ -36,4 +36,4 @@ doesn't only have one chapter.
 ## Customer Quote ##
 "Wow, Bill Cosby's approval ratings sure took a sharp turn that year."
 
-**What are you waiting for? Go and get your point across.**
+***What are you waiting for? Go and get your point across.***
