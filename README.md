@@ -17,6 +17,7 @@ corruption, and so on are the triggers that turn a POI into a POS (Piece of S***
   - __Development Team Members__: Jose Cuchilla, Jongsoo Yoon
 
 ## Usage
+Make sure that Nodejs is installed.
 ```
  npm install
  npm start
@@ -24,7 +25,7 @@ corruption, and so on are the triggers that turn a POI into a POS (Piece of S***
 
 ## Technologies
 * [Angular 1.5.9](https://angularjs.org/)
-* [Angular-Route] (https://www.npmjs.com/package/angular-route)
+* [Angular-UI-Router] (https://www.npmjs.com/package/angular-route)
 * [Express](http://expressjs.com)
 * [Node] (https://github.com/felixge/node-mysql)
 * [PostgreSQL] (https://www.postgresql.org/)
