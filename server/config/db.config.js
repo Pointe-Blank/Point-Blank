@@ -1,5 +1,6 @@
 const dburl = // MARK, FILL THIS IN
 
+const dbConnection = // MARK, connect our db here!;
 // Don't delete. May be useful later.
 // db.on('connected', function () {
 //   console.log('Connected to database successfully.');
@@ -26,6 +27,7 @@ const dburl = // MARK, FILL THIS IN
 //     process.kill(process.pid, 'SIGUSR2');
 //   });
 // });
+module.exports = dbConnection;
 
 require('../api/poi/poi.model.js');
 require('../api/users/users.model.js');
