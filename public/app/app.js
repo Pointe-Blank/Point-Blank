@@ -3,7 +3,7 @@
 
   angular
     .module('point-blank', ['ui.router'])
-    .config(config);
+    .config(config)
 
   config.$inject = ['$stateProvider', '$urlRouterProvider']
 
