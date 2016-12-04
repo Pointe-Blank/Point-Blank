@@ -1,6 +1,6 @@
 (function () {
   angular
-        .module('point-blank')
+        .module('point-blank.navigation')
         // .controller('NavBarController')
         .directive('navBar', function () {
           return {
