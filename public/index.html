@@ -1,26 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="point-blank">
   <head>
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/assets/css/style.css" rel="stylesheet">
+    <!-- Below node_module script sourcing is possible because of middleware in app.js-->
+
   </head>
   <body>
-    <nav-bar> </nav-bar>
-    <h1>TESTING</h1>
-    
-    <!-- Below node_module script sourcing is possible because of middleware in app.js-->
+
+    <nav-bar></nav-bar>
+
+    <div ui-view></div>
+
+    <!-- jquery -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!-- bootstrap -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Angular Dependencies-->
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-    
-    <!--shared navbar-->
-    <script src="./app/shared/navigation/navBar.module.js"></script>
-    <!--<script src="./app/shared/navigation/navBar.controller.js"></script>-->
-    <script src="./app/shared/navigation/navBar.directive.js"></script>
 
-    
-    <!--Bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- JS -->
+    <script src="/app/app.js"></script>
+
+    <!--shared navbar-->
+    <!--<script src="./app/shared/navigation/navBar.controller.js"></script>-->
+    <script src="/app/shared/navigation/navBar.directive.js"></script>
+
+    <!-- Splash -->
+    <script src="/app/splash/splash.module.js"></script>
+    <script src="/app/splash/splash.controller.js"></script>
+    <script src="/app/splash/splash.services.js"></script>
+
+    <!-- Search -->
+    <script src="/app/search/search.module.js"></script>
+    <script src="/app/search/search.controller.js"></script>
+    <script src="/app/search/search.services.js"></script>
+
+    <!-- POI -->
+    <script src="/app/poi/poi.module.js"></script>
+    <script src="/app/poi/poi.controller.js"></script>
+    <script src="/app/poi/poi.services.js"></script>
+
+    <!-- Authentication -->
+    <script src="/app/auth/auth.module.js"></script>
+    <script src="/app/auth/auth.controller.js"></script>
+    <script src="/app/auth/auth.services.js"></script>
+
   </body>
 </html>
