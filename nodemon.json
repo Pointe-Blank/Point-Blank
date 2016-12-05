@@ -1,4 +1,4 @@
 {
-  "ignore": ["public/*"],            //do not restart server when files change in the public folder
-  "verbose": true                    //nodemon outputs more detailed info in the console
+  "ignore": ["public/*"],
+  "verbose": true                    
 }

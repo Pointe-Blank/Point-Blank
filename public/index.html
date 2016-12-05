@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="point-blank">
   <head>
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/assets/css/style.css" rel="stylesheet">
+    <!-- Below node_module script sourcing is possible because of middleware in app.js-->
+
   </head>
   <body>
 
@@ -12,7 +14,7 @@
 
     <h1>TESTING</h1>
 
-    <!-- Below node_module script sourcing is possible because of middleware in app.js-->
+    <div ui-view > </div>
 
     <!-- Angular Dependencies-->
     <script src="node_modules/angular/angular.js"></script>
@@ -30,7 +32,13 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <!-- JS -->
-    <script src="./app/app.js"></script>
+    <script src="/app/app.js"></script>
 
+
+    <!-- Splash -->
+
+    <!-- Search -->
+
+    <!-- POI -->
   </body>
 </html>
