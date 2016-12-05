@@ -37,7 +37,7 @@ const dbConnection = new Sequelize('dburl');
 //     process.kill(process.pid, 'SIGUSR2');
 //   });
 // });
-module.exports = dbConnection
+module.exports = dbConnection;
 
 require('../api/poi/poi.model.js');
 require('../api/users/users.model.js');
