@@ -10,35 +10,38 @@
   </head>
   <body>
 
-    <nav-bar> </nav-bar>
+    <nav-bar></nav-bar>
 
-    <h1>TESTING</h1>
+    <div ui-view></div>
 
-    <div ui-view > </div>
+    <!-- jquery -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!-- bootstrap -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Angular Dependencies-->
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 
-    <!--shared navbar-->
-    <script src="./app/shared/navigation/navBar.module.js"></script>
-    <!--<script src="./app/shared/navigation/navBar.controller.js"></script>-->
-    <script src="./app/shared/navigation/navBar.directive.js"></script>
-
-    <!-- Jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-    <!-- bootstrap -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
     <!-- JS -->
     <script src="/app/app.js"></script>
 
+    <!--shared navbar-->
+    <!--<script src="./app/shared/navigation/navBar.controller.js"></script>-->
+    <script src="./app/shared/navigation/navBar.directive.js"></script>
 
     <!-- Splash -->
+    <script src=""></script>
 
     <!-- Search -->
+    <script src=""></script>
 
     <!-- POI -->
+    <script src=""></script>
+
+    <!-- Authentication -->
+    <script src=""></script>
+
   </body>
 </html>

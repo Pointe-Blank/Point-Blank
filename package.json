@@ -30,7 +30,9 @@
     "angular-ui-router": "^0.3.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
     "express": "^4.14.0",
+    "jquery": "^3.1.1",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "sequelize": "^3.27.0"
