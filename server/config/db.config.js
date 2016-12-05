@@ -1,8 +1,5 @@
 const Sequelize = require('sequelize');
-<<<<<<< HEAD
-=======
 const pg = require('pg');
->>>>>>> feat/backend-setup
 const creds = require('./credentials'); // grabbing the data from credentials.json
 
 /* NOTE: that file is gitignored, add instructions on how to get
@@ -46,11 +43,11 @@ dbConnection
   // })
 
 // process.once('SIGUSR2', function () {
-//   db.close(function () {
-//     console.log('Process terminated by nodemon.')
-//     process.kill(process.pid, 'SIGUSR2')
-//   })
-// })
+  //   db.close(function () {
+  //     console.log('Process terminated by nodemon.')
+  //     process.kill(process.pid, 'SIGUSR2')
+  //   })
+  // })
 
 module.exports = dbConnection;
 
