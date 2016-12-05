@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('point-blank')
+    .module('point-blank.splash')
     .factory('search-service', searchService);
 
   searchService.$inject = ['$http'];

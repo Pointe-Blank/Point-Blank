@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('point-blank', ['ui.router'])
+    .module('point-blank', ['ui.router', 'point-blank.splash', 'point-blank.poi', 'point-blank.search'])
     .config(config);
 
   function config ($stateProvider, $urlRouterProvider) {
