@@ -1,12 +1,17 @@
-// const jwt = require('jsonwebtoken');
+const passport = require('passport');
 const bcrypt = require('bcrypt-nodejs');
 
-exports.register = function (req, res) {
+exports.register = function () {
 
 };
 
 exports.login = function (req, res) {
 
+};
+
+exports.logout = function (req, res) {
+  req.logout();
+  res.redirect('/');
 };
 
 // authentication middleware
