@@ -1,11 +1,19 @@
 const Sequelize = require('sequelize');
 const creds = require('./credentials');  // grabbing the data from credentials.json
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9e68d279f371da1e63a616bfc53822cc279fab46
 /* NOTE: that file is gitignored, add instructions on how to get
          username and password!
 */
 
 // creates database connection credentials needed to connect to DB via Sequelize
+<<<<<<< HEAD
 const dburl = `postgres://${creds.username}:${creds.password}@tantor.db.elephantsql.com:5432/sritpzob`;
+=======
+const dburl = `postgres://${creds.username}:${creds.password}@tantor.db.elephantsql.com:5432/sritpzob`
+>>>>>>> 9e68d279f371da1e63a616bfc53822cc279fab46
 
 // MARK, connect our db here!;
 const dbConnection = new Sequelize('dburl');
