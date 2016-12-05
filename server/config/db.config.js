@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const creds = require('./credentials')  // grabbing the data from credentials.json
+const Sequelize = require('sequelize');
+const creds = require('./credentials');  // grabbing the data from credentials.json
 /* NOTE: that file is gitignored, add instructions on how to get
          username and password!
 */
@@ -38,6 +38,6 @@ const dbConnection = new Sequelize('dburl');
 // });
 module.exports = dbConnection
 
-require('../api/poi/poi.model.js')
-require('../api/users/users.model.js')
-require('../api/reviews/reviews.model.js')
+require('../api/poi/poi.model.js');
+require('../api/users/users.model.js');
+require('../api/reviews/reviews.model.js');
