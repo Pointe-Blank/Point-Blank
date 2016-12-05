@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 const Sequelize = require('sequelize');
 const creds = require('./credentials');  // grabbing the data from credentials.json
+=======
+const Sequelize = require('sequelize');
+const creds = require('./credentials');  // grabbing the data from credentials.json
+>>>>>>> db69e19e426f4f9c776aa43f381d05dc78efe431
 /* NOTE: that file is gitignored, add instructions on how to get
          username and password!
 */
@@ -8,7 +13,11 @@ const creds = require('./credentials');  // grabbing the data from credentials.j
 const dburl = `postgres://${creds.username}:${creds.password}@tantor.db.elephantsql.com:5432/sritpzob`
 
 // MARK, connect our db here!;
+<<<<<<< HEAD
 const dbConnection = new Sequelize('dburl');
+=======
+const dbConnection = new Sequelize('dburl');
+>>>>>>> db69e19e426f4f9c776aa43f381d05dc78efe431
 
 // Don't delete. May be useful later.
 // db.on('connected', function () {
@@ -38,6 +47,6 @@ const dbConnection = new Sequelize('dburl');
 // });
 module.exports = dbConnection
 
-require('../api/poi/poi.model.js');
-require('../api/users/users.model.js');
-require('../api/reviews/reviews.model.js');
+require('../api/poi/poi.model.js')
+require('../api/users/users.model.js')
+require('../api/reviews/reviews.model.js')
