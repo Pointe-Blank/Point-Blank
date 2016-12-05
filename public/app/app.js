@@ -6,11 +6,12 @@
     .config(config);
 
   function config ($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('splash', {
-      url: '/splash',
-      templateUrl: 'app/splash/splash.template.html',
-      controller: 'splash-controller as vm'
-    })
+    $stateProvider
+      .state('splash', {
+        url: '/',
+        templateUrl: 'app/splash/splash.template.html',
+        controller: 'splash-controller as vm'
+      })
       .state('search', {
         url: '/search',
         templateUrl: 'app/search/search.template.html',
