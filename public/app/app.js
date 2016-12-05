@@ -20,8 +20,17 @@
         url: '/poi',
         templateUrl: 'app/poi/poi.template.html',
         controller: 'poi-controller as vm'
+      })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'app/auth/signup.template.html',
+        controller: 'auth-controller as vm'
+      })
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'app/auth/signin.template.html',
+        controller: 'auth-controller as vm'
       });
-      // add auth when its finalized
 
     $urlRouterProvider.otherwise('/');
   }

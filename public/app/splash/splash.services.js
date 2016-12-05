@@ -8,5 +8,6 @@
   searchService.$inject = ['$http'];
 
   function searchService ($http) {
+    var getData;
   }
 })();
