@@ -12,7 +12,7 @@ const reviewsRoutes = require('./server/routes/reviews.routes.js');
 const usersRoutes = require('./server/routes/users.routes.js');
 
 app.set('port', process.env.PORT || 3000);
-app.set('json spaces', 2);  // pretty prints res.json
+app.set('json spaces', 2); // pretty prints res.json
 
 app.use(morgan('dev'));
 
@@ -31,4 +31,3 @@ app.use('/api/users', usersRoutes);
 app.listen(app.get('port'), function () {
   console.log('Server is listening on port', app.get('port'));
 });
-
