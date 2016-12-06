@@ -8,7 +8,7 @@ const POI = dbConnection.define('poi', {
     type: Sequelize.STRING
   },
   summary: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue: 'No summary provided.'
   },
   general_rating: {
