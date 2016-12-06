@@ -9,7 +9,7 @@
   function config ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('splash', {
-        url: '/',
+        url: '/splash',
         templateUrl: 'app/splash/splash.template.html',
         controller: 'splash-controller as vm'
       })

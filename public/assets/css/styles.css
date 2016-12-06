@@ -1,0 +1,11 @@
+#poi {
+    float: left;
+    width: 25%;
+    height: auto;
+}
+
+#pos {
+  /*float: right;*/
+  width: 25%;
+  height: auto;
+}
