@@ -7,10 +7,12 @@ const Review = dbConnection.define('review', {
     type: Sequelize.STRING
   },
   review_content: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue: 'No review provided.'
   },
   rating: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 5
   },
   created_at: {
     type: Sequelize.DATE
