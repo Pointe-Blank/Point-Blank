@@ -14,7 +14,7 @@ exports.getAllPOI = function (req, res) {
 
 exports.getOnePOIByName = function (req, res) {
   const POIName = req.params.name;
-  POI.findOne({ where: {name: 'POIName'} })
+  POI.findOne({ where: {name: POIName} })
     .then(function (poi) {
       res.status(200).json(poi);
     })
