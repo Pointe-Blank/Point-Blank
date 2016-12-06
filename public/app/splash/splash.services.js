@@ -17,10 +17,13 @@
         });
     };
 
-    var initPosSplash = function () {
-      return $http.get;
-    };
+    // later add params on these
 
-    var getSplashData = function () {};
+    var initPosSplash = function () {
+      return $http.get('api/poi')
+        .then(function (results) {
+          return results;
+        });
+    };
   }
 })();

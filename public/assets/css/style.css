@@ -16,3 +16,19 @@
 #filter {
     padding-left: 80px;
 }
+
+#poi {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#poiImage {
+  display:inline-block;
+  margin: 0 auto;
+}
+
+#jong {
+
+  height: 600px;
+  width: 460px;
+}
