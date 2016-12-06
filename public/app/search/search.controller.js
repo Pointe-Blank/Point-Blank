@@ -12,7 +12,11 @@
     vm.poiList;
 
     vm.init = function () {
-      vm.poiList = searchService.getInitData();
+      searchService.getInitData()
+      .then(function (results) {
+        vm.poiList = results;
+        console.log('on client! ', vm.poiList);
+      });
     };
     vm.init();
 
@@ -23,7 +27,6 @@
     vm.getPOI = function (poiInfo) {
       searchService.getPoiData(poiInfo);
       console.log('/poi/' + (poiInfo.split(' ').join('_')));
-      return $location.path('/poi');
       // .then(function () {
       //   return $location.path('/poi/' + (poiInfo.split(' ').join('_')));
       // })

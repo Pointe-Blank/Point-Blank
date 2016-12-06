@@ -29,7 +29,7 @@
   <div ng-repeat="poi in vm.poiList | filter : vm.searchTerm" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <br>
       <br>
-    <div class="table-responsive" ng-show="vm.all || vm.isPOS(poi)" id="photoBox">
+    <div class="table-responsive photoBox" ng-show="vm.all || vm.isPOS(poi)" id="">
         <a ng-click="vm.getPOI(poi.name)">
             <div class="col-sm-4 col-md-4 col-xs-4 image-container" id="photo">
                 <img class="photo-box-img" ng-src="{{poi.profile_image_url}}"></img>
