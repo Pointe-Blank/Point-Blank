@@ -51,8 +51,8 @@
     var getPoiData = function (poiInfo) {
       console.log('its working', poiInfo);
       // return $http({
-      //   method: 'POST',
-      //   url: '/api/poi/' + poiInfo,
+      //   method: 'GET',
+      //   url: '/api/poi/' + (poiInfo.split(' ').join('_')),
       //   headers: {'Content-Type': 'application/json'},
       //   data: {'name': 'poiInfo'}
       // })
