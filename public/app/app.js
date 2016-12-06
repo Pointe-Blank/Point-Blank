@@ -36,7 +36,7 @@
         templateUrl: 'app/auth/signin.template.html'
       });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/splash');
   }
 
   function run ($rootScope, authFactory, $state) {
