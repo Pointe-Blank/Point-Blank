@@ -1,12 +1,21 @@
-/*#photoBox {
-    border: 4px solid lightslategrey;
-}*/
+#photoBox {
+    border: 2px solid #DCDCDC;
+}
 
-/*#photo {
-    padding-left: 200px;
+#photo {
+    padding-left: 100px;
     padding-top: 25px;
-} */
+    display: inline;
+} 
 
 h1 {
     text-align: center;
+}
+
+#resultName {
+    color: black;
+}
+
+#filter {
+    padding-left: 80px;
 }
