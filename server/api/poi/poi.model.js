@@ -7,13 +7,16 @@ const POI = dbConnection.define('poi', {
     type: Sequelize.STRING
   },
   summary: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue: 'No summary provided.'
   },
   general_rating: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: -1
   },
   personal_rating: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: -1
   },
   profile_image_url: {
     type: Sequelize.STRING
