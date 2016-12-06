@@ -11,7 +11,7 @@
 
   function splashService ($http) {
     var initPoiSplash = function () {
-      return $http.get('/api/poi')
+      return $http.get('/api/poi/Ricky%20Walker')
         .then(function (results) {
           return results;
         });
@@ -20,7 +20,7 @@
     // later add params on these
 
     var initPosSplash = function () {
-      return $http.get('api/poi')
+      return $http.get('api/poi/David%20Miscavige')
         .then(function (results) {
           return results;
         });
