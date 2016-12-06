@@ -19,6 +19,9 @@ const reviewsRoutes = require('./server/routes/reviews.routes.js');
 const usersRoutes = require('./server/routes/users.routes.js');
 const fbAuthRoutes = require('./server/routes/fbAuth.routes.js');
 
+// auth middleware
+const isLoggedIn = require('./server/middleware/auth.middleware.js');
+
 app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2); // pretty prints res.json
 
@@ -47,6 +50,9 @@ app.use('/api/poi', POIRoutes);
 app.use('/api/review', reviewsRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/auth/facebook', fbAuthRoutes);
+app.get('/auth', isLoggedIn, function (req, res) {
+  res.send(req.user);
+});
 
 app.listen(app.get('port'), function () {
   console.log('Server is listening on port', app.get('port'));
