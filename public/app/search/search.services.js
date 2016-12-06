@@ -34,7 +34,12 @@
       profile_image_url: 'http://avatarbox.net/avatars/img40/batman_eyes_avatar_picture_32033.gif'
     }];
 
-    var singlePoiData;
+    var singlePoiData = [{
+      name: 'George Bush',
+      summary: 'Previous president of the US. Current president elect of the US. is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
+      general_rating: 10,
+      profile_image_url: 'https://www.nbc.com/the-tonight-show/content/sites/nbcutsjf/files/styles/snl_100x100/public/images/2015/02/05/willferrell_imp_georgewbush_450x450_ko.jpg?itok=olyOhM6h'
+    }];
 
     var getInitData = function () {
       return allPoiData;
