@@ -6,11 +6,20 @@ const User = dbConnection.define('user', {
   name: {
     type: Sequelize.STRING
   },
+  token: {
+    type: Sequelize.STRING
+  },
+  facebookId: {
+    type: Sequelize.STRING
+  },
   credibility_upvotes: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+
   },
   credibility_downvotes: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 });
 
