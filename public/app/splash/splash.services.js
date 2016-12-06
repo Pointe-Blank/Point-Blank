@@ -3,11 +3,11 @@
 
   angular
     .module('point-blank.splash')
-    .factory('search-service', searchService);
+    .factory('splash-service', splashService);
 
-  searchService.$inject = ['$http'];
+  splashService.$inject = ['$http'];
 
-  function searchService ($http) {
+  function splashService ($http) {
     var getData;
   }
 })();
