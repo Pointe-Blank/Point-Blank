@@ -1,6 +1,8 @@
 // reviews schema/model
 const Sequelize = require('sequelize');
 const dbConnection = require('../../config/db.config.js');
+const POI = require('../poi/poi.model.js');
+const User = require('../users/users.model.js');
 
 const Review = dbConnection.define('review', {
   review_type: {
