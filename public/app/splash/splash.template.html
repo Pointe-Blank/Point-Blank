@@ -1,10 +1,14 @@
 <div class="container">
-  <div id="poi">
+  <div id="poi" ng-init="vm.poiInit()">
     <div id="poiImage">
-      <img id="jong" src="/../../assets/images/jong.jpg" ui-sref="poi" class="thumbnail">
+      <img id="portrait" ng-src="{{vm.poiImage}}" ui-sref="poi" class="thumbnail">
+      <p>{{vm.poiName}}</p>
+      <p>{{vm.poiSummary}}</p>
     </div>
     <div id="poiImage">
-      <img id="jong" src="/../../assets/images/pharmabro.jpeg"  class="thumbnail">
+      <img id="portrait" ng-src="{{vm.posImage}}" ui-sref="poi" class="thumbnail">
+      <p>{{vm.posName}}</p>
+      <p>{{vm.posSummary}}</p>
     </div>
   </div>
 </div>
