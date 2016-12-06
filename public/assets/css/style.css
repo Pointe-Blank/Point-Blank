@@ -28,7 +28,14 @@
 }
 
 #portrait {
-
   height: 600px;
   width: 460px;
+}
+
+.mainPoi {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
 }
