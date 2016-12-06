@@ -7,7 +7,7 @@
   searchService.$inject = ['$http'];
 
   function searchService ($http) {
-    var data = [{
+    var allPoiData = [{
       name: 'Donald Trump',
       summary: 'Current president elect of the US. is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
       general_rating: 20,
@@ -34,17 +34,41 @@
       profile_image_url: 'http://avatarbox.net/avatars/img40/batman_eyes_avatar_picture_32033.gif'
     }];
 
+    var singlePoiData;
+
     var getInitData = function () {
-      return data;
+      return allPoiData;
+      // return $http({
+      //   method: 'get',
+      //   url: '/api/poi',
+      //   headers: {'Content-Type': 'application/json'}
+      // })
+      // .then(function (results) {
+      //   return results.data;
+      // });
     };
 
     var getPoiData = function (poiInfo) {
       console.log('its working', poiInfo);
+      // return $http({
+      //   method: 'POST',
+      //   url: '/api/poi/' + poiInfo,
+      //   headers: {'Content-Type': 'application/json'},
+      //   data: {'name': 'poiInfo'}
+      // })
+      // .then(function (results) {
+      //   singlePoiData = results.data;
+      // });
+    };
+
+    var grabSinglePoiData = function () {
+      return singlePoiData;
     };
 
     return {
       getInitData: getInitData,
-      getPoiData: getPoiData
+      getPoiData: getPoiData,
+      grabSinglePoiData: grabSinglePoiData
     };
   }
 })();
