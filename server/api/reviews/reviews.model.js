@@ -9,7 +9,7 @@ const Review = dbConnection.define('review', {
     type: Sequelize.STRING
   },
   review_content: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue: 'No review provided.'
   },
   rating: {
