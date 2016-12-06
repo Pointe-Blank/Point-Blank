@@ -8,6 +8,13 @@
   splashService.$inject = ['$http'];
 
   function splashService ($http) {
-    var getData;
+    var initSplash = function () {
+      return $http.get('/api/poi')
+        .then(function (results) {
+          return results;
+        });
+    };
+
+    var getSplashData = function () {};
   }
 })();

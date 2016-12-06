@@ -22,7 +22,7 @@
         }
       })
       .state('poi', {
-        url: '/poi',
+        url: '/poi/:name',
         templateUrl: 'app/poi/poi.template.html',
         controller: 'poi-controller as vm'
       })
