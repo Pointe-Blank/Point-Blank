@@ -5,7 +5,9 @@
     .directive('navBar', function () {
       return {
         restrict: 'E',
-        templateUrl: '/app/shared/navigation/navBar.template.html'
+        templateUrl: '/app/shared/navigation/navBar.template.html',
+        controller: 'NavBarController',
+        controllerAs: 'vm'
       };
     });
 })();
