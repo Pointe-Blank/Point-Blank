@@ -1,7 +1,7 @@
 // Users schema/model.
 const Sequelize = require('sequelize');
 const dbConnection = require('../../config/db.config.js');
-const Review = require('../reviews/reviews.model.js');
+const Reviews = require('../reviews/reviews.model.js');
 
 const User = dbConnection.define('user', {
   name: {
@@ -24,7 +24,6 @@ const User = dbConnection.define('user', {
 });
 
 // relation setup
-// User.belongsTo(Review, {foreignKey: 'user_id'})
 
 // will only create table once; use {force: true} to override table
 User.sync().then(function () {

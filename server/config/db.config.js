@@ -51,6 +51,6 @@ dbConnection
 
 module.exports = dbConnection;
 
-require('../api/poi/poi.model.js');
-require('../api/users/users.model.js');
 require('../api/reviews/reviews.model.js');
+require('../api/users/users.model.js');
+require('../api/poi/poi.model.js');
