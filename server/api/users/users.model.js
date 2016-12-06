@@ -15,7 +15,6 @@ const User = dbConnection.define('user', {
   credibility_upvotes: {
     type: Sequelize.INTEGER,
     defaultValue: 0
-
   },
   credibility_downvotes: {
     type: Sequelize.INTEGER,
