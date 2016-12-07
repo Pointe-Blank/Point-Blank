@@ -17,18 +17,29 @@
     vm.posSummary = '';
 
     let poiInit = function () {
-      splashService.initPoiSplash()
-        .then(function (result) {
-          console.log('THIS IS RESULT', result);
-          vm.poiName = result.data.name;
-          vm.poiImage = result.data.profile_image_url;
-          vm.poiSummary = result.data.summary;
-        });
-      splashService.initPosSplash()
-        .then(function (result) {
-          vm.posName = result.data.name;
-          vm.posImage = result.data.profile_image_url;
-          vm.posSummary = result.data.summary;
+      splashService.getPOIList()
+        .then(function (response) {
+          let goodPeople = [];
+          let badPeople = [];
+
+          response.data.forEach(function (person) {
+            if (person.general_rating < 50) {
+              badPeople.push(person);
+            } else {
+              goodPeople.push(person);
+            }
+          });
+
+          let randomPOI = goodPeople[Math.floor(Math.random() * goodPeople.length)];
+          let randomPOS = badPeople[Math.floor(Math.random() * badPeople.length)];
+
+          vm.poiName = randomPOI.name;
+          vm.poiImage = randomPOI.profile_image_url;
+          vm.poiSummary = randomPOI.summary;
+
+          vm.posName = randomPOS.name;
+          vm.posImage = randomPOS.profile_image_url;
+          vm.posSummary = randomPOS.summary;
         });
     };
 

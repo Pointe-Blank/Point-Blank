@@ -8,23 +8,15 @@
   splashService.$inject = ['$http'];
 
   function splashService ($http) {
-    var initPoiSplash = function () {
-      return $http.get('/api/poi/Mark%20Zuckerberg')
-        .then(function (results) {
-          return results;
-        });
-    };
-
-    var initPosSplash = function () {
-      return $http.get('api/poi/Martin%20Shkreli')
+    var getPOIList = function () {
+      return $http.get('/api/poi')
         .then(function (results) {
           return results;
         });
     };
 
     return {
-      initPoiSplash: initPoiSplash,
-      initPosSplash: initPosSplash
+      getPOIList: getPOIList
     };
   }
 })();
