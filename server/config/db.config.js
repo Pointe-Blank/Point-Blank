@@ -35,17 +35,10 @@ dbConnection
   //   console.log('Connectioned failed with error:', err)
   // })
 
-// process.on('SIGINT', function () {
+// db.on('SIGINT', function () {
   //   db.close(function () {
   //     console.log('Process terminated. SOME DUDE PRESSED CONTROL+C!?')
   //     process.exit(0)
-  //   })
-  // })
-
-// process.once('SIGUSR2', function () {
-  //   db.close(function () {
-  //     console.log('Process terminated by nodemon.')
-  //     process.kill(process.pid, 'SIGUSR2')
   //   })
   // })
 

@@ -1,38 +1,47 @@
+<!-- BIG CONTAINER-->
 <div>
-  <h1>{{ vm.poi.name }}</h1>
-  <h3>General Rating: {{vm.poi.personal_rating}}</h3>
-    <div class="col-sm-12 col-md-12 col-xs-12 image-container mainPoi">
+  <!-- LEFT COLUMN -->
+  <div class="col-md-4 image-container mainPoi">
+    <!-- IMAGE -->
+    <div>
       <img class="photo-box-img" ng-src= "{{ vm.poi.profile_image_url }}"></img>
-      <br>
-      <br>
     </div>
+    <!-- END IMAGE -->
 
-    <div class="col-sm-12 col-md-12 col-xs-12 mainPoi">
-      <div>{{ vm.poi.summary }}</div>
+    <!-- ADD REVIEW -->
+    <div>
+      <ng-form>
+        <div class="form-group">
+          <label for="rating">General Rating</label>
           <br>
+          <input type="text" ng-model="vm.data.rating" id="rating" placeholder="">
           <br>
+          <label for="textarea">Review</label>
           <br>
+          <textarea name="textarea" rows="5" cols="50" ng-model="vm.data.review_content" id="review">Write something here</textarea>
+          <!--<text type="text" ng-model="data.review" id="review" placeholder="">-->
           <br>
+          <button type="button" class="btn-default" ng-click="vm.addReview(vm.data)">Add Review</button>
+        </div>
+
+      </ng-form>
+
     </div>
+    <!-- END ADD REVIEW -->
 
-    <ng-form>
-      <div class="form-group">
-        <label for="rating">Personal Rating</label>
-        <br>
-        <input type="number" ng-model="vm.data.rating" id="rating" placeholder="0-100">
-        <br>
-        <label for="textarea">Review</label>
-        <br>
-        <textarea name="textarea" rows="5" cols="50" ng-model="vm.data.review_content" id="review">Write something here</textarea>
-        <!--<text type="text" ng-model="data.review" id="review" placeholder="">-->
-        <br>
-        <button type="button" class="btn-default" ng-click="vm.addReview(vm.data)">Add Review</button>
-      </div>
-      
-    </ng-form>
+  </div>
+  <!-- END LEFT COLUMN -->
 
+  <!-- RIGHT COLUMN #1 (POI NAME/INFO)-->
+  <div class="col-md-8">
+    <h1>{{ vm.poi.name }}</h1>
+    <h3>General Rating: {{vm.poi.personal_rating}}</h3>
+    <div>{{ vm.poi.summary }}</div>
+  </div>
+  <!-- END RIGHT COLUMN #1 -->
 
-
+  <!-- RIGHT COLUMN #2 (REVIEWS) -->
+  <div class="col-md-8">
     <h3>Reviews</h3>
     <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
@@ -43,13 +52,19 @@
             </div>
 
             <div class="col-sm-4 col-md-4 col-xs-4">
-                <h3>{{ review.review_content }}</h3>
+                <h3>{{ review.review_content || review.reviewContent }}</h3>
             </div>
-            
+
             <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
-                <h3>Review Rating: <h2>{{ review.rating }} </h2></h3>
+                <h3>General Rating: <h2 class="genRating">{{ review.rating }} </h2></h3>
             </div>
     </div>
   </div>
+  </div>
+  <!-- END RIGHT COLUMN #2 -->
+
+  <!--  -->
+  <!--  -->
 
 </div>
+<!-- End BIG CONTAINER -->
