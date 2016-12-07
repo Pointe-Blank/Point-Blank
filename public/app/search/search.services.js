@@ -18,25 +18,27 @@
         headers: {'Content-Type': 'application/json'}
       })
       .then(function (results) {
-        console.log('this is the data', results);
+        // console.log('this is the data', results);
         return results.data;
       });
     };
 
     var getPoiData = function (poiInfo) {
-      console.log('its working', poiInfo);
-      // return $http({
-      //   method: 'GET',
-      //   url: '/api/poi/' + (poiInfo.split(' ').join('_')),
-      //   headers: {'Content-Type': 'application/json'},
-      //   data: {'name': 'poiInfo'}
-      // })
-      // .then(function (results) {
-      //   singlePoiData = results.data;
-      // });
+      // console.log(poiInfo);
+      return $http({
+        method: 'GET',
+        url: '/api/poi/' + poiInfo,
+        headers: {'Content-Type': 'application/json'},
+        data: {'name': 'poiInfo'}
+      })
+      .then(function (results) {
+        // console.log('inside services', results);
+        singlePoiData = results.data;
+      });
     };
 
     var grabSinglePoiData = function () {
+      // console.log('heres the single poi ', singlePoiData);
       return singlePoiData;
     };
 

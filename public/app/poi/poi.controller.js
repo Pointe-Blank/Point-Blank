@@ -46,7 +46,12 @@
 
     vm.init = function () {
       vm.poi = searchService.grabSinglePoiData();
+      console.log('data ', vm.poi);
     };
     vm.init();
+
+    vm.addReview = function (poireview) {
+      console.log('heres a poi review ', poireview);
+    };
   }
 })();

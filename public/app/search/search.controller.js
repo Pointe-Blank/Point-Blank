@@ -15,7 +15,7 @@
       searchService.getInitData()
       .then(function (results) {
         vm.poiList = results;
-        console.log('on client! ', vm.poiList);
+        // console.log('on client! ', vm.poiList);
       });
     };
     vm.init();
@@ -25,14 +25,15 @@
     };
 
     vm.getPOI = function (poiInfo) {
-      searchService.getPoiData(poiInfo);
-      console.log('/poi/' + (poiInfo.split(' ').join('_')));
-      // .then(function () {
-      //   return $location.path('/poi/' + (poiInfo.split(' ').join('_')));
-      // })
-      // .catch(function (err) {
-      //   console.log(err);
-      // });
+      searchService.getPoiData(poiInfo)
+      .then(function () {
+        // console.log('/poi/' + (poiInfo.split(' ').join('_')));
+        return $location.path('/poi');
+        // return $location.path('/poi/' + poiInfo);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
     };
   }
 })();
