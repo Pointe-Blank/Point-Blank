@@ -1,8 +1,3 @@
-div {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 .photoBox {
     border: 2px solid #DCDCDC;
 }
@@ -70,7 +65,7 @@ h3 {
 
 /* CUSTOM DESIGN */
 .main-container {
-  background: : #90A4AE;
+  background: #90A4AE;
 }
 
 .box-shadow {
@@ -86,4 +81,10 @@ h3 {
 
 .standard-text {
   word-wrap: break-word;
+}
+
+#reviewCount {
+  text-align: center;
+  padding: 140px 0 0 0;
+  font-size: 40px;
 }
