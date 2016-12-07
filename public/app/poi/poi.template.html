@@ -16,7 +16,7 @@
         <form action="#">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <label for="rating">General Rating</label>
-            <input class="mdl-slider mdl-js-slider" ng-model="vm.data.rating" id="rating" type="range" min="0" max="100" value="50" tabindex="0">
+            <input class="mdl-slider mdl-js-slider" ng-model="vm.rating" id="rating" type="range" min="0" max="100" value="50" tabindex="0">
             <!-- <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" ng-model="vm.data.rating" id="rating"> -->
             <label class="mdl-textfield__label" for="rating"></label>
             <span class="mdl-textfield__error">Needs to be 0-100!</span>
@@ -24,7 +24,7 @@
 
           <div class="mdl-textfield mdl-js-textfield">
             <label for="textarea">Review</label>
-            <textarea class="mdl-textfield__input" name="textarea" rows="3" cols="45" ng-model="vm.data.review_content" id="review"></textarea>
+            <textarea class="mdl-textfield__input" name="textarea" rows="3" cols="45" ng-model="vm.review_content" id="review"></textarea>
           </div>
           <div>
             <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="vm.addReview(vm.data);">Submit</button>
