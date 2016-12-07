@@ -26,11 +26,14 @@
     };
     vm.init();
 
-    vm.addReview = function (poireview) {
+    vm.addReview = function () {
+      let poireview = {};
       poireview.reviewType = 'general';
-      poireview.userId = 1;
+      poireview.userId = $rootScope.id;
       poireview.poiId = vm.poi.id;
       poireview.reviewer_name = $rootScope.name;
+      poireview.review_content = vm.review_content;
+      poireview.rating = vm.rating;
 
       vm.reviews.unshift(poireview);
       poiService.addReviewPoiData(poireview)
