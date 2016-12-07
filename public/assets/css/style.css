@@ -92,4 +92,31 @@ h3 {
 #genReviewCount {
    color: black;
    text-align: center;
+ }
+
+#modal-header {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 38px;
+}
+
+.modal-title {
+  font-family: 'Voltaire', sans-serif;
+  font-size: 40px;
+}
+
+.modal-content {
+  background-image: url("/assets/images/background-textures-11.jpg");
+}
+
+#modal {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
+}
+
+#font {
+  font-family: 'Voltaire', sans-serif;
+}
+
+#font2 {
+  font-family: 'Josefin Sans', sans-serif;
 }
