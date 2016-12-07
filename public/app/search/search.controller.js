@@ -27,9 +27,9 @@
     vm.getPOI = function (poiInfo) {
       searchService.getPoiData(poiInfo)
       .then(function () {
-        // console.log('/poi/' + (poiInfo.split(' ').join('_')));
-        return $location.path('/poi');
-        // return $location.path('/poi/' + poiInfo);
+        console.log('/poi/' + poiInfo);
+        // return $location.path('/poi');
+        return $location.path('/poi/' + poiInfo);
       })
       .catch(function (err) {
         console.log(err);
