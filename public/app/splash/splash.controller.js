@@ -16,7 +16,7 @@
     vm.posImage = '';
     vm.posSummary = '';
 
-    vm.poiInit = function () {
+    let poiInit = function () {
       splashService.initPoiSplash()
         .then(function (result) {
           console.log('THIS IS RESULT', result);
@@ -31,5 +31,7 @@
           vm.posSummary = result.data.summary;
         });
     };
+
+    poiInit();
   }
 })();
