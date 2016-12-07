@@ -1,18 +1,15 @@
 <!-- BIG CONTAINER-->
-<div class="main-container">
+<div>
   <!-- LEFT COLUMN -->
   <div class="col-md-4 image-container mainPoi">
     <!-- IMAGE -->
     <div>
-      <img class="photo-box-img box-shadow" ng-src= "{{ vm.poi.profile_image_url }}"></img>
+      <img class="photo-box-img" ng-src= "{{ vm.poi.profile_image_url }}"></img>
     </div>
     <!-- END IMAGE -->
 
     <!-- ADD REVIEW -->
     <div>
-      <!-- Rating Field-->
-      <div class="box-shadow">
-
       <ng-form>
         <div class="form-group">
           <label for="rating">General Rating</label>
@@ -46,6 +43,7 @@
         </form>
 
       </div>
+      </ng-form>
 
     </div>
     <!-- END ADD REVIEW -->
@@ -54,29 +52,29 @@
   <!-- END LEFT COLUMN -->
 
   <!-- RIGHT COLUMN #1 (POI NAME/INFO)-->
-  <div class="col-md-8 box-shadow">
+  <div class="col-md-8">
     <h1>{{ vm.poi.name }}</h1>
-    <h3>General Rating: {{ vm.genRating }}</h3>
+    <h3>General Rating: {{vm.poi.personal_rating}}</h3>
     <div>{{ vm.poi.summary }}</div>
   </div>
   <!-- END RIGHT COLUMN #1 -->
 
   <!-- RIGHT COLUMN #2 (REVIEWS) -->
-  <div class="col-md-8 box-shadow">
+  <div class="col-md-8">
     <h3>Reviews</h3>
     <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
     <div class="table-responsive photoBox">
 
-            <div class="col-sm-4" id="resultName">
-                <h3>{{ review.reviewer_name }}</h3>
+            <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
+                <h3>{{ review.poiId }}</h3>
             </div>
 
-            <div class="col-sm-4 standard-text">
+            <div class="col-sm-4 col-md-4 col-xs-4">
                 <h3>{{ review.review_content || review.reviewContent }}</h3>
             </div>
 
-            <div class="col-sm-4" id="resultName">
+            <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
                 <h3>General Rating: <h2 class="genRating">{{ review.rating }} </h2></h3>
             </div>
     </div>
