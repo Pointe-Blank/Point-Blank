@@ -57,3 +57,8 @@ h3 {
 .margin-right {
   margin-right: 50px;
 }
+
+.photo-box-img {
+  width: 100%;
+  height: auto;
+}
