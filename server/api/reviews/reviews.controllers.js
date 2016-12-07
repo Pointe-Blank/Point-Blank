@@ -1,4 +1,3 @@
-// REMEMBER TO REQUIRE POI MODEL AND DB CONNECTION
 const dbConnection = require('../../config/db.config.js');
 const Review = require('./reviews.model.js');
 

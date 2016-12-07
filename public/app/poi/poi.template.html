@@ -14,14 +14,14 @@
         <div class="form-group">
           <label for="rating">General Rating</label>
           <br>
-          <input type="text" ng-model="vm.data.rating" id="rating" placeholder="">
+          <input type="text" ng-model="vm.rating" id="rating" placeholder="">
           <br>
           <label for="textarea">Review</label>
           <br>
-          <textarea name="textarea" rows="5" cols="50" ng-model="vm.data.review_content" id="review">Write something here</textarea>
+          <textarea name="textarea" rows="5" cols="50" ng-model="vm.review_content" id="review">Write something here</textarea>
           <!--<text type="text" ng-model="data.review" id="review" placeholder="">-->
           <br>
-          <button type="button" class="btn-default" ng-click="vm.addReview(vm.data); vm.init();">Add Review</button>
+          <button type="button" class="btn-default" ng-click="vm.addReview();">Add Review</button>
         </div>
 
       </ng-form>
