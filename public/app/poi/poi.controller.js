@@ -12,15 +12,17 @@
     vm.poi;
     vm.reviews;
     vm.data = {};
+    vm.genRating;
 
     vm.init = function () {
       var url = $location.$$url;
       url = url.slice(5).split('%20').join(' ');
       poiService.grabSinglePoiData(url)
-      .then(function (results) {
-        vm.poi = results;
-        vm.reviews = results.reviews;
-      });
+        .then(function (results) {
+          vm.poi = results;
+          vm.reviews = results.reviews;
+          vm.genRating = vm.calcGeneralRating(vm.reviews);
+        });
     };
     vm.init();
 
@@ -31,9 +33,16 @@
 
       vm.reviews.unshift(poireview);
       poiService.addReviewPoiData(poireview)
-      .then(function (reviews) {
-        console.log('here in poicontroller ', reviews);
-      });
+        .then(function (reviews) {
+          console.log('here in poicontroller ', reviews);
+        });
+    };
+
+    vm.calcGeneralRating = function (reviews) {
+      var result = reviews.reduce(function (acc, review) {
+        return acc + review.rating;
+      }, 0);
+      return Math.floor(result / reviews.length);
     };
   }
 })();
