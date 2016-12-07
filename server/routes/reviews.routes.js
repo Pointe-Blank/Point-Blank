@@ -6,7 +6,7 @@ router.route('/')
   .get(reviewsControllers.getAllReviews)
   .post(reviewsControllers.addOneReview);
 
-router.route('/:id')
-  .get(reviewsControllers.getOneReviewById);
+router.route('/:name')
+  .get(reviewsControllers.getOneReviewByName);
 
 module.exports = router;
