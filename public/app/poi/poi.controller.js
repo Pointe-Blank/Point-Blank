@@ -30,6 +30,7 @@
       poireview.reviewType = 'general';
       poireview.userId = 1;
       poireview.poiId = vm.poi.id;
+      poireview.reviewer_name = $rootScope.name;
 
       vm.reviews.unshift(poireview);
       poiService.addReviewPoiData(poireview)
