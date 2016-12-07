@@ -1,17 +1,30 @@
 <!-- BIG CONTAINER-->
-<div>
+<div class="main-container">
   <!-- LEFT COLUMN -->
   <div class="col-md-4 image-container mainPoi">
     <!-- IMAGE -->
     <div>
-      <img class="photo-box-img" ng-src= "{{ vm.poi.profile_image_url }}"></img>
+      <img class="photo-box-img box-shadow" ng-src= "{{ vm.poi.profile_image_url }}"></img>
     </div>
     <!-- END IMAGE -->
 
     <!-- ADD REVIEW -->
     <div>
+      <!-- Rating Field-->
+      <div class="box-shadow">
+
+        <form action="#">
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" ng-model="vm.data.rating" id="rating">
+            <label class="mdl-textfield__label" for="rating">Enter a rating...</label>
+            <span class="mdl-textfield__error">Needs to be 0-100!</span>
+          </div>
+        </form>
+
+      </div>
+
       <ng-form>
-        <div class="form-group">
+        <div class="form-group box-shadow">
           <label for="rating">General Rating</label>
           <br>
           <input type="text" ng-model="vm.rating" id="rating" placeholder="Scale: 0 - 100">
@@ -21,7 +34,9 @@
           <textarea name="textarea" rows="5" cols="50" ng-model="vm.review_content" id="review" placeholder="What do you think about this person?"></textarea>
           <!--<text type="text" ng-model="data.review" id="review" placeholder="">-->
           <br>
-          <button type="button" class="btn-default" ng-click="vm.addReview();">Add Review</button>
+
+          <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="vm.addReview(vm.data);">Add Review</button>
+
         </div>
 
         <form action="#">
@@ -52,7 +67,7 @@
   <!-- END LEFT COLUMN -->
 
   <!-- RIGHT COLUMN #1 (POI NAME/INFO)-->
-  <div class="col-md-8">
+  <div class="col-md-8 box-shadow">
     <h1>{{ vm.poi.name }}</h1>
     <h3>General Rating: {{vm.poi.personal_rating}}</h3>
     <div>{{ vm.poi.summary }}</div>
@@ -60,21 +75,21 @@
   <!-- END RIGHT COLUMN #1 -->
 
   <!-- RIGHT COLUMN #2 (REVIEWS) -->
-  <div class="col-md-8">
+  <div class="col-md-8 box-shadow">
     <h3>Reviews</h3>
     <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
     <div class="table-responsive photoBox">
 
-            <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
+            <div class="col-sm-4" id="resultName">
                 <h3>{{ review.poiId }}</h3>
             </div>
 
-            <div class="col-sm-4 col-md-4 col-xs-4">
+            <div class="col-sm-4 standard-text">
                 <h3>{{ review.review_content || review.reviewContent }}</h3>
             </div>
 
-            <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
+            <div class="col-sm-4" id="resultName">
                 <h3>General Rating: <h2 class="genRating">{{ review.rating }} </h2></h3>
             </div>
     </div>
