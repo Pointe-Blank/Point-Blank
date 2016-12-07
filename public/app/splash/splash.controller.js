@@ -19,15 +19,16 @@
     vm.poiInit = function () {
       splashService.initPoiSplash()
         .then(function (result) {
-          vm.poiName = result.name;
-          vm.poiImage = result.profile_image_url;
-          vm.poiSummary = result.summary;
+          console.log('THIS IS RESULT', result);
+          vm.poiName = result.data.name;
+          vm.poiImage = result.data.profile_image_url;
+          vm.poiSummary = result.data.summary;
         });
       splashService.initPosSplash()
         .then(function (result) {
-          vm.posName = result.name;
-          vm.posImage = result.profile_image_url;
-          vm.posSummary = result.summary;
+          vm.posName = result.data.name;
+          vm.posImage = result.data.profile_image_url;
+          vm.posSummary = result.data.summary;
         });
     };
   }

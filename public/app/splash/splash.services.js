@@ -3,11 +3,9 @@
 
   angular
     .module('point-blank.splash')
-    .factory('splash-service', splashService);
+    .factory('splashService', splashService);
 
   splashService.$inject = ['$http'];
-
-  // edit it so it gets a specific two people
 
   function splashService ($http) {
     var initPoiSplash = function () {
@@ -17,13 +15,16 @@
         });
     };
 
-    // later add params on these
-
     var initPosSplash = function () {
       return $http.get('api/poi/David%20Miscavige')
         .then(function (results) {
           return results;
         });
+    };
+
+    return {
+      initPoiSplash: initPoiSplash,
+      initPosSplash: initPosSplash
     };
   }
 })();
