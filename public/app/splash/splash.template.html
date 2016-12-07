@@ -1,6 +1,15 @@
 <div class="jumbotron">
- <h1 class="text-center">POI | POS</h1>
+ <h1 class="text-center">Daily Spotlight</h1>
+ <hr>
   <div class="container">
+<div class="row">
+        <div class="col-md-6">
+        <h1 class="text-center">POI</h1>
+      </div>
+              <div class="col-md-6">
+        <h1 class="text-center">POS</h1>
+      </div>
+</div>
 
     <div class="row">
 
@@ -8,7 +17,7 @@
         <div class="thumbnail">
           <a ng-href="/#/poi/{{vm.poiName}}">
             <img src="/assets/images/halo.png" class="img-responsive"/>
-            <img ng-src="{{vm.poiImage}}" class="thumbnail img-responsive custom"/>
+            <img ng-src="{{vm.poiImage}}" class="thumbnail img-responsive customPicture"/>
             <div class="caption">
               <h2 class="text-center">{{vm.poiName}}</h2>
               <p>{{vm.poiSummary}}</p>
@@ -22,7 +31,7 @@
           <a ng-href="/#/poi/{{vm.posName}}">
             <img src="/assets/images/poop.png" class="img-responsive" width="159"/>
 
-              <img ng-src="{{vm.posImage}}" class="thumbnail img-responsive custom"/>
+              <img ng-src="{{vm.posImage}}" class="thumbnail img-responsive customPicture"/>
             
             <div class="caption">
               <h2 class="text-center">{{vm.posName}}</h2>

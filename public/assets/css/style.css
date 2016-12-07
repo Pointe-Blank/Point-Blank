@@ -45,8 +45,11 @@ h3 {
   height: 400px;
 }
 
-.custom {
+.customPicture {
   width: auto;
   height: 350px !important;
 }
 
+.margin-right {
+  margin-right: 50px;
+}
