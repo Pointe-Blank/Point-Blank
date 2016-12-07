@@ -5,7 +5,7 @@
     .module('point-blank.splash')
     .controller('splash-controller', SplashController);
 
-  SplashController.$inject = ['splashService'];
+  SplashController.$inject = ['splashService', '$location'];
 
   function SplashController (splashService) {
     var vm = this;

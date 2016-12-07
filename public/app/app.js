@@ -42,19 +42,18 @@
   function run ($rootScope, authFactory, $state) {
     $rootScope.$on('$stateChangeStart', function (event, toState) {
       if (toState.access && toState.access.restricted && !authFactory.isLoggedIn) {
-        event.preventDefault();      // prevent transition from happening
+        event.preventDefault(); // prevent transition from happening
         authFactory.authService()
-        .then(function (response) {
-          if (response.status === 401) {
-            $state.go('signin');
-          } else {
-            authFactory.isLoggedIn = true;
-            $rootScope.loggedIn = true;
-            $state.go(toState.name);
-          }
-        });
+          .then(function (response) {
+            if (response.status === 401) {
+              $state.go('signin');
+            } else {
+              authFactory.isLoggedIn = true;
+              $rootScope.loggedIn = true;
+              $state.go(toState.name);
+            }
+          });
       }
     });
   }
 })();
-
