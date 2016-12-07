@@ -48,9 +48,10 @@
           if (response.status === 401) {
             $state.go('signin');
           } else {
+            console.log(response.data);
             authFactory.isLoggedIn = true;
             $rootScope.loggedIn = true;
-            $rootScope.userId = response.data.id;
+            $rootScope.userId = response.data.name;
             $state.go(toState.name);
           }
         });
