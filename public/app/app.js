@@ -9,7 +9,7 @@
   function config ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('splash', {
-        url: '/splash',
+        url: '/',
         templateUrl: 'app/splash/splash.template.html',
         controller: 'splash-controller as vm'
       })
@@ -36,7 +36,7 @@
         templateUrl: 'app/auth/signin.template.html'
       });
 
-    $urlRouterProvider.otherwise('/splash');
+    $urlRouterProvider.otherwise('/');
   }
 
   function run ($rootScope, authFactory, $state) {
