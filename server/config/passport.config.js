@@ -42,7 +42,7 @@ module.exports = function (passport) {
     // facebook will send back the token and profile
     function (token, refreshToken, profile, done) {
       // find the user in the database based on their facebook id
-      User.findOne({where: {facebookId: 'profile.id'}})
+      User.findOne({where: {facebookId: profile.id}})
           .then(function (user) {
             if (user) {                   // if user already exists, simply return that user
               return done(null, user);

@@ -9,7 +9,7 @@
 
   function splashService ($http) {
     var initPoiSplash = function () {
-      return $http.get('/api/poi/Kip%20Thorne')
+      return $http.get('/api/poi/Mark%20Zuckerberg')
         .then(function (results) {
           return results;
         });

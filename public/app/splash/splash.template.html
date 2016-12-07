@@ -1,28 +1,38 @@
-<!-- <div class="container">
-  <div id="poi" ng-init="vm.poiInit()">
-    <div id="poiImage">
-<<<<<<< HEAD
-      <a ng-href="/#/poi/{{vm.poiName}}"><img id="portrait" ng-src="{{vm.poiImage}}" class="thumbnail"/></a>
-      <p>{{vm.poiName}}</p>
-      <p>{{vm.poiSummary}}</p>
-=======
-      <img id="portrait" ng-src="{{vm.poiImage}}" ui-sref="poi" class="thumbnail">
-      <div>{{vm.poiName}}</div>
-      <div>{{vm.poiSummary}}</div>
->>>>>>> [style] add css to splash
-    </div>
-    <div id="poiImage">
-      <a ng-href="/#/poi/{{vm.posName}}"><img id="portrait" ng-src="{{vm.posImage}}" class="thumbnail"/></a>
-      <p>{{vm.posName}}</p>
-      <p>{{vm.posSummary}}</p>
-    </div>
-  </div>
-</div> -->
+<div class="jumbotron">
+ <h1 class="text-center">POI | POS</h1>
+  <div class="container">
 
-<div class="container">
-  <div class="row" ng-init="vm.poiInit()">
-    <div class="col-xs-6 col-sm-3"></div>
-    <div class="col-xs-6 col-sm-3"></div>
-    <div class="col-xs-6 col-sm-3"></div>
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="thumbnail">
+          <a ng-href="/#/poi/{{vm.poiName}}">
+            <img src="/assets/images/halo.png" class="img-responsive"/>
+            <img ng-src="{{vm.poiImage}}" class="thumbnail img-responsive custom"/>
+            <div class="caption">
+              <h2 class="text-center">{{vm.poiName}}</h2>
+              <p>{{vm.poiSummary}}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="thumbnail">
+          <a ng-href="/#/poi/{{vm.posName}}">
+            <img src="/assets/images/poop.png" class="img-responsive" width="159"/>
+
+              <img ng-src="{{vm.posImage}}" class="thumbnail img-responsive custom"/>
+            
+            <div class="caption">
+              <h2 class="text-center">{{vm.posName}}</h2>
+              <p>{{vm.posSummary}}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </div>
