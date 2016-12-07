@@ -65,6 +65,11 @@ h3 {
 
 #reviewCount {
   text-align: center;
-  padding: 140px 0 0 0;
-  font-size: 40px;
+  padding: 32px 0 0 0;
+  font-size: 35px;
+}
+
+#genReviewCount {
+   color: black;
+   text-align: center;
 }
