@@ -51,6 +51,7 @@
             console.log(response.data);
             authFactory.isLoggedIn = true;
             $rootScope.loggedIn = true;
+            $rootScope.id = response.data.id;      // logged in user's id
             $rootScope.name = response.data.name;  // logged in user's name
             $state.go(toState.name);
           }
