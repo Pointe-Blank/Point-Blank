@@ -15,11 +15,7 @@ exports.getAllPOI = function (req, res) {
 
 exports.getOnePOIByName = function (req, res) {
   const POIName = req.params.name;
-<<<<<<< 2a9448ce078ceab65afb0794d616dff2d8ce078d
   POI.findOne({ where: {name: POIName}, include: [ Review ] })
-=======
-  POI.findOne({ where: {name: POIName} })
->>>>>>> [progress] Poi page controller,template, and dummy data update
     .then(function (poi) {
       res.status(200).json(poi);
     })
