@@ -9,8 +9,11 @@ exports.getOneReviewById = function (req, res) {
 
 exports.addOneReview = function (req, res) {
   const reviewType = req.body.reviewType; // MUST BE 'general' OR 'personal'
-  const reviewContent = req.body.reviewContent;
+  const reviewContent = req.body.review_content;
   const rating = req.body.rating || 10;
+  const userId = req.body.userId;
+  const poiId = req.body.poiId;
+
   Review.create({
     review_type: reviewType,
     review_content: reviewContent,

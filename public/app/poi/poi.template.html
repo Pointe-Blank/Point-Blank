@@ -19,14 +19,14 @@
       <div class="form-group">
         <label for="rating">Personal Rating</label>
         <br>
-        <input type="text" ng-model="data.rating" id="rating" placeholder="">
+        <input type="number" ng-model="vm.data.rating" id="rating" placeholder="0-100">
         <br>
         <label for="textarea">Review</label>
         <br>
-        <textarea name="textarea" rows="5" cols="50" ng-model="data.review" id="review">Write something here</textarea>
+        <textarea name="textarea" rows="5" cols="50" ng-model="vm.data.review_content" id="review">Write something here</textarea>
         <!--<text type="text" ng-model="data.review" id="review" placeholder="">-->
         <br>
-        <button type="button" class="btn-default" ng-click="vm.addReview(data)">Add Review</button>
+        <button type="button" class="btn-default" ng-click="vm.addReview(vm.data)">Add Review</button>
       </div>
       
     </ng-form>
@@ -34,20 +34,20 @@
 
 
     <h3>Reviews</h3>
-    <div ng-repeat="review in vm.reviews" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
     <div class="table-responsive photoBox">
-            <div class="col-sm-4 col-md-4 col-xs-4 image-container" id="photo">
-                <img class="photo-box-img" ng-src="{{ review.profile_image_url }}"></img>
-            </div>
 
             <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
-                <h3>{{ review.name }}</h3>
-                <div>{{ review.summary }}</div>
+                <h3>{{ review.poiId }}</h3>
+            </div>
+
+            <div class="col-sm-4 col-md-4 col-xs-4">
+                <h3>{{ review.review_content }}</h3>
             </div>
             
             <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
-                <h3>Review Rating: <h2>{{ review.general_rating }} </h2></h3>
+                <h3>Review Rating: <h2>{{ review.rating }} </h2></h3>
             </div>
     </div>
   </div>
