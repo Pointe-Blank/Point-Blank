@@ -9,14 +9,14 @@
 
   function splashService ($http) {
     var initPoiSplash = function () {
-      return $http.get('/api/poi/Ricky%20Walker')
+      return $http.get('/api/poi/Kip%20Thorne')
         .then(function (results) {
           return results;
         });
     };
 
     var initPosSplash = function () {
-      return $http.get('api/poi/David%20Miscavige')
+      return $http.get('api/poi/Martin%20Shkreli')
         .then(function (results) {
           return results;
         });

@@ -23,3 +23,19 @@
 h3 {
     text-align: center;
 }
+
+#poi {
+  width: inherit;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#poiImage {
+  display:inline-block;
+  margin: 0 auto;
+}
+
+#portrait {
+  height: 500px;
+  width: 315px;
+}
