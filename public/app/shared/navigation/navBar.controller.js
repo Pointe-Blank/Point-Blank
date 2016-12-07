@@ -13,9 +13,13 @@
     $rootScope.loggedIn = authFactory.isLoggedIn;
 
     vm.logout = function () {
-      $rootScope.loggedIn = false;
-      authFactory.isLoggedIn = false;
-      console.log(authFactory.isLoggedIn);
+      process.nextTick(
+        function () {
+          $rootScope.loggedIn = false;
+          authFactory.isLoggedIn = false;
+          console.log(authFactory.isLoggedIn);
+        }
+      );
     };
 
     vm.isLoggedIn = function () {
