@@ -9,7 +9,7 @@
   function config ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('splash', {
-        url: '/',
+        url: '/splash',
         templateUrl: 'app/splash/splash.template.html',
         controller: 'splash-controller as vm'
       })
@@ -22,7 +22,7 @@
         }
       })
       .state('poi', {
-        url: '/poi',
+        url: '/poi/:name',
         templateUrl: 'app/poi/poi.template.html',
         controller: 'poi-controller as vm'
       })
@@ -36,7 +36,7 @@
         templateUrl: 'app/auth/signin.template.html'
       });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/splash');
   }
 
   function run ($rootScope, authFactory, $state) {

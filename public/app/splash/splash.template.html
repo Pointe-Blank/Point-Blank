@@ -1,3 +1,14 @@
-<div>
-  <h1> SPLASH </h1>
+<div class="container">
+  <div id="poi" ng-init="vm.poiInit()">
+    <div id="poiImage">
+      <img id="portrait" ng-src="{{vm.poiImage}}" ui-sref="poi" class="thumbnail">
+      <p>{{vm.poiName}}</p>
+      <p>{{vm.poiSummary}}</p>
+    </div>
+    <div id="poiImage">
+      <img id="portrait" ng-src="{{vm.posImage}}" ui-sref="poi" class="thumbnail">
+      <p>{{vm.posName}}</p>
+      <p>{{vm.posSummary}}</p>
+    </div>
+  </div>
 </div>
