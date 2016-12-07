@@ -9,23 +9,19 @@ const Review = dbConnection.define('review', {
     type: Sequelize.STRING
   },
   review_content: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue: 'No review provided.'
   },
   rating: {
     type: Sequelize.INTEGER,
     defaultValue: 5
-  },
-  created_at: {
-    type: Sequelize.DATE
-  },
-  user_id: {
-    type: Sequelize.INTEGER
-  },
-  poi_id: {
-    type: Sequelize.INTEGER
   }
 });
+
+Review.belongsTo(User);
+Review.belongsTo(POI);
+User.hasMany(Review);
+POI.hasMany(Review);
 
 // will only create table once; use {force: true} to override table
 Review.sync().then(function () {
