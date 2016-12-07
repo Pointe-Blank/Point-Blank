@@ -12,7 +12,7 @@ exports.getAllReviews = function (req, res) {
     });
 };
 
-exports.getOneReviewById = function (req, res) {
+exports.getOneReviewByName = function (req, res) {
   const reviewId = req.params.id;
   Review.findOne({ where: {name: reviewId} })
     .then(function (review) {
