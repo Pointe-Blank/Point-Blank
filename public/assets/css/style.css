@@ -99,6 +99,7 @@ h3 {
 }
 
 .modal-title {
+  font-family: 'Voltaire', sans-serif;
   font-size: 40px;
 }
 
@@ -109,4 +110,8 @@ h3 {
 #modal {
   font-family: "Times New Roman", Times, serif;
   font-size: 24px;
+}
+
+#font {
+  font-family: 'Voltaire', sans-serif;
 }
