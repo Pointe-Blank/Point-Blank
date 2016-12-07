@@ -8,6 +8,23 @@
             <li><a ui-sref="search">Search POIs</a></li>
             <li ng-hide="loggedIn"><a ui-sref="signin">Sign In</a></li>
             <li ng-show="loggedIn"><a ng-click="vm.logout()" ng-href="/api/users/logout" class="btn btn-default btn-sm">Logout</a></li>
+            <li><a data-toggle="modal" data-target=".bs-example-modal-lg">About us</a></li>
         </ul>
+    </div>
+
+    <!-- modal -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabe">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">About ._</h4>
+          </div>
+          <div class="modal-body">
+            <p>Mark will fill this in!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
 </nav>
