@@ -31,7 +31,7 @@
       <br>
     <div class="table-responsive photoBox">
         <a ng-click="vm.getPOI(poi.name)">
-            <div class="col-sm-4 col-md-4 col-xs-4 image-container" id="photo">
+            <div class="col-sm-3 col-md-3 col-xs-3 image-container" id="photo">
                 <img class="photo-box-img" ng-src="{{poi.profile_image_url}}"></img>
             </div>
 
@@ -40,8 +40,15 @@
                 <div>{{poi.summary}}</div>
             </div>
 
-            <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
-                <h3>General Rating: <h2>{{poi.general_rating}}</h2></h3>
+            <div class="col-sm-3 col-md-3 col-xs-3" id="genReviewCount">
+                <h3>General Rating</h3>
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                    {{ poi.general_rating }}
+                </button>
+            </div>
+
+            <div class="col-sm-2 col-md-2 col-xs-2" id="reviewCount">
+                <span class="mdl-badge" data-badge="{{ poi.reviews.length }}">Reviews</span>
             </div>
         </a>
     </div>
