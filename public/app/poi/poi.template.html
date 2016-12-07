@@ -21,7 +21,7 @@
           <textarea name="textarea" rows="5" cols="50" ng-model="vm.data.review_content" id="review">Write something here</textarea>
           <!--<text type="text" ng-model="data.review" id="review" placeholder="">-->
           <br>
-          <button type="button" class="btn-default" ng-click="vm.addReview(vm.data)">Add Review</button>
+          <button type="button" class="btn-default" ng-click="vm.addReview(vm.data); vm.init();">Add Review</button>
         </div>
 
       </ng-form>
@@ -35,7 +35,7 @@
   <!-- RIGHT COLUMN #1 (POI NAME/INFO)-->
   <div class="col-md-8">
     <h1>{{ vm.poi.name }}</h1>
-    <h3>General Rating: {{vm.poi.personal_rating}}</h3>
+    <h3>General Rating: {{ vm.genRating }}</h3>
     <div>{{ vm.poi.summary }}</div>
   </div>
   <!-- END RIGHT COLUMN #1 -->
