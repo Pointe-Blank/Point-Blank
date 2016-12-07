@@ -1,9 +1,10 @@
 // REMEMBER TO REQUIRE POI MODEL AND DB CONNECTION
 const dbConnection = require('../../config/db.config.js');
 const POI = require('./poi.model.js');
+const Review = require('../reviews/reviews.model.js');
 
 exports.getAllPOI = function (req, res) {
-  POI.findAll()
+  POI.findAll({include: [ Review ]})
     .then(function (poi) {
       res.status(200).json(poi);
     })
@@ -14,7 +15,7 @@ exports.getAllPOI = function (req, res) {
 
 exports.getOnePOIByName = function (req, res) {
   const POIName = req.params.name;
-  POI.findOne({ where: {name: POIName} })
+  POI.findOne({ where: {name: POIName}, include: [ Review ] })
     .then(function (poi) {
       res.status(200).json(poi);
     })

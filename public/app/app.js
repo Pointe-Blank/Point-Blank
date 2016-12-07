@@ -22,13 +22,14 @@
         }
       })
       .state('poi', {
-        url: '/poi',
+        url: '/poi/:name',
         templateUrl: 'app/poi/poi.template.html',
         controller: 'poi-controller as vm'
       })
       .state('signup', {
         url: '/signup',
-        templateUrl: 'app/auth/signup.template.html'
+        templateUrl: 'app/auth/signup.template.html',
+        controller: 'auth-controller as vm'
       })
       .state('signin', {
         url: '/signin',
@@ -39,7 +40,7 @@
   }
 
   function run ($rootScope, authFactory, $state) {
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+    $rootScope.$on('$stateChangeStart', function (event, toState) {
       if (toState.access && toState.access.restricted && !authFactory.isLoggedIn) {
         event.preventDefault();      // prevent transition from happening
         authFactory.authService()
@@ -48,7 +49,7 @@
             $state.go('signin');
           } else {
             authFactory.isLoggedIn = true;
-            console.log(toState);
+            $rootScope.loggedIn = true;
             $state.go(toState.name);
           }
         });

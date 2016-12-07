@@ -1,16 +1,14 @@
 <div>
-
-  <h1>{{ vm.poi[0].name }}</h1>
-
+  <h1>{{ vm.poi.name }}</h1>
+  <h3>General Rating: {{vm.poi.personal_rating}}</h3>
     <div class="col-sm-12 col-md-12 col-xs-12 image-container mainPoi">
-      <img class="photo-box-img" ng-src= "{{ vm.poi[0].profile_image_url }}"></img>
+      <img class="photo-box-img" ng-src= "{{ vm.poi.profile_image_url }}"></img>
       <br>
       <br>
     </div>
 
     <div class="col-sm-12 col-md-12 col-xs-12 mainPoi">
-      <div>{{ vm.poi[0].summary }}</div>
-      
+      <div>{{ vm.poi.summary }}</div>
           <br>
           <br>
           <br>
@@ -19,11 +17,16 @@
 
     <ng-form>
       <div class="form-group">
-        <label for="addReview">Review</label>
+        <label for="rating">Personal Rating</label>
         <br>
-        <input type="text" class="" ng-model="data.abv" id="addReview" placeholder="">
+        <input type="text" ng-model="data.rating" id="rating" placeholder="">
         <br>
-        <button type="button" class="btn-default" ng-click="addReview(data)">Add Review</button>
+        <label for="textarea">Review</label>
+        <br>
+        <textarea name="textarea" rows="5" cols="50" ng-model="data.review" id="review">Write something here</textarea>
+        <!--<text type="text" ng-model="data.review" id="review" placeholder="">-->
+        <br>
+        <button type="button" class="btn-default" ng-click="vm.addReview(data)">Add Review</button>
       </div>
       
     </ng-form>
@@ -44,7 +47,7 @@
             </div>
             
             <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
-                <h3>Review Rating: <h2>{{ review.general_rating}} </h2></h3>
+                <h3>Review Rating: <h2>{{ review.general_rating }} </h2></h3>
             </div>
     </div>
   </div>

@@ -5,12 +5,25 @@
         .module('point-blank')
         .controller('NavBarController', NavBarController);
 
-  NavBarController.$inject = ['$scope', '$state'];
+  NavBarController.$inject = ['$rootScope', 'authFactory'];
 
-  function NavBarController ($scope, $state, authFactory) {
+  function NavBarController ($rootScope, authFactory) {
     const vm = this;
+
+    $rootScope.loggedIn = authFactory.isLoggedIn;
+
     vm.logout = function () {
-      authFactory.loggedIn = false;
+      process.nextTick(
+        function () {
+          $rootScope.loggedIn = false;
+          authFactory.isLoggedIn = false;
+          console.log(authFactory.isLoggedIn);
+        }
+      );
+    };
+
+    vm.isLoggedIn = function () {
+      vm.loggedIn = authFactory.isLoggedIn;
     };
   }
 })();
