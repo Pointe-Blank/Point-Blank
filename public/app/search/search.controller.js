@@ -15,7 +15,6 @@
       searchService.getInitData()
       .then(function (results) {
         vm.poiList = results;
-        // console.log('on client! ', vm.poiList);
       });
     };
     vm.init();
@@ -25,15 +24,7 @@
     };
 
     vm.getPOI = function (poiInfo) {
-      searchService.getPoiData(poiInfo)
-      .then(function () {
-        console.log('/poi/' + poiInfo);
-        // return $location.path('/poi');
-        return $location.path('/poi/' + poiInfo);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
+      return $location.path('/poi/' + poiInfo);
     };
   }
 })();
