@@ -146,7 +146,7 @@ POI.sync({force: true}).then(function () {
     name: 'Kanye West',
     summary: "American rapper, songwriter, record producer, fashion designer, and entrepreneur. Born in Atlanta and raised in Chicago, West first became known as a producer for Roc-A-Fella Records in the early 2000s, producing hit singles for artists such as Jay Z and Alicia Keys. West's outspoken views and life outside of music have received significant mainstream attention. He has been a frequent source of controversy for his conduct at award shows, on social media, and in other public settings. His more scrutinized comments include his off-script denunciation of President George W. Bush during a live 2005 television broadcast for Hurricane Katrina relief and his interruption of singer Taylor Swift at the 2009 MTV Video Music Awards.",
     profile_image_url: 'http://i.imgur.com/siKa4j2.jpg',
-    general_rating: 56
+    general_rating: 49
   });
 
   POI.create({

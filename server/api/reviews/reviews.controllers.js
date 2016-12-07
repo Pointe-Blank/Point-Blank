@@ -29,13 +29,15 @@ exports.addOneReview = function (req, res) {
   const rating = req.body.rating || 10;
   const userId = req.body.userId;
   const poiId = req.body.poiId;
+  const reviewerName = req.body.reviewer_name;
 
   Review.create({
     review_type: reviewType,
     review_content: reviewContent,
     rating: rating,
     userId: userId,
-    poiId: poiId
+    poiId: poiId,
+    reviewer_name: reviewerName
   })
     .then(function (review) {
       res.status(201).json(review);
