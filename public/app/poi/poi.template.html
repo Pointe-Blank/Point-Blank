@@ -17,8 +17,10 @@
 
         <form action="#">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <label for="rating">General Rating</label>
-            <input class="mdl-slider mdl-js-slider" ng-model="vm.rating" id="rating" type="range" min="0" max="100" value="50" tabindex="0">
+            <label for="rating">General Rating</label> 
+            <p id="font" style="font-size:2em;">{{vm.reviewRating}}</p>
+            <input class="mdl-slider mdl-js-slider" style="margin-left:0;" ng-model="vm.reviewRating" id="rating" type="range" min="0" max="100" value="50" tabindex="0">
+
             <!-- <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" ng-model="vm.data.rating" id="rating"> -->
             <label class="mdl-textfield__label" for="rating"></label>
             <span class="mdl-textfield__error">Needs to be 0-100!</span>
@@ -43,7 +45,7 @@
   <!-- END LEFT COLUMN -->
 
   <!-- RIGHT COLUMN #1 (POI NAME/INFO)-->
-  <div class="col-md-8 box-shadow spaced div-space">
+  <div class="col-md-7 box-shadow spaced div-space">
     <h1>{{ vm.poi.name }}</h1>
     <h3>General Rating: {{ vm.genRating }}</h3>
     <h6>{{ vm.poi.summary }}</h6>
@@ -51,7 +53,7 @@
   <!-- END RIGHT COLUMN #1 -->
 
   <!-- RIGHT COLUMN #2 (REVIEWS) -->
-  <div class="col-md-8 box-shadow spaced div-space">
+  <div class="col-md-7 box-shadow spaced div-space">
     <h3 class="aligned">Reviews</h3>
     <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 spaced">
 

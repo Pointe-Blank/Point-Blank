@@ -24,7 +24,10 @@
       .state('poi', {
         url: '/poi/:name',
         templateUrl: 'app/poi/poi.template.html',
-        controller: 'poi-controller as vm'
+        controller: 'poi-controller as vm',
+        access: {
+          restricted: true
+        }
       })
       .state('signup', {
         url: '/signup',

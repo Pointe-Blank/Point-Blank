@@ -12,6 +12,7 @@
     vm.poi;
     vm.reviews;
     vm.data = {};
+    vm.reviewRating = 50;
     vm.genRating;
 
     vm.init = function () {
@@ -33,7 +34,7 @@
       poireview.poiId = vm.poi.id;
       poireview.reviewer_name = $rootScope.name;
       poireview.review_content = vm.review_content;
-      poireview.rating = vm.rating;
+      poireview.rating = vm.reviewRating;
 
       vm.reviews.unshift(poireview);
       poiService.addReviewPoiData(poireview)
