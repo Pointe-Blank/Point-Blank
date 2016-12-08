@@ -1,28 +1,19 @@
 <!-- BIG CONTAINER-->
-<div>
+<div class="main-container">
   <!-- LEFT COLUMN -->
-  <div class="col-md-4 image-container mainPoi">
+  <div class="col-md-4 image-container mainPoi spaced">
     <!-- IMAGE -->
-    <div>
-      <img class="photo-box-img" ng-src= "{{ vm.poi.profile_image_url }}"></img>
+    <div class="spaced">
+      <img class="photo-box-img box-shadow" ng-src= "{{ vm.poi.profile_image_url }}"></img>
     </div>
     <!-- END IMAGE -->
 
     <!-- ADD REVIEW -->
     <div>
+      <!-- Rating Field-->
+
       <ng-form>
-        <div class="form-group">
-          <label for="rating">General Rating</label>
-          <br>
-          <input type="text" ng-model="vm.rating" id="rating" placeholder="Scale: 0 - 100">
-          <br>
-          <label for="textarea">Review</label>
-          <br>
-          <textarea name="textarea" rows="5" cols="50" ng-model="vm.review_content" id="review" placeholder="What do you think about this person?"></textarea>
-          <!--<text type="text" ng-model="data.review" id="review" placeholder="">-->
-          <br>
-          <button type="button" class="btn-default" ng-click="vm.addReview();">Add Review</button>
-        </div>
+
 
         <form action="#">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -52,33 +43,35 @@
   <!-- END LEFT COLUMN -->
 
   <!-- RIGHT COLUMN #1 (POI NAME/INFO)-->
-  <div class="col-md-8">
+  <div class="col-md-8 box-shadow spaced div-space">
     <h1>{{ vm.poi.name }}</h1>
-    <h3>General Rating: {{vm.poi.personal_rating}}</h3>
-    <div>{{ vm.poi.summary }}</div>
+    <h3>General Rating: {{ vm.genRating }}</h3>
+    <h6>{{ vm.poi.summary }}</h6>
   </div>
   <!-- END RIGHT COLUMN #1 -->
 
   <!-- RIGHT COLUMN #2 (REVIEWS) -->
-  <div class="col-md-8">
-    <h3>Reviews</h3>
-    <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-md-8 box-shadow spaced div-space">
+    <h3 class="aligned">Reviews</h3>
+    <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 spaced">
 
-    <div class="table-responsive photoBox">
-
-            <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
-                <h3>{{ review.poiId }}</h3>
+      <div class="table-responsive photoBox">
+            <div class="col-sm-4" id="resultName">
+                <div style="padding-top: 20px">
+                  <i class="material-icons mdl-list__item-avatar">person</i>
+                </div>
+                <h4>{{ review.reviewer_name }}</h4>
             </div>
 
-            <div class="col-sm-4 col-md-4 col-xs-4">
-                <h3>{{ review.review_content || review.reviewContent }}</h3>
+            <div class="col-sm-4 standard-text">
+                <h6 class="">{{ review.review_content || review.reviewContent }}</h6>
             </div>
 
-            <div class="col-sm-4 col-md-4 col-xs-4" id="resultName">
-                <h3>General Rating: <h2 class="genRating">{{ review.rating }} </h2></h3>
+            <div class="col-sm-4" id="resultName">
+                <h4 class="aligned">General Rating: <h2 class="genRating">{{ review.rating }} </h2></h4>
             </div>
+        </div>
     </div>
-  </div>
   </div>
   <!-- END RIGHT COLUMN #2 -->
 
