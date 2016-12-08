@@ -7,6 +7,7 @@
   searchService.$inject = ['$http'];
 
   function searchService ($http) {
+    // getInitData is invoked inside the controller upon pageload. Once invoked, it fires off an http request to grab all the POIs from the database and returns this result over to the controller
     var getInitData = function () {
       return $http({
         method: 'GET',

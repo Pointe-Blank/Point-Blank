@@ -22,10 +22,12 @@
     };
     vm.init();
 
+    // this function is used for the POS filtering, it evaluates whether the general POI rating is less than 40, returning true or false
     vm.isPOS = function (poi) {
       return poi.general_rating < 40;
     };
 
+    // this function does a path redirect to the POI page when a user clicks on their icon
     vm.getPOI = function (poiInfo) {
       return $location.path('/poi/' + poiInfo);
     };

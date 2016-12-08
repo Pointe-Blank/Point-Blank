@@ -12,6 +12,7 @@
 
     $rootScope.loggedIn = authFactory.isLoggedIn;
 
+    // This function logs out the user by making the loggedIn property inside the rootScope, as well s the isloggedIn property inside authFactory equal to false.
     vm.logout = function () {
       process.nextTick(
         function () {
@@ -22,6 +23,7 @@
       );
     };
 
+    // This function is part of the auth system. It checks whether the user is logged in (using authFactory.isLoggedIn) and passes its truth statement to the vm.loggedIn variable.
     vm.isLoggedIn = function () {
       vm.loggedIn = authFactory.isLoggedIn;
     };
