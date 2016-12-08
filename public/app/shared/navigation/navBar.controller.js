@@ -18,7 +18,6 @@
         function () {
           $rootScope.loggedIn = false;
           authFactory.isLoggedIn = false;
-          console.log(authFactory.isLoggedIn);
         }
       );
     };

@@ -28,12 +28,6 @@ const User = dbConnection.define('user', {
 // will only create table once; use {force: true} to override table
 User.sync().then(function () {
   console.log('User table successfuly created.');
-// sample code to seed database
-// return User.create({
-//   name: 'User1',
-//   token: 'n/a',
-//   facebookId: 'filler'
-// })
 });
 
 module.exports = User;

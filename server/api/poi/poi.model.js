@@ -29,7 +29,6 @@ const setup = require('./poi.setup.js');
 POI.sync({force: true}).then(function () {
   console.log('POI table successfuly created.');
   // seed database
-  // POIs
   POI.create({
     name: 'Mark Zuckerberg',
     summary: 'American computer programmer, internet entrepreneur, and philanthropist. He is the chairman, chief executive officer, and co-founder of social networking website Facebook.',

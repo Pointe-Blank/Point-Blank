@@ -15,32 +15,12 @@ const dbConnection = new Sequelize(dburl);
 // testing connection
 dbConnection
   .authenticate()
-  .then(function (err) {
+  .then(function () {
     console.log('Connection has been established successfully.');
   })
   .catch(function (err) {
     console.log('Unable to connect to the database:', err);
   });
-
-// Don't delete. May be useful later.
-  // db.on('connected', function () {
-  //   console.log('Connected to database successfully.')
-  // })
-
-// db.on('disconnected', function () {
-  //   console.log('Disconnected from database!')
-  // })
-
-// db.on('error', function (err) {
-  //   console.log('Connectioned failed with error:', err)
-  // })
-
-// db.on('SIGINT', function () {
-  //   db.close(function () {
-  //     console.log('Process terminated. SOME DUDE PRESSED CONTROL+C!?')
-  //     process.exit(0)
-  //   })
-  // })
 
 module.exports = dbConnection;
 
