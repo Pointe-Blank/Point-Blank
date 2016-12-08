@@ -1,7 +1,6 @@
 // Users schema/model.
 const Sequelize = require('sequelize');
 const dbConnection = require('../../config/db.config.js');
-const Reviews = require('../reviews/reviews.model.js');
 
 const User = dbConnection.define('user', {
   name: {

@@ -1,9 +1,8 @@
-const sequelizeDB = require('./server/config/db.config.js');
+require('./server/config/db.config.js');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const flash = require('connect-flash');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -40,10 +39,9 @@ app.use(session({
   secret: 'kittycats',
   saveUninitialized: true,
   resave: true
-})); // session secret
+}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
 
 // api routes
 app.use('/api/poi', POIRoutes);

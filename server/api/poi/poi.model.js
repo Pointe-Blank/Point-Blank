@@ -1,7 +1,6 @@
 // POI schema/model
 const Sequelize = require('sequelize');
 const dbConnection = require('../../config/db.config.js');
-const Reviews = require('../reviews/reviews.model.js');
 
 const POI = dbConnection.define('poi', {
   name: {
@@ -24,7 +23,6 @@ const POI = dbConnection.define('poi', {
   }
 });
 
-const setup = require('./poi.setup.js');
 // will only create table once; use {force: true} to override table
 POI.sync({force: true}).then(function () {
   console.log('POI table successfuly created.');
