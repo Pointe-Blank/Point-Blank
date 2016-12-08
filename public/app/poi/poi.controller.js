@@ -37,10 +37,7 @@
       poireview.rating = vm.reviewRating;
 
       vm.reviews.unshift(poireview);
-      poiService.addReviewPoiData(poireview)
-        .then(function (reviews) {
-          console.log('here in poicontroller ', reviews);
-        });
+      poiService.addReviewPoiData(poireview);
     };
 
     vm.calcGeneralRating = function (reviews) {

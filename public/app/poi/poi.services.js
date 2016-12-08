@@ -14,7 +14,6 @@
         data: poireview
       })
       .then(function (results) {
-        console.log('inside poiservices', results);
         return results;
       });
     };

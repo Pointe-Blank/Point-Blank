@@ -1,7 +1,6 @@
 // POI schema/model
 const Sequelize = require('sequelize');
 const dbConnection = require('../../config/db.config.js');
-const Reviews = require('../reviews/reviews.model.js');
 
 const POI = dbConnection.define('poi', {
   name: {
@@ -24,12 +23,10 @@ const POI = dbConnection.define('poi', {
   }
 });
 
-const setup = require('./poi.setup.js');
 // will only create table once; use {force: true} to override table
 POI.sync({force: true}).then(function () {
   console.log('POI table successfuly created.');
   // seed database
-  // POIs
   POI.create({
     name: 'Mark Zuckerberg',
     summary: 'American computer programmer, internet entrepreneur, and philanthropist. He is the chairman, chief executive officer, and co-founder of social networking website Facebook.',
@@ -114,12 +111,6 @@ POI.sync({force: true}).then(function () {
     profile_image_url: 'http://i.imgur.com/akNpmZM.jpg',
     general_rating: 24
   });
-
-  // POI.create({
-  //   name: 'Peter Brabeck-Letmathe',
-  //   summary: 'An Austrian businessman. He is the chairman and former CEO of the Nestlé Group, and chairman of Formula One. ',
-  //   profile_image_url: ''
-  // })
 
   POI.create({
     name: 'Jared Fogle',

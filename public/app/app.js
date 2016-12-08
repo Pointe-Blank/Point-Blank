@@ -51,7 +51,6 @@
           if (response.status === 401) {
             $state.go('signin');
           } else {
-            console.log(response.data);
             authFactory.isLoggedIn = true;
             $rootScope.loggedIn = true;
             $rootScope.id = response.data.id;      // logged in user's id

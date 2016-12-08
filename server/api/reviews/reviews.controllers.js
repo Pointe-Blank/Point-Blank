@@ -1,4 +1,4 @@
-const dbConnection = require('../../config/db.config.js');
+require('../../config/db.config.js');
 const Review = require('./reviews.model.js');
 
 exports.getAllReviews = function (req, res) {
