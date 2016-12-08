@@ -112,12 +112,6 @@ POI.sync({force: true}).then(function () {
     general_rating: 24
   });
 
-  // POI.create({
-  //   name: 'Peter Brabeck-Letmathe',
-  //   summary: 'An Austrian businessman. He is the chairman and former CEO of the Nestlé Group, and chairman of Formula One. ',
-  //   profile_image_url: ''
-  // })
-
   POI.create({
     name: 'Jared Fogle',
     summary: 'Known as "the Subway Guy", he is a former American spokesperson for Subway restaurants. he was investigated for paying for sex with minors and receiving child pornography in 2015. On August 19, 2015, he agreed to plead guilty in federal court to possessing child pornography and traveling to pay for sex with minors.',

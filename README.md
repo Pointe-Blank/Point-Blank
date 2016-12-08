@@ -1,4 +1,5 @@
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
+[![js-semistandard-style](https://cdn.rawgit.com/flet/semistandard/master/badge.svg)](https://github.com/Flet/semistandard)
 
 # Point Blank
 
@@ -17,10 +18,15 @@ corruption, and so on are the triggers that turn a POI into a POS (Piece of S***
   - __Development Team Members__: Jose Cuchilla, Jongsoo Yoon
 
 ## Usage
-Make sure that Nodejs is installed.
+1. Make sure that Nodejs is installed.
+2. Create a server/config/credentials.json file that has credentials for your elephantsql database. Follow the format of server/config/sampleCredentials.json.
+3. Create a server/config/fbAuth.config.js file that has credentials for your Facebook app. Follow the format of server/config/samplefbAuth.config.js.
+  - Registering a Facebook app: https://scotch.io/tutorials/easy-node-authentication-facebook#creating-our-facebook-application
+  - *Important:* Add *http://localhost:3000* to your Facebook app's Valid OAuth redirect URIs under Settings > Advanced
 ```
  npm install
  npm start
+ open http://localhost:3000
 ```
 
 ## Technologies
@@ -38,4 +44,15 @@ Make sure that Nodejs is installed.
 
 See **_CONTRIBUTING.md** for contribution guidelines.
 
-[![js-semistandard-style](https://cdn.rawgit.com/flet/semistandard/master/badge.svg)](https://github.com/Flet/semistandard)
+## Pending Features
+1. Implement *put requests* to POI general ratings.
+2. Implement API calls to Wikipedia instead of preseeding database with POIs.
+3. Implement Facebook profile pictures.
+4. Implement personal experience ratings section.
+5. Implement user credibility by allowing other users to rate reviews.
+6. Implement cron job so that Daily Spotlight page auto updates every 24 hours.
+7. Implement a filter for only good POI. (POS filter already exists)
+8. Implement Twitter API to link tweets with POI.
+9. Implement user profile page.
+10. Implement charts (d3, charts.js, etc).
+11. Implement local login? Design reason for omitting and requiring FB account is to give reviews a more credibility.
