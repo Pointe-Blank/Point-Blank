@@ -2,3 +2,4 @@ node_modules
 *.DS_Store
 server/config/credentials.json
 server/config/fbAuth.config.js
+.env
