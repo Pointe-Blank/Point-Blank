@@ -8,7 +8,15 @@ const creds = require('./credentials');
 const dburl = `postgres://${creds.username}:${creds.password}@tantor.db.elephantsql.com:5432/sritpzob`;
 
 // database connection
-const dbConnection = new Sequelize(dburl);
+const dbConnection = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASS, {
+  host: process.env.DB_HOST,
+  dialect: 'mysql',
+  pool: {
+    max: 5, 
+    min: 0,
+    idle: 10000
+  },
+});
 
 // testing connection
 dbConnection
