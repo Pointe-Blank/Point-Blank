@@ -1,10 +1,10 @@
 // REMEMBER TO REQUIRE POI MODEL AND DB CONNECTION
-const dbConnection = require('../../config/db.config.js');
-const POI = require('./poi.model.js');
-const Review = require('../reviews/reviews.model.js');
+const models = require('../../config/db.config.js');
 
 exports.getAllPOI = function (req, res) {
-  POI.findAll({include: [ Review ]})
+  models.POI.findAll({
+    include: [ models.Review ]
+  })
     .then(function (poi) {
       res.status(200).json(poi);
     })
@@ -15,7 +15,10 @@ exports.getAllPOI = function (req, res) {
 
 exports.getOnePOIByName = function (req, res) {
   const POIName = req.params.name;
-  POI.findOne({ where: {name: POIName}, include: [ Review ] })
+  models.POI.findOne({ 
+    where: {name: POIName}, 
+    include: [ models.Review ] 
+  })
     .then(function (poi) {
       res.status(200).json(poi);
     })
@@ -32,7 +35,7 @@ exports.addOnePOI = function (req, res) {
   // picture of a cat if no image url is provided
   const profileImageUrl = req.body.profileImageUrl || 'http://i.imgur.com/D6Tt4kr.jpg';
 
-  POI.create({
+  models.POI.create({
     name: name,
     summary: summary,
     general_rating: generalRating,
