@@ -28,7 +28,7 @@
 
       <div class="col-md-6">
         <div class="thumbnail">
-          <a ng-href="/#!/poi/{{vm.posName}}">
+          <div ng-click="vm.goPoi(vm.posName)"">
             <img src="/assets/images/poop.png" class="img-responsive" width="159"/>
 
               <img ng-src="{{vm.posImage}}" class="thumbnail img-responsive customPicture"/>
@@ -37,7 +37,7 @@
               <h2 id="font" class="text-center">{{vm.posName}}</h2>
               <p id="font2" >{{vm.posSummary}}</p>
             </div>
-          </a>
+          </div>
         </div>
       </div>
 
