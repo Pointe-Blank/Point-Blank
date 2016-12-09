@@ -5,9 +5,9 @@
     .module('point-blank.splash')
     .controller('splash-controller', SplashController);
 
-  SplashController.$inject = ['splashService', '$location'];
+  SplashController.$inject = ['splashService', '$location', '$state'];
 
-  function SplashController (splashService) {
+  function SplashController (splashService, $location, $state) {
     var vm = this;
     vm.poiName = '';
     vm.poiImage = '';
@@ -15,6 +15,13 @@
     vm.posName = '';
     vm.posImage = '';
     vm.posSummary = '';
+
+    vm.goPoi = function (input) {
+      console.log('Here is the input we are sending in state change', vm.poiName);
+      $state.go('poi', {
+        name: input
+      });
+    };
 
     let poiInit = function () {
       splashService.getPOIList()

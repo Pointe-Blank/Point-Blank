@@ -28,8 +28,15 @@
     };
 
     // this function does a path redirect to the POI page when a user clicks on their icon
-    vm.getPOI = function (poiInfo) {
-      return $location.path('/poi/' + poiInfo);
+    // vm.getPOI = function (poiInfo) {
+    //   return $location.path('/poi/' + poiInfo);
+    // };
+
+    // this function does a path redirect to the POI page when a user clicks on their icon
+    vm.getPOI = function(input) {
+      $state.go('poi', {
+        input: input
+      })
     };
   }
 })();
