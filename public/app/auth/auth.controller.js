@@ -5,9 +5,9 @@
         .module('point-blank')
         .controller('auth-controller', AuthController);
 
-  AuthController.$inject = ['$rootScope'];
+  AuthController.$inject = ['$rootScope', '$state', '$stateParams'];
 
-  function AuthController (authFactory) {
+  function AuthController (authFactory, $state, $stateParams) {
     const vm = this;
     vm.logIn = function () {
       authFactory.isLoggedIn = true;
