@@ -12,5 +12,13 @@
     vm.logIn = function () {
       authFactory.isLoggedIn = true;
     };
+
+    vm.goSignup = function () {
+      $state.go('signup');
+    };
+
+    vm.goSignin = function () {
+      $state.go('signin');
+    };
   }
 })();
