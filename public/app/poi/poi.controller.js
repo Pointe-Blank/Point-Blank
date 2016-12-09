@@ -22,8 +22,9 @@
           console.log('Returned results from data fetch', results);
           vm.poi = results;
           vm.reviews = results.reviews;
-          vm.genRating = vm.calcGeneralRating(vm.reviews);
-          console.log('Here is the poi', vm.poi); 
+          vm.lastRev = vm.reviews[vm.reviews.length-1]
+          console.log('reviews:', vm.reviews)
+          vm.genRating = vm.lastRev.sumUserRevs / vm.lastReview.numUserRevs
         })
         .catch(function(err) {
           console.log('Error initializing poi', err);
@@ -39,6 +40,8 @@
       poireview.reviewer_name = $rootScope.name;
       poireview.review_content = vm.review_content;
       poireview.rating = vm.reviewRating;
+      poireview.numUserRevs = vm.lastReview.numUserRevs +1;
+      poireview.sumUserRevs = vm.lastRev.sumUserRevs + vm.reviewRating;
 
       vm.reviews.unshift(poireview);
       poiService.addReviewPoiData(poireview);
