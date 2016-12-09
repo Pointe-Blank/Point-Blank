@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 
 // Please create a credential.json file with your username and password for your cloud DB.
 // Look at sampleCredentials.json.
-const creds = require('./credentials');
+//const creds = require('./credentials');
 
 // creates database connection credentials needed to connect to DB via Sequelize
-const dburl = `postgres://${creds.username}:${creds.password}@tantor.db.elephantsql.com:5432/sritpzob`;
+//const dburl = `postgres://${creds.username}:${creds.password}@tantor.db.elephantsql.com:5432/sritpzob`;
 
 // database connection
 const dbConnection = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASS, {
