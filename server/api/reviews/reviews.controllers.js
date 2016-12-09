@@ -1,8 +1,8 @@
-require('../../config/db.config.js');
-const Review = require('./reviews.model.js');
+const models = require('../../config/db.config.js');
+
 
 exports.getAllReviews = function (req, res) {
-  Review.findAll()
+  models.Review.findAll()
     .then(function (review) {
       res.status(200).json(review);
     })
@@ -13,7 +13,11 @@ exports.getAllReviews = function (req, res) {
 
 exports.getOneReviewByName = function (req, res) {
   const reviewId = req.params.id;
-  Review.findOne({ where: {name: reviewId} })
+  models.Review.findOne({ 
+    where: {
+      name: reviewId
+    } 
+  })
     .then(function (review) {
       res.status(200).json(review);
     })
@@ -30,7 +34,7 @@ exports.addOneReview = function (req, res) {
   const poiId = req.body.poiId;
   const reviewerName = req.body.reviewer_name;
 
-  Review.create({
+  models.Review.create({
     review_type: reviewType,
     review_content: reviewContent,
     rating: rating,

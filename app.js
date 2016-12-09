@@ -1,5 +1,7 @@
 require('dotenv').config();
-require('./server/config/db.config.js');
+
+const models = require('./server/config/db.config.js');
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -9,6 +11,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const app = express();
+
+
 
 // set up passport configurations
 require('./server/config/passport.config.js')(passport); // pass passport for configuration
@@ -53,6 +57,10 @@ app.get('/auth', isLoggedIn, function (req, res) {
   res.send(req.user);
 });
 
-app.listen(app.get('port'), function () {
-  console.log('Server is listening on port', app.get('port'));
-});
+
+
+models.sequelize.sync({force:true}).then(()=>{
+  app.listen(app.get('port'), function () {
+    console.log('Server is listening on port', app.get('port'));
+  });
+})

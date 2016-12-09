@@ -3,7 +3,8 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 // load up the user model
-var User = require('../api/users/users.model.js');
+const models = require('./db.config.js')
+//var User = require('../api/users/users.model.js');
 
 // load the auth variables
 var configAuth = require('./fbAuth.config.js');
@@ -22,7 +23,7 @@ module.exports = function (passport) {
 
   // used to deserialize the user
   passport.deserializeUser(function (id, done) {
-    User.findById(id)
+    models.User.findById(id)
       .then(function (user) {
         done(null, user);
       })
@@ -42,12 +43,12 @@ module.exports = function (passport) {
     // facebook will send back the token and profile
     function (token, refreshToken, profile, done) {
       // find the user in the database based on their facebook id
-      User.findOne({where: {facebookId: profile.id}})
+      models.User.findOne({where: {facebookId: profile.id}})
           .then(function (user) {
             if (user) {                   // if user already exists, simply return that user
               return done(null, user);
             } else {
-              User.create({
+              models.User.create({
                 name: profile.name.givenName + ' ' + profile.name.familyName,
                 token: token,
                 facebookId: profile.id
