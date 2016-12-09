@@ -5,25 +5,29 @@
     .module('point-blank.poi')
     .controller('poi-controller', PoiController);
 
-  PoiController.$inject = ['$location', '$state', 'poiService', '$rootScope'];
+  PoiController.$inject = ['$http', '$location', '$state', '$stateParams', 'poiService', '$rootScope'];
 
-  function PoiController ($location, $state, poiService, $rootScope) {
+  function PoiController ($http, $location, $state, $stateParams, poiService, $rootScope) {
     var vm = this;
+    vm.poiName = $stateParams.name;
     vm.poi;
-    vm.reviews;
+    vm.reviews = [];
     vm.data = {};
     vm.reviewRating = 50;
     vm.genRating;
 
     vm.init = function () {
-      var url = $location.$$url;
-      url = url.slice(5).split('%20').join(' ');
-      poiService.grabSinglePoiData(url)
+      poiService.grabSinglePoiData(vm.poiName)
         .then(function (results) {
+          console.log('Returned results from data fetch', results);
           vm.poi = results;
           vm.reviews = results.reviews;
           vm.genRating = vm.calcGeneralRating(vm.reviews);
-        });
+          console.log('Here is the poi', vm.poi); 
+        })
+        .catch(function(err) {
+          console.log('Error initializing poi', err);
+        })
     };
     vm.init();
 
