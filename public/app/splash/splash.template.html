@@ -15,20 +15,20 @@
 
       <div class="col-md-6">
         <div class="thumbnail">
-          <a ng-href="/#/poi/{{vm.poiName}}">
+          <div ng-click="vm.goPoi(vm.poiName)">
             <img src="/assets/images/halo.png" class="img-responsive"/>
             <img ng-src="{{vm.poiImage}}" class="thumbnail img-responsive customPicture"/>
             <div class="caption">
               <h2 id="font" class="text-center">{{vm.poiName}}</h2>
               <p id="font2" >{{vm.poiSummary}}</p>
             </div>
-          </a>
+          </idv>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="thumbnail">
-          <a ng-href="/#/poi/{{vm.posName}}">
+          <a ng-href="/#!/poi/{{vm.posName}}">
             <img src="/assets/images/poop.png" class="img-responsive" width="159"/>
 
               <img ng-src="{{vm.posImage}}" class="thumbnail img-responsive customPicture"/>
