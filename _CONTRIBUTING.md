@@ -84,16 +84,16 @@
 4. **Be very, very clear and specific in your commit messages.**
 
 ### KEYWORDS: ###
-- [progress] - progress on a specific feature has been made
-- [feature] - implementation of a specific feature is complete
+- [prog] - progress on a specific feature has been made
+- [feat] - implementation of a specific feature is complete
 - [fix] - made something broken working, like a bug or something
 - [style] - styling changes
 - [refactor] - code does the same thing but it is better code
 - [setup] - changes to readme, gitignore, package.json, webpack, scaffolding, backend routing, database config, etc.
 
 ### Examples: ###
-- [progress] Make progress on itemform and wishlist rendering
-- [feature] Finish basic signup component
+- [prog] Make progress on itemform and wishlist rendering
+- [feat] Finish basic signup component
 - [fix] Fix successful ajax call landing in error
 - [style] Implement category image buttons
 - [refactor] Refactor base components to es6 and set preloaders
