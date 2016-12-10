@@ -15,7 +15,8 @@
       })
       .then(function (results) {
         return results;
-      });
+      })
+      .catch(err=>console.log(err));
     };
 
     var grabSinglePoiData = function (poiInfo) {
