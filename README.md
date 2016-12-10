@@ -37,7 +37,7 @@ corruption, and so on are the triggers that turn a POI into a POS (Piece of S***
 * [PostgreSQL] (https://www.postgresql.org/)
 * [ElephantSQL] (https://www.elephantsql.com/)
 * [Sequelize] (http://docs.sequelizejs.com/en/v3/)
-* [Passport] (http://passportjs.org/)
+* [Auth0] (http://auth0.org/)
 * [Bcrypt-nodejs] (https://www.npmjs.com/package/bcrypt-nodejs)
 
 ## Contributing

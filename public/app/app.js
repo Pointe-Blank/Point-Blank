@@ -39,11 +39,6 @@
           restricted: true
         }
       })
-      .state('signup', {
-        url: '/signup',
-        templateUrl: 'app/auth/signup.template.html',
-        controller: 'auth-controller as vm'
-      })
 
     $urlRouterProvider.otherwise('/');
 
@@ -76,5 +71,10 @@
     // Register the synchronous hash parser
     // when using UI Router
     lock.interceptHash();
+
+    // Use the authManager from angular-jwt to check for
+    // the user's authentication state when the page is
+    // refreshed and maintain authentication
+    authManager.checkAuthOnRefresh();
   }
 })();

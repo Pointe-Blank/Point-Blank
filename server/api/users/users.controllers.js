@@ -1,20 +1,31 @@
-const passport = require('passport');
-const bcrypt = require('bcrypt-nodejs');
+const models = require('../../config/db.config.js');
 
-exports.register = function () {
-
+exports.findUser = (req, res, next) => {
+  models.User.find({
+    where: {
+      token: req.body.token
+    }
+  }).then((user) => {
+      let tmp = [];
+      if (user) tmp.push(user);
+      res.json(tmp);
+  })
+  .catch((err) => {
+    res.json(err);
+  });
 };
 
-exports.login = function (req, res) {
-
-};
-
-exports.logout = function (req, res) {
-  req.logout();
-  res.redirect('/');
-};
-
-// authentication middleware
-exports.authenticate = function (req, res, next) {
-
-};
+exports.addOneUser = (req, res, next) => {
+  console.log('creating user')
+  models.User.create({
+    name: req.body.name,
+    token: req.body.token,
+    facebookId: req.body.facebookId
+  })
+  .then((user) => {
+    res.json(user);
+  })
+  .catch((err) => {
+    res.json(err);
+  });
+}
