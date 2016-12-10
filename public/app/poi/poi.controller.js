@@ -51,6 +51,7 @@
           vm.genRating = vm.lastRev ? 
             vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs :
             results.general_rating;
+          vm.drawChart();
         })
         .catch(function(err) {
           console.log('!!Error initializing poi', err);
@@ -80,11 +81,9 @@
       vm.genRating = vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs
     };
 
-    vm.calcGeneralRating = function (reviews) {
-      var result = reviews.reduce(function (acc, review) {
-        return acc + review.rating;
-      }, 0);
-      return Math.floor(result / reviews.length);
-    };
+    vm.drawChart = () => {
+
+    }
+
   }
 })();

@@ -80,14 +80,3 @@
 
 </div>
 <!-- End BIG CONTAINER -->
-
-<!-- Begin Nested Views -->
-<div 
-  ng-repeat="t in tabs" 
-  ui-sref="{{t.route}}"
-  ui-sref-active="active">
-  {{t.heading}}
-</div>
-
-<div ui-view></div>
-<!--End Nested Views-->
