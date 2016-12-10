@@ -155,8 +155,6 @@ INSERT into `poi` (`createdAt`, `updatedAt`,`name`,`summary`,`profile_image_url`
 
 
 
-
-
   
 
 

@@ -7,18 +7,11 @@
 
   AuthController.$inject = ['$rootScope', '$state', '$stateParams'];
 
-  function AuthController (authFactory, $state, $stateParams) {
-    const vm = this;
-    vm.logIn = function () {
-      authFactory.isLoggedIn = true;
-    };
+  function AuthController(authService) {
 
-    vm.goSignup = function () {
-      $state.go('signup');
-    };
+    var vm = this;
 
-    vm.goSignin = function () {
-      $state.go('signin');
-    };
+    vm.authService = authService;
+
   }
 })();
