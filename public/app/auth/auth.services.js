@@ -1,27 +1,22 @@
-(function () {
-  'use strict';
+angular
+  .module('point-blank')
+  .factory('authService', function (lock, authManager) {
 
-  angular
-    .module('point-blank.auth')
-    .factory('authFactory', authFactory);
-
-  authFactory.$inject = ['$http'];
-  function authFactory ($http) {
-    function authService () {
-      return $http.get('/auth')
-        .then(function (response) {
-          return response;
-        })
-        .catch(function (err) {
-          return err;
-        });
-    }
-
-    var isLoggedIn = false;
-
-    return {
-      authService: authService,
-      isLoggedIn: isLoggedIn
-    };
+  function login() {
+    lock.show();
   }
-})();
+
+  // Set up the logic for when a user authenticates
+  // This method is called from app.run.js
+  function registerAuthenticationListener() {
+    lock.on('authenticated', function (authResult) {
+      localStorage.setItem('id_token', authResult.idToken);
+      authManager.authenticate();
+    });
+  }
+
+  return {
+    login: login,
+    registerAuthenticationListener: registerAuthenticationListener
+  }
+})

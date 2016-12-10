@@ -3,7 +3,7 @@
   <head>
     <title>Point Blank</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Voltaire" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
@@ -31,11 +31,13 @@
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
     <!-- Angular Dependencies-->
-    <script src="node_modules/angular/angular.js"></script>
-    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 
     <!-- JS -->
     <script src="/app/app.js"></script>
+    <script src="/app/auth/auth.controller.js"></script>
+    <script src="/app/auth/auth.services.js"></script>
 
     <!--shared navbar-->
     <script src="/app/shared/navigation/navBar.controller.js"></script>
@@ -57,9 +59,9 @@
     <script src="/app/poi/poi.services.js"></script>
 
     <!-- Authentication -->
-    <script src="/app/auth/auth.module.js"></script>
-    <!--<script src="/app/auth/auth.controller.js"></script>-->
-    <script src="/app/auth/auth.services.js"></script>
+    <script src="/lib/auth0-lock/build/lock.js"></script>
+    <script src="/lib/angular-lock/dist/angular-lock.js"></script>
+    <script src="/lib/angular-jwt/dist/angular-jwt.js"></script>
 
   </body>
 </html>

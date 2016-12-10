@@ -11,7 +11,7 @@
         </ul>
                   <ul class="nav navbar-nav navbar-right">
             <!--This section determines the auth buttons on the navigation bar.-->
-            <li ng-hide="loggedIn" class="navbar-right"><button class="navbar-btn btn-sm btn-info margin-right" ui-sref="signin">Sign In</button></li>
+            <li ng-hide="loggedIn" class="navbar-right"><button class="navbar-btn btn-sm btn-info margin-right" ng-click="vm.authService.login()">Sign In</button></li>
             <li ng-show="loggedIn" class="navbar-right"><a ng-click="vm.logout()" href="/api/users/logout" class="btn btn-default btn-sm">Logout</a></li>
           </ul>
     </div>
