@@ -3,17 +3,25 @@
         <a class="navbar-brand" ui-sref="splash">Point Blank  ._</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
-        <ul class="nav navbar-nav">
-          <!--This section is setting the state of each navigation button-->
-            <li><a ui-sref="splash">Home</a></li>
-            <li><a ui-sref="search">Search POIs</a></li>
-            <li><a href="" data-toggle="modal" data-target=".bs-example-modal-lg">About us</a></li>
-        </ul>
-                  <ul class="nav navbar-nav navbar-right">
-            <!--This section determines the auth buttons on the navigation bar.-->
-            <li ng-hide="loggedIn" class="navbar-right"><button class="navbar-btn btn-sm btn-info margin-right" ng-click="vm.authService.login()">Sign In</button></li>
-            <li ng-show="loggedIn" class="navbar-right"><a ng-click="vm.logout()" href="/api/users/logout" class="btn btn-default btn-sm">Logout</a></li>
-          </ul>
+      <ul class="nav navbar-nav">
+        <!--This section is setting the state of each navigation button-->
+          <li><a ui-sref="splash">Home</a></li>
+          <li><a ui-sref="search">Search POIs</a></li>
+          <li><a href="" data-toggle="modal" data-target=".bs-example-modal-lg">About us</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!--This section determines the auth buttons on the navigation bar.-->
+        <li ng-hide="isAuthenticated" class="navbar-right">
+          <button class="navbar-btn btn-sm btn-info margin-right" ng-click="vm.authService.login()">
+            Sign In
+          </button>
+        </li>
+        <li ng-show="isAuthenticated" class="navbar-right">
+          <button class="navbar-btn btn-sm btn-info margin-right" ng-click="vm.authService.logout()">
+            Logout
+          </button>
+        </li>
+      </ul>
     </div>
 
     <!-- modal -->

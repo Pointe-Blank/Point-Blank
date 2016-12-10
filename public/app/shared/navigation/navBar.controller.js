@@ -2,30 +2,24 @@
   'use strict';
 
   angular
-        .module('point-blank')
-        .controller('NavBarController', NavBarController);
+    .module('point-blank')
+    .controller('NavBarController', NavBarController);
 
-  NavBarController.$inject = ['$rootScope', 'authService'];
+  NavBarController.$inject = ['$rootScope', '$scope', 'authService'];
 
-  function NavBarController ($rootScope, authService) {
+  function NavBarController ($rootScope, $scope, authService) {
     const vm = this;
     vm.authService = authService;
+    vm.authService.registerAuthenticationListener();
+    
+    // Set the user profile when the page is refreshed
+    $rootScope.profile = authService.userProfile;
 
-    $rootScope.loggedIn = authService.isLoggedIn;
 
-    // This function logs out the user by making the loggedIn property inside the rootScope, as well s the isloggedIn property inside authService equal to false.
-    vm.logout = function () {
-      process.nextTick(
-        function () {
-          $rootScope.loggedIn = false;
-          authService.isLoggedIn = false;
-        }
-      );
-    };
-
-    // This function is part of the auth system. It checks whether the user is logged in (using authService.isLoggedIn) and passes its truth statement to the vm.loggedIn variable.
-    vm.isLoggedIn = function () {
-      vm.loggedIn = authService.isLoggedIn;
-    };
+    // Listen for the user profile being set when the user
+    // logs in and update it in the view
+    $scope.$on('userProfileSet', function(event, userProfile) {
+      $scope.profile = userProfile;
+    });
   }
 })();

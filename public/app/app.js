@@ -45,12 +45,23 @@
         controller: 'auth-controller as vm'
       })
 
+    $urlRouterProvider.otherwise('/');
+
     lockProvider.init({
       clientID: 'J37zTs3sv9OlpadC9ear6VzzcHqclTO0',
       domain: 'teach-me-how.auth0.com'
     });
+    
+  /** 
+   * configuration for agular.jwt. If a user is logged
+   * in, it will pull the id_token from local storage.
+   */
+    jwtOptionsProvider.config({
+      tokenGetter: function(){
+        return localStorage.getItem('id_token');
+      }
+    });
 
-    $urlRouterProvider.otherwise('/');
   }
 
   function run ($rootScope, authService, authManager, lock) {
