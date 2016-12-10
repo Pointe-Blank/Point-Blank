@@ -19,7 +19,7 @@ const POIRoutes = require('./server/routes/poi.routes.js');
 const reviewsRoutes = require('./server/routes/reviews.routes.js');
 const usersRoutes = require('./server/routes/users.routes.js');
 const redisRoutes = require('./server/routes/redis.routes.js');
-//const newsfeedRoutes = require('./server/routes/newsfeed.routes.js');
+const newsfeedRoutes = require('./server/routes/newsfeed.routes.js');
 
 
 // auth middleware
@@ -44,7 +44,7 @@ app.use('/api/poi', POIRoutes);
 app.use('/api/cache', redisRoutes);
 app.use('/api/review', reviewsRoutes);
 app.use('/api/users', usersRoutes);
-//app.use('/newsfeed', newsfeedRoutes);
+app.use('/newsfeed', newsfeedRoutes);
 
 app.get('/auth', isLoggedIn, function (req, res) {
   res.send(req.user);

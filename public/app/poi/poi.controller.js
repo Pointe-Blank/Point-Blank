@@ -5,9 +5,9 @@
     .module('point-blank.poi')
     .controller('poi-controller', PoiController);
 
-  PoiController.$inject = ['$http', '$location', '$state', '$stateParams', 'poiService', '$rootScope'];
+  PoiController.$inject = ['$scope', '$http', '$location', '$state', '$stateParams', 'poiService', '$rootScope'];
 
-  function PoiController ($http, $location, $state, $stateParams, poiService, $rootScope) {
+  function PoiController ($scope, $http, $location, $state, $stateParams, poiService, $rootScope) {
     var vm = this;
     console.log("$stateParams:",$stateParams)
     vm.poiName = $stateParams.name;
@@ -16,6 +16,27 @@
     vm.data = {};
     vm.reviewRating = 50;
     vm.genRating;
+
+    $scope.tabs = [{
+      heading: 'Guardian News',
+      route: 'poi.guardian',
+      active: false
+    }, {
+      heading: 'New York Times',
+      route: 'poi.nytimes',
+      active: false
+    }]
+
+    $scope.$on('$stateChangeSuccess', function() {
+      $scope.tabs.forEach(function(tab) {
+        tab.active = $state.is(tab.route);
+      });
+    });
+
+    // let validStates = ['poi.guardian'];
+    // if (validStates.indexOf($state.current.name) === -1) {
+    //   $state.go('.guardian');
+    // }
 
     vm.init = function () {
       console.log('vm.poiName:', vm.poiName)

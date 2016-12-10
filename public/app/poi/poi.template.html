@@ -81,7 +81,13 @@
 </div>
 <!-- End BIG CONTAINER -->
 
-  <!-- Nested Views -->
-  <!--<br>-->
-  <a ui-sref="guardian">Guardian News</a>
-  <div ui-view></div>
+<!-- Begin Nested Views -->
+<div 
+  ng-repeat="t in tabs" 
+  ui-sref="{{t.route}}"
+  ui-sref-active="active">
+  {{t.heading}}
+</div>
+
+<div ui-view></div>
+<!--End Nested Views-->

@@ -40,13 +40,17 @@
           restricted: true
         }
       })
-      .state('guardian', {
+      .state('poi.guardian', {
         url: '/guardian',
         templateUrl: 'app/data-view/guardian/guardian.template.html',
         controller: 'guardian-controller as vm',
         access: {
           restricted: true
         }
+      })
+      .state('poi.nytimes', {
+        url: '/nytimes',
+        templateUrl: 'app/data-view/nytimes/nytimes.template.html'
       })
 
     $urlRouterProvider.otherwise('/');
