@@ -18,6 +18,16 @@ const queryGuardian = (req, res) => {
     });
 };
 
+// create a function that gets all pois in db and query guardian for articles for each poi
+// getPOI: (req, res, next) => {
+//   red_client.get('POIs')
+//   .then(result => {
+//     res.json(JSON.parse(result));
+//   })
+//   .catch(err=>{
+//     console.log("testing Error: Error trying to get all POIs", err);
+//   })
+
 module.exports = {
   queryGuardian: queryGuardian
 };
