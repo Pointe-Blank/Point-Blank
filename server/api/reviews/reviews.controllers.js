@@ -30,17 +30,20 @@ exports.addOneReview = function (req, res) {
   const reviewType = req.body.reviewType; // MUST BE 'general' OR 'personal'
   const reviewContent = req.body.review_content;
   const rating = req.body.rating || 10;
-  const userId = req.body.userId;
+  const userId = req.body.UserId;
   const poiId = req.body.poiId;
   const reviewerName = req.body.reviewer_name;
 
   models.Review.create({
-    review_type: reviewType,
-    review_content: reviewContent,
-    rating: rating,
-    userId: userId,
-    poiId: poiId,
-    reviewer_name: reviewerName
+    review_type: req.body.reviewType, // MUST BE 'general' OR 'personal'
+    review_content: req.body.review_contentt,
+    rating: req.body.rating,
+    UserId: req.body.UserId,
+    POIId: req.body.poiId,
+    reviewer_name: req.body.reviewer_name,
+    NumUserRevs: req.body.numUserRevs,
+    SumUserRevs: req.body.sumUserRevs
+
   })
     .then(function (review) {
       res.status(201).json(review);
