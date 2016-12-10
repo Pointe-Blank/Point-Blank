@@ -16,7 +16,10 @@
       .then(function (results) {
         return results;
       })
-      .catch(err=>console.log(err));
+      .catch(err=>{
+        console.log('error data:',err.data)
+        console.log('attemped post:',poireview)
+      });
     };
 
     var grabSinglePoiData = function (poiInfo) {

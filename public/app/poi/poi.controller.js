@@ -39,7 +39,7 @@
     vm.addReview = function () {
       let poireview = {};
       poireview.reviewType = 'general';
-      poireview.userId = $rootScope.id;
+      poireview.UserId = $rootScope.id;
       poireview.reviewer_name = $rootScope.name;
       poireview.poiId = vm.poi.id;
       poireview.review_content = vm.review_content;
@@ -48,8 +48,8 @@
         poireview.numUserRevs = vm.lastReview.numUserRevs +1;
         poireview.sumUserRevs = vm.lastRev.sumUserRevs + vm.reviewRating;
       } else {
-        poireview.numUserRevs = 0;
-        poireview.sumUserRevs = 0;
+        poireview.numUserRevs = 1;
+        poireview.sumUserRevs = poireview.rating;
       }
       vm.reviews.unshift(poireview);
       console.log('creating review:',poireview)
