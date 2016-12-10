@@ -5,9 +5,9 @@
     .module('data-view.guardian')
     .controller('guardian-controller', GuardianController);
 
-  GuardianController.$inject = [];
+  GuardianController.$inject = ['$state'];
 
-  function GuardianController () {
+  function GuardianController ($state) {
     const vm = this;
   }
 })();

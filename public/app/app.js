@@ -8,6 +8,7 @@
       'point-blank.splash', 
       'point-blank.poi', 
       'point-blank.search',
+      'data-view.guardian',
       'ui.router' 
     ])
     .config(config)
@@ -35,6 +36,14 @@
         url: '/poi/:name',
         templateUrl: 'app/poi/poi.template.html',
         controller: 'poi-controller as vm',
+        access: {
+          restricted: true
+        }
+      })
+      .state('data-view.guardian', {
+        url: '/guardian',
+        templateUrl: 'app/data-view/guardian/guardian.template.html',
+        controller: 'guardian-controller as vm',
         access: {
           restricted: true
         }
