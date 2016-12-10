@@ -15,6 +15,10 @@
       })
       .then(function (results) {
         return results;
+      })
+      .catch(err=>{
+        console.log('error data:',err.data)
+        console.log('attemped post:',poireview)
       });
     };
 

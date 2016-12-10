@@ -24,6 +24,9 @@ angular
       console.log('sent back from user db:', user)
       if(user.data[0]) {
         userProfile = user.data[0];
+        console.log('found user profile:',userProfile)
+        $rootScope.id = userProfile.id;
+        $rootScope.name = userProfile.name;
       } else {
         $http.post('/api/users/register', {
           name: profile.name,
@@ -32,7 +35,9 @@ angular
         })
         .then((user) => {
           userProfile = user.data;
-          console.log(userProfile)
+          console.log('created user profile:',userProfile)
+          $rootScope.id = userProfile.id;
+          $rootScope.name = userProfile.name;
         })
         .catch((err) => console.log('!!'+err));              
       };
@@ -50,7 +55,7 @@ angular
         if (error) console.log(error);
         localStorage.setItem('profile', JSON.stringify(profile));
         $rootScope.$broadcast('userProfileSet', profile);
-        console.log(profile)
+        console.log('auth0 profile:',profile)
         connectProfile(profile);
       });
     });
