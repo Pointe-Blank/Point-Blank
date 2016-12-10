@@ -36,6 +36,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
+    "guardian-js": "^1.0.7",
     "jquery": "^3.1.1",
     "lodash": "^4.17.2",
     "morgan": "^1.7.0",
