@@ -40,7 +40,7 @@
           restricted: true
         }
       })
-      .state('data-view.guardian', {
+      .state('guardian', {
         url: '/guardian',
         templateUrl: 'app/data-view/guardian/guardian.template.html',
         controller: 'guardian-controller as vm',
