@@ -1,5 +1,5 @@
 (function () {
   'use strict';
 
-  angular.module('data-vew.guardian', []);
+  angular.module('data-view.guardian', []);
 })();

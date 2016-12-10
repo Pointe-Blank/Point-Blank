@@ -8,6 +8,7 @@
       'point-blank.splash', 
       'point-blank.poi', 
       'point-blank.search',
+      'data-view.guardian',
       'ui.router' 
     ])
     .config(config)
@@ -38,6 +39,18 @@
         access: {
           restricted: true
         }
+      })
+      .state('poi.guardian', {
+        url: '/guardian',
+        templateUrl: 'app/data-view/guardian/guardian.template.html',
+        controller: 'guardian-controller as vm',
+        access: {
+          restricted: true
+        }
+      })
+      .state('poi.nytimes', {
+        url: '/nytimes',
+        templateUrl: 'app/data-view/nytimes/nytimes.template.html'
       })
 
     $urlRouterProvider.otherwise('/');
