@@ -1,6 +1,6 @@
 angular
   .module('point-blank')
-  .factory('authService', function (lock, authManager, $rootScope) {
+  .factory('authService', function (lock, authManager, $rootScope, $http) {
 
   let  userProfile = JSON.parse(localStorage.getItem('profile')) || null;
 
@@ -12,8 +12,31 @@ angular
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
     authManager.unauthenticate();
-    userProfile = {};
+    userProfile = null;
     console.log('logout')
+  }
+
+  function connectProfile(profile){
+    $http.post('/api/users/login', {
+      token: profile.user_id
+    })
+    .then((user) => {
+      console.log('sent back from user db:', user)
+      if(user.data[0]) {
+        userProfile = user.data[0];
+      } else {
+        $http.post('/api/users/register', {
+          name: profile.name,
+          token: profile.user_id,
+          facebookId: profile.identities[0].user_id        
+        })
+        .then((user) => {
+          userProfile = user.data;
+          console.log(userProfile)
+        })
+        .catch((err) => console.log('!!'+err));              
+      };
+    });
   }
 
   // Set up the logic for when a user authenticates
@@ -28,6 +51,7 @@ angular
         localStorage.setItem('profile', JSON.stringify(profile));
         $rootScope.$broadcast('userProfileSet', profile);
         console.log(profile)
+        connectProfile(profile);
       });
     });
   }

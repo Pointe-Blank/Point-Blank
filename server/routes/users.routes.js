@@ -7,12 +7,9 @@ const usersControllers = require('../api/users/users.controllers.js');
 //   .get(usersControllers.getAllUsers);
 
 router.route('/register')
-  .post(usersControllers.register);
+  .post(usersControllers.addOneUser);
 
 router.route('/login')
-  .post(usersControllers.login);
-
-router.route('/logout')
-  .get(usersControllers.logout);
+  .post(usersControllers.findUser);
 
 module.exports = router;

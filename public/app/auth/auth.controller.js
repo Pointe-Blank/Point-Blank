@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-        .module('point-blank')
-        .controller('auth-controller', AuthController);
+    .module('point-blank')
+    .controller('auth-controller', AuthController);
 
   AuthController.$inject = ['$rootScope', '$state', '$stateParams'];
 
