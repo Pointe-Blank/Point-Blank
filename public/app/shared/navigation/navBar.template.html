@@ -22,6 +22,9 @@
           </button>
         </li>
       </ul>
+      <p ng-show="isAuthenticated" style="color:white">
+        logged in as {{vm.authService.profile.name}}
+      </p>
     </div>
 
     <!-- modal -->

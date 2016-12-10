@@ -35,8 +35,8 @@ exports.addOneReview = function (req, res) {
     UserId: req.body.UserId,
     POIId: req.body.poiId,
     reviewer_name: req.body.reviewer_name,
-    NumUserRevs: req.body.numUserRevs,
-    SumUserRevs: req.body.sumUserRevs
+    NumUserRevs: req.body.NumUserRevs,
+    SumUserRevs: req.body.SumUserRevs
 
   })
     .then(function (review) {

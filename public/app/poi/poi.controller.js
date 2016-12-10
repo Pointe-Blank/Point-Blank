@@ -26,9 +26,10 @@
           vm.reviews = results.Reviews;
           vm.lastRev = vm.reviews[vm.reviews.length-1]
           console.log('reviews:', vm.reviews)
+          console.log('lastRev:', vm.lastRev)
           vm.genRating = vm.lastRev ? 
-            vm.lastRev.sumUserRevs / vm.lastReview.numUserRevs :
-            results.general_rating
+            vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs :
+            results.general_rating;
         })
         .catch(function(err) {
           console.log('!!Error initializing poi', err);
@@ -45,15 +46,17 @@
       poireview.review_content = vm.review_content;
       poireview.rating = vm.reviewRating;
       if (vm.lastRev) {
-        poireview.numUserRevs = vm.lastReview.numUserRevs +1;
-        poireview.sumUserRevs = vm.lastRev.sumUserRevs + vm.reviewRating;
+        poireview.NumUserRevs = vm.lastRev.NumUserRevs +1;
+        poireview.SumUserRevs = vm.lastRev.SumUserRevs + vm.reviewRating;
       } else {
-        poireview.numUserRevs = 1;
-        poireview.sumUserRevs = poireview.rating;
+        poireview.NumUserRevs = 1;
+        poireview.SumUserRevs = poireview.rating;
       }
       vm.reviews.unshift(poireview);
       console.log('creating review:',poireview)
       poiService.addReviewPoiData(poireview);
+      vm.lastRev = poireview;
+      vm.genRating = vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs
     };
 
     vm.calcGeneralRating = function (reviews) {
