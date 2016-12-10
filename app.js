@@ -59,7 +59,7 @@ app.get('/auth', isLoggedIn, function (req, res) {
 
 
 
-models.sequelize.sync({force:true}).then(()=>{
+models.sequelize.sync().then(()=>{
   app.listen(app.get('port'), function () {
     console.log('Server is listening on port', app.get('port'));
   });

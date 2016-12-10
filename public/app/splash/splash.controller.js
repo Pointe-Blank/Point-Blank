@@ -17,7 +17,7 @@
     vm.posSummary = '';
 
     vm.goPoi = function (input) {
-      console.log('Here is the input we are sending in state change', vm.poiName);
+      console.log('Here is the input we are sending in state change:', input);
       $state.go('poi', {
         name: input
       });
@@ -47,7 +47,8 @@
           vm.posName = randomPOS.name;
           vm.posImage = randomPOS.profile_image_url;
           vm.posSummary = randomPOS.summary;
-        });
+        })
+      .catch(err=> console.log(err));
     };
 
     poiInit();
