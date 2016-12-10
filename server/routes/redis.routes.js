@@ -14,5 +14,7 @@ router.route('/review')
 router.route('/poi')
   .get(redisControllers.getPOI)
 
+router.route('/pod')
+  .get(redisControllers.getPOD)
 
 module.exports = router;

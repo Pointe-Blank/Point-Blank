@@ -20,76 +20,7 @@ client.on("error", function (err) {
  */
 client.on('connect',()=>{
   console.log(`Redis is connected  to ${host}:${port}`);
-  models.Review.findAll({})
-    .then(result=>{
-      let allItems = [];
-      result.map(item => {
-        allItems.push(item.dataValues);
-      })
-      let str_result = JSON.stringify(allItems);
-      return str_result;
-    })
-    .then(str=>{
-      return client.set('Reviews', str)
-    })
-
-
-    /**
-     *  Storing Users in cache
-     */
-    .then(response=>{
-      console.log("Success storing Reviews")
-      return models.User.findAll({
-        include: [models.Review]
-      })
-    })
-    .then(result=>{
-      let allItems = [];
-      result.map(item => {
-        allItems.push(item.dataValues);
-      })
-      let str_result = JSON.stringify(allItems);
-      return str_result;
-    })
-    .then(str=>{
-      return client.set('Users', str)
-    })
-
-    /**
-     *  Storing Users in cache
-     */
-    .then(response=>{
-      console.log("Success storing Users")
-      return models.POI.findAll({
-        include: [models.Review]
-      })
-    })
-    .then(result=>{
-      let allItems = [];
-      result.map(item => {
-        allItems.push(item.dataValues);
-      })
-      let str_result = JSON.stringify(allItems);
-      return str_result;
-    })
-    .then(str=>{
-      return client.set('POIs', str)
-    })
-    .then(response=>{
-      console.log("Success storing POIs, Users, and Reviews in cache")
-    })
-
-    .catch(err=>{
-      console.log("ERROR: REDIS.CONFIG: ", err);
-    })
+  require('../api/redis/redis.controllers.js').initAll();
 })
-/**
- * Storing Reviews in cache
- */
-const initCache = () => {
-
-  
-}
-
 
 module.exports = client;
