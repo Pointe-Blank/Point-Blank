@@ -122,9 +122,13 @@ module.exports = {
 
     red_client.get('POD')
     .then(result => {
+      // console.log("FOUND POD", typeof result, result);
       if(result){
-        res.json(result)
+        // console.log("sending pod", typeof JSON.parse(result))
+        res.json(JSON.parse(result))
+        return null;
       }else{
+        console.log("NO POD found");
         return red_client.get('POIs')
       }
     })
@@ -134,33 +138,41 @@ module.exports = {
        * Get random POI and POS
        *
        */
-      let poiList = [];
-      let posList = [];
-      
-      JSON.parse(allPOIs).filter(person=>{
-        if(person.general_rating>50){
-          poiList.push(person)
-        }else{
-          posList.push(person)
-        }
-      })
+      if(allPOIs){
+        // console.log('ALLLL POIS', allPOIs)
+        let poiList = [];
+        let posList = [];
+        // console.log("HEREEEEE",allPOIs);
+        let parsed = JSON.parse(allPOIs)
+        parsed.filter(person=>{
+          if(person.general_rating>50){
+            poiList.push(person)
+          }else{
+            posList.push(person)
+          }
+        })
 
-      let randPod = [
-        poiList[Math.floor(Math.random()*poiList.length)],
-        posList[Math.floor(Math.random()*posList.length)]
-      ]
-      res.json(randPod);
+        let randPod = [
+          poiList[Math.floor(Math.random()*poiList.length)],
+          posList[Math.floor(Math.random()*posList.length)]
+        ]
+        res.json(randPod);
 
-      return red_client.set('POD', JSON.stringify(randPod));
+        return red_client.set('POD', JSON.stringify(randPod));
+      }else{
+        return null
+      }
     })
     .then(result=>{
       if(result){
-        console.log("response for storing POD:", result);
+        // console.log("response for storing POD:", result);
         return red_client.expireat('POD', parseInt((+new Date)/1000) + 86400)
       }
     })
     .then(result=>{
-       console.log("response for Setting expiration of POD POD:", result);
+      if(result){
+        console.log("response for Setting expiration of POD POD:", result);
+      }
     })
     .catch(err=>{
       console.log("ERROR getting POD", err);
