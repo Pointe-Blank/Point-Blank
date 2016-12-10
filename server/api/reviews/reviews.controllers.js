@@ -27,16 +27,10 @@ exports.getOneReviewByName = function (req, res) {
 };
 
 exports.addOneReview = function (req, res) {
-  const reviewType = req.body.reviewType; // MUST BE 'general' OR 'personal'
-  const reviewContent = req.body.review_content;
-  const rating = req.body.rating || 10;
-  const userId = req.body.UserId;
-  const poiId = req.body.poiId;
-  const reviewerName = req.body.reviewer_name;
 
   models.Review.create({
     review_type: req.body.reviewType, // MUST BE 'general' OR 'personal'
-    review_content: req.body.review_contentt,
+    review_content: req.body.review_content,
     rating: req.body.rating,
     UserId: req.body.UserId,
     POIId: req.body.poiId,
