@@ -1,5 +1,17 @@
 <!-- BIG CONTAINER-->
 <div class="main-container">
+
+  <!-- Begin Nested Views -->
+<div 
+  ng-repeat="t in tabs" 
+  ui-sref="{{t.route}}"
+  ui-sref-active="active">
+  {{t.heading}}
+</div>
+
+<div ui-view></div>
+<!--End Nested Views-->
+
   <!-- LEFT COLUMN -->
   <div class="col-md-4 image-container mainPoi spaced">
     <!-- IMAGE -->

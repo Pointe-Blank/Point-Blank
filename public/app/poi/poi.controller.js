@@ -18,6 +18,10 @@
     vm.genRating;
 
     $scope.tabs = [{
+      heading: 'Reviews',
+      route:'poi.reviews',
+      active: false
+    }, {
       heading: 'Guardian News',
       route: 'poi.guardian',
       active: false

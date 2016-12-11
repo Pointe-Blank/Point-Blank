@@ -2,11 +2,11 @@
   'use strict';
   angular
     .module('data-view.guardian')
-    .factory('GuardianServices', GuardianServices);
+    .factory('guardianServices', guardianServices);
 
-  GuardianServices.$inject = ['$http'];
+  guardianServices.$inject = ['$http'];
 
-  function GuardianServices ($http) {
+  function guardianServices ($http) {
 
     const getNews = function(poiName) {
       return $http({

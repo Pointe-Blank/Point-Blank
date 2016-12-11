@@ -8,6 +8,7 @@
       'point-blank.splash', 
       'point-blank.poi', 
       'point-blank.search',
+      'data-view.reviews',
       'data-view.guardian',
       'ui.router' 
     ])
@@ -36,6 +37,14 @@
         url: '/poi/:name',
         templateUrl: 'app/poi/poi.template.html',
         controller: 'poi-controller as vm',
+        access: {
+          restricted: true
+        }
+      })
+      .state('poi.reviews', {
+        url: '/reviews',
+        templateUrl: 'app/data-view/reviews/reviews.template.html',
+        controller: 'reviews-controller as vm',
         access: {
           restricted: true
         }
