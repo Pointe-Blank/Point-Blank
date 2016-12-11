@@ -1,5 +1,6 @@
 // REMEMBER TO REQUIRE POI MODEL AND DB CONNECTION
 const models = require('../../config/db.config.js');
+const redHelpers = require('../redis/redis.helpers.js');
 
 exports.getAllPOI = function (req, res) {
   models.POI.findAll({
@@ -43,10 +44,14 @@ exports.addOnePOI = function (req, res) {
     // picture of a cat if no image url is provided
     profile_image_url: profileImageUrl
   })
-    .then(function (poi) {
-      res.status(201).json(poi);
-    })
-    .catch(function (err) {
-      res.status(400).send(err);
-    });
+  .then(function (poi) {
+    res.status(201).json(poi);
+    return redHelpers.initAll();
+  })
+  .then(result=>{
+    if(result) console.log("Updated POI cache: ", result)
+  })
+  .catch(function (err) {
+    res.status(400).send(err);
+  });
 };

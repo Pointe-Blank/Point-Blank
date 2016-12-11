@@ -1,4 +1,5 @@
 const models = require('../../config/db.config.js');
+const redHelpers = require('../redis/redis.helpers.js');
 
 exports.findUser = (req, res, next) => {
   models.User.find({
@@ -24,6 +25,10 @@ exports.addOneUser = (req, res, next) => {
   })
   .then((user) => {
     res.json(user);
+    return redHelpers.initAll();
+  })
+  .then(result=>{
+    if(result) console.log("Updated User cache: ", result)
   })
   .catch((err) => {
     res.json(err);

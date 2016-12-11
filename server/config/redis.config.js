@@ -20,7 +20,7 @@ client.on("error", function (err) {
  */
 client.on('connect',()=>{
   console.log(`Redis is connected  to ${host}:${port}`);
-  require('../api/redis/redis.controllers.js').initAll();
+  require('../api/redis/redis.helpers.js').initAll();
 })
 
 module.exports = client;
