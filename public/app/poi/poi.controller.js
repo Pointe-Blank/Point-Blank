@@ -15,7 +15,18 @@
     vm.data = {};
     vm.reviewRating = 50;
     vm.genRating;
+<<<<<<< HEAD
     vm.cache;
+=======
+    vm.thisReview;
+    vm.thisReviewer;
+    vm.thisRevTime;
+
+    vm.increment = () => {
+      vm.thisReview++
+      console.log(vm.thisReview)
+    }
+>>>>>>> [prog] progress on datavis
 
     $scope.tabs = [{
       heading: 'Reviews',
@@ -104,9 +115,66 @@
       vm.genRating = vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs
     };
 
+<<<<<<< HEAD
     vm.drawChart = () => {
 
+=======
+    let drawPoiChart = () => {
+      let ratingsLine=['ratings'];
+      let averageLine=['average'];
+      let reviewers=['reviewer'];
+      let dates=['dates'];
+      let ids=['ids'];
+      vm.reviews.forEach(review => {
+        ratingsLine.push(review.rating);
+        averageLine.push(review.SumUserRevs / review.NumUserRevs);
+        reviewers.push(review.reviewer_name);
+        ids.push(review.UserId);
+        dates.push(
+          review.createdAt
+          .split('Z')[0]
+          .replace('T', ' ')
+          .split('.')[0]);
+      })
+      console.log('drawing chart');
+      let poiChart = c3.generate({
+        bindto: '#poiChart',
+        point: {
+          show: false
+        },
+        data: {
+          columns: [
+            ratingsLine,
+            averageLine,
+            reviewers,
+            ids,
+            dates
+          ],
+          types: {
+            ratings: 'scatter',
+            average: 'spline',
+          },
+          hide: ['reviewer', 'dates', 'ids'],
+          onmouseover: rev => {
+            console.log(rev);
+            vm.thisReview = rev.value;
+            console.log(vm.thisReview)
+            vm.thisReviewer = "Rated by "+reviewers[rev.index];
+            console.log(vm.thisReviewer)
+            vm.thisRevTime = "at "+dates[rev.index]
+              .split(' ')
+              .reverse()
+              .join(' on ');
+            console.log(vm.thisRevTime)
+          }
+        },
+        legend: {
+          hide: ['reviewer', 'dates', 'ids']
+        }
+      });
+      console.log('chart drawn')
+      return poiChart;
+>>>>>>> [prog] progress on datavis
     }
-
   }
 })();
