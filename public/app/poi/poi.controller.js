@@ -15,6 +15,7 @@
     vm.data = {};
     vm.reviewRating = 50;
     vm.genRating;
+    vm.cache;
 
     $scope.tabs = [{
       heading: 'Reviews',
@@ -42,22 +43,42 @@
     }
 
     vm.init = function () {
-      poiService.grabSinglePoiData(vm.poiName)
-        .then(function (results) {
-          console.log('Returned results from data fetch', results);
-          vm.poi = results;
-          vm.reviews = results.Reviews;
-          vm.lastRev = vm.reviews[vm.reviews.length-1]
-          console.log('reviews:', vm.reviews)
-          console.log('lastRev:', vm.lastRev)
-          vm.genRating = vm.lastRev ? 
+      poiService.getCache()
+        .then(function(returnedCache) {
+          vm.cache = returnedCache;
+          vm.poi = returnedCache[2].filter(function(person) {
+            return person.name === vm.poiName;
+          })[0];
+          vm.reviews = vm.poi.Reviews;
+          vm.lastRev = vm.reviews[vm.reviews.length - 1];
+          vm.genRating = vm.lastRev ?
             vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs :
-            results.general_rating;
-          vm.drawChart();
+            vm.poi.general_rating;
+          // console.log('Here we are storing the cache on the poi controller', returnedCache);
+          // console.log('Here we are grabbing Mark from the cache', vm.poi);
+          // console.log("Here we are grabbing Mark's reviews from the cache", vm.reviews);
+          // console.log("Here we are grabbing Mark's last review from the cache", vm.lastRev);
+          // console.log("Here we are grabbing Mark's general rating from the cache", vm.genRating);
         })
-        .catch(function(err) {
-          console.log('!!Error initializing poi', err);
+        .catch(function(error) {
+          throw error;
         })
+      // poiService.grabSinglePoiData(vm.poiName)
+      //   .then(function (results) {
+      //     console.log('Returned results from data fetch', results);
+      //     vm.poi = results;
+      //     vm.reviews = results.Reviews;
+      //     vm.lastRev = vm.reviews[vm.reviews.length-1]
+      //     console.log('reviews:', vm.reviews)
+      //     console.log('lastRev:', vm.lastRev)
+      //     vm.genRating = vm.lastRev ? 
+      //       vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs :
+      //       results.general_rating;
+      //     vm.drawChart();
+      //   })
+      //   .catch(function(err) {
+      //     console.log('!!Error initializing poi', err);
+      //   })
     };
     vm.init();
 

@@ -35,9 +35,24 @@
       });
     };
 
+    const getCache = function() {
+      return $http({
+        method: 'GET',
+        url: '/api/cache/all'
+      })
+      .then(function(returnedCache) {
+        console.log('Here is the returnedCache', returnedCache);
+        return returnedCache.data;
+      })
+      .catch(function(error) {
+        throw error;
+      })
+    };
+
     return {
       addReviewPoiData: addReviewPoiData,
-      grabSinglePoiData: grabSinglePoiData
+      grabSinglePoiData: grabSinglePoiData,
+      getCache: getCache
     };
   }
 })();
