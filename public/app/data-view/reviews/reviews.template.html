@@ -1,59 +1,6 @@
-<!-- BIG CONTAINER-->
-<div class="main-container">
-  <!-- LEFT COLUMN -->
-  <div class="col-md-4 image-container mainPoi spaced">
-    <!-- IMAGE -->
-    <div class="spaced">
-      <img class="photo-box-img box-shadow" ng-src= "{{ vm.poi.profile_image_url }}"></img>
-    </div>
-    <!-- END IMAGE -->
-
-    <!-- ADD REVIEW -->
-    <div>
-      <!-- Rating Field-->
-
-      <ng-form>
-
-
-        <form action="#">
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <label for="rating">General Rating</label> 
-            <p id="font" style="font-size:2em;">{{vm.reviewRating}}</p>
-            <input class="mdl-slider mdl-js-slider" style="margin-left:0;" ng-model="vm.reviewRating" id="rating" type="range" min="0" max="100" value="50" tabindex="0">
-
-            <!-- <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" ng-model="vm.data.rating" id="rating"> -->
-            <label class="mdl-textfield__label" for="rating"></label>
-            <span class="mdl-textfield__error">Needs to be 0-100!</span>
-          </div>
-
-          <div class="mdl-textfield mdl-js-textfield">
-            <label for="textarea">Review</label>
-            <textarea class="mdl-textfield__input" name="textarea" rows="3" cols="45" ng-model="vm.review_content" id="review"></textarea>
-          </div>
-          <div>
-            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="vm.addReview(vm.data);">Submit</button>
-          </div>
-        </form>
-
-      </div>
-      </ng-form>
-
-    </div>
-    <!-- END ADD REVIEW -->
-
-  </div>
-  <!-- END LEFT COLUMN -->
-
-  <!-- RIGHT COLUMN #1 (POI NAME/INFO)-->
-  <div class="col-md-7 box-shadow spaced div-space">
-    <h1>{{ vm.poi.name }}</h1>
-    <h3>General Rating: {{ vm.genRating }}</h3>
-    <h6>{{ vm.poi.summary }}</h6>
-  </div>
-  <!-- END RIGHT COLUMN #1 -->
 
   <!-- RIGHT COLUMN #2 (REVIEWS) -->
-  <div class="col-md-7 box-shadow spaced div-space">
+  <div>
     <h3 class="aligned">Reviews</h3>
     <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 spaced">
 
@@ -78,5 +25,3 @@
   <!-- END RIGHT COLUMN #2 -->
   
 
-</div>
-<!-- End BIG CONTAINER -->

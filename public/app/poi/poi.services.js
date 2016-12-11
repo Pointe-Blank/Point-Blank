@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   angular
-    .module('point-blank.search')
+    .module('point-blank.poi')
     .factory('poiService', poiService);
 
   poiService.$inject = ['$http'];

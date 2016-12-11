@@ -2,15 +2,13 @@
 <div class="main-container">
 
   <!-- Begin Nested Views -->
-<div 
-  ng-repeat="t in tabs" 
-  ui-sref="{{t.route}}"
-  ui-sref-active="active">
-  {{t.heading}}
-</div>
-
-<div ui-view></div>
-<!--End Nested Views-->
+  <div 
+    ng-repeat="t in tabs" 
+    ui-sref="{{t.route}}"
+    ui-sref-active="active">
+    {{t.heading}}
+  </div>
+  <!--End Nested Views-->
 
   <!-- LEFT COLUMN -->
   <div class="col-md-4 image-container mainPoi spaced">
@@ -65,7 +63,7 @@
   <!-- END RIGHT COLUMN #1 -->
 
   <!-- RIGHT COLUMN #2 (REVIEWS) -->
-  <div class="col-md-7 box-shadow spaced div-space">
+  <!--<div class="col-md-7 box-shadow spaced div-space">
     <h3 class="aligned">Reviews</h3>
     <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 spaced">
 
@@ -86,7 +84,8 @@
             </div>
         </div>
     </div>
-  </div>
+  </div>-->
+  <div ui-view class="col-md-7 box-shadow spaced div-space"></div>
   <!-- END RIGHT COLUMN #2 -->
   
 
