@@ -9,7 +9,6 @@
 
   function PoiController ($scope, $http, $location, $state, $stateParams, poiService, $rootScope) {
     var vm = this;
-    console.log("$stateParams:",$stateParams)
     vm.poiName = $stateParams.name;
     vm.poi;
     vm.reviews = [];
@@ -43,7 +42,6 @@
     }
 
     vm.init = function () {
-      console.log('vm.poiName:', vm.poiName)
       poiService.grabSinglePoiData(vm.poiName)
         .then(function (results) {
           console.log('Returned results from data fetch', results);

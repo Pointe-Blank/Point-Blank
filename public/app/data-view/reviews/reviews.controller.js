@@ -5,19 +5,19 @@
     .module('data-view.reviews')
     .controller('reviews-controller', ReviewsController);
 
-  ReviewsController.$inject = ['$scope', '$http', '$location', '$state', '$stateParams', 'poiService', '$rootScope'];
+  ReviewsController.$inject = ['$scope', '$http', '$location', '$state', '$stateParams', 'reviewsService', '$rootScope'];
 
-  function ReviewsController ($scope, $http, $location, $state, $stateParams, poiService, $rootScope) {
+  function ReviewsController ($scope, $http, $location, $state, $stateParams, reviewsService, $rootScope) {
     const vm = this;
-    const parent = $scope.$parent.vm;
-
+    
+    vm.parent = $scope.$parent.vm;
     vm.poiName = $stateParams.name;
     vm.poi;
     vm.reviews = [];
     vm.genRating;
 
     vm.init = function () {
-      poiService.grabSinglePoiData(vm.poiName)
+      reviewsService.grabSinglePoiData(vm.poiName)
         .then(function (results) {
           console.log('Returned results from data fetch', results);
           vm.poi = results;
@@ -34,5 +34,12 @@
         })
     };
     vm.init();
+
+    // loading this controller only initializes the vm.reviews. when vm.reviews is updated, it is updated on the
+    // poi controller. that information is not currently being shared with this controller. 
+      // couple ways to solutionize. one way would be to share data on a service
+        // might be redundant if we can just access the redis cache
+      // another way to solutionize would be to access the redis cache
+        // probably this is the way to go on this problem 
   }
 })();

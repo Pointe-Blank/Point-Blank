@@ -1,28 +1,12 @@
 (function () {
   'use strict';
   angular
-    .module('point-blank.search')
+    .module('data-view.reviews')
     .factory('reviewsService', reviewsService);
 
   reviewsService.$inject = ['$http'];
 
   function reviewsService ($http) {
-    
-    var addReviewPoiData = function (poireview) {
-      return $http({
-        method: 'POST',
-        url: '/api/review',
-        data: poireview
-      })
-      .then(function (results) {
-        return results;
-      })
-      .catch(err=>{
-        console.log('error data:',err.data)
-        console.log('attemped post:',poireview)
-      });
-    };
-
     var grabSinglePoiData = function (poiInfo) {
       return $http({
         method: 'GET',
@@ -36,7 +20,6 @@
     };
 
     return {
-      addReviewPoiData: addReviewPoiData,
       grabSinglePoiData: grabSinglePoiData
     };
   }
