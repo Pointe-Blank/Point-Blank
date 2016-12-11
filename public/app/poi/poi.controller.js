@@ -20,7 +20,7 @@
     $scope.tabs = [{
       heading: 'Reviews',
       route:'poi.reviews',
-      active: false
+      active: true
     }, {
       heading: 'Guardian News',
       route: 'poi.guardian',
@@ -37,10 +37,10 @@
       });
     });
 
-    // let validStates = ['poi.guardian'];
-    // if (validStates.indexOf($state.current.name) === -1) {
-    //   $state.go('.guardian');
-    // }
+    let validStates = ['poi.reviews', 'poi.guardian', 'poi.nytimes'];
+    if (validStates.indexOf($state.current.name) === -1) {
+      $state.go('poi.reviews');
+    }
 
     vm.init = function () {
       console.log('vm.poiName:', vm.poiName)
