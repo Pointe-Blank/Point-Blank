@@ -15,18 +15,10 @@
     vm.data = {};
     vm.reviewRating = 50;
     vm.genRating;
-<<<<<<< HEAD
     vm.cache;
-=======
     vm.thisReview;
     vm.thisReviewer;
     vm.thisRevTime;
-
-    vm.increment = () => {
-      vm.thisReview++
-      console.log(vm.thisReview)
-    }
->>>>>>> [prog] progress on datavis
 
     $scope.tabs = [{
       heading: 'Reviews',
@@ -115,10 +107,8 @@
       vm.genRating = vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs
     };
 
-<<<<<<< HEAD
     vm.drawChart = () => {
 
-=======
     let drawPoiChart = () => {
       let ratingsLine=['ratings'];
       let averageLine=['average'];
