@@ -4,23 +4,23 @@
     .module('data-view.reviews')
     .factory('reviewsService', reviewsService);
 
-  reviewsService.$inject = ['$http'];
+  reviewsService.$inject = [];
 
-  function reviewsService ($http) {
-    var grabSinglePoiData = function (poiInfo) {
-      return $http({
-        method: 'GET',
-        url: '/api/poi/' + poiInfo,
-        headers: {'Content-Type': 'application/json'},
-        data: {'name': 'poiInfo'}
-      })
-      .then(function (results) {
-        return results.data;
-      });
-    };
+  function reviewsService () {
+    // var grabSinglePoiData = function (poiInfo) {
+    //   return $http({
+    //     method: 'GET',
+    //     url: '/api/poi/' + poiInfo,
+    //     headers: {'Content-Type': 'application/json'},
+    //     data: {'name': 'poiInfo'}
+    //   })
+    //   .then(function (results) {
+    //     return results.data;
+    //   });
+    // };
 
-    return {
-      grabSinglePoiData: grabSinglePoiData
-    };
+    // return {
+    //   grabSinglePoiData: grabSinglePoiData
+    // };
   }
 })();

@@ -1,15 +1,6 @@
 <!-- BIG CONTAINER-->
 <div class="main-container">
 
-  <!-- Begin Nested Views -->
-  <div 
-    ng-repeat="t in tabs" 
-    ui-sref="{{t.route}}"
-    ui-sref-active="active">
-    {{t.heading}}
-  </div>
-  <!--End Nested Views-->
-
   <!-- LEFT COLUMN -->
   <div class="col-md-4 image-container mainPoi spaced">
     <!-- IMAGE -->
@@ -62,31 +53,25 @@
   </div>
   <!-- END RIGHT COLUMN #1 -->
 
-  <!-- RIGHT COLUMN #2 (REVIEWS) -->
-  <!--<div class="col-md-7 box-shadow spaced div-space">
-    <h3 class="aligned">Reviews</h3>
-    <div ng-repeat="review in vm.reviews | orderBy:'-createdAt'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 spaced">
+  <!--RIGHT COLUMN #2 (NESTED TABS)-->
+  <div class="col-md-7 box-shadow spaced div-space">
+    <ul class="tab">
+      <li>
+        <a class="tablinks"
+          href="javascript:void(0)"
+          ng-repeat="t in tabs" 
+          ui-sref="{{t.route}}"
+          ui-sref-active="active">
+          {{t.heading}}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!--END RIGHT COLUMN #2-->
 
-      <div class="table-responsive photoBox">
-            <div class="col-sm-4" id="resultName">
-                <div style="padding-top: 20px">
-                  <i class="material-icons mdl-list__item-avatar">person</i>
-                </div>
-                <h4>{{ review.reviewer_name }}</h4>
-            </div>
-
-            <div class="col-sm-4 standard-text">
-                <h6 class="">{{ review.review_content || review.reviewContent }}</h6>
-            </div>
-
-            <div class="col-sm-4" id="resultName">
-                <h4 class="aligned">General Rating: <h2 class="genRating">{{ review.rating }} </h2></h4>
-            </div>
-        </div>
-    </div>
-  </div>-->
+  <!-- RIGHT COLUMN #3 (REVIEWS) -->
   <div ui-view class="col-md-7 box-shadow spaced div-space"></div>
-  <!-- END RIGHT COLUMN #2 -->
+  <!-- END RIGHT COLUMN #3 -->
   
 
 </div>
