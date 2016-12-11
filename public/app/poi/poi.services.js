@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   angular
-    .module('point-blank.search')
+    .module('point-blank.poi')
     .factory('poiService', poiService);
 
   poiService.$inject = ['$http'];
@@ -23,21 +23,36 @@
       });
     };
 
-    var grabSinglePoiData = function (poiInfo) {
+    // var grabSinglePoiData = function (poiInfo) {
+    //   return $http({
+    //     method: 'GET',
+    //     url: '/api/poi/' + poiInfo,
+    //     headers: {'Content-Type': 'application/json'},
+    //     data: {'name': 'poiInfo'}
+    //   })
+    //   .then(function (results) {
+    //     return results.data;
+    //   });
+    // };
+
+    const getCache = function() {
       return $http({
         method: 'GET',
-        url: '/api/poi/' + poiInfo,
-        headers: {'Content-Type': 'application/json'},
-        data: {'name': 'poiInfo'}
+        url: '/api/cache/all'
       })
-      .then(function (results) {
-        return results.data;
-      });
+      .then(function(returnedCache) {
+        console.log('Here is the returnedCache', returnedCache);
+        return returnedCache.data;
+      })
+      .catch(function(error) {
+        throw error;
+      })
     };
 
     return {
       addReviewPoiData: addReviewPoiData,
-      grabSinglePoiData: grabSinglePoiData
+      // grabSinglePoiData: grabSinglePoiData,
+      getCache: getCache
     };
   }
 })();
