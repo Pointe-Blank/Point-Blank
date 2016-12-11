@@ -1,6 +1,8 @@
-<div class="jumbotron">
+ <div class="jumbotron">
  <h1 id="font" class="text-center">Daily Spotlight</h1>
+
  <hr>
+ <timer end-time="1451628000000">{{vm.days}} days, {{vm.hours}} hours, {{vm.minutes}} minutes, {{vm.seconds}} seconds.</timer>
   <div class="container">
 <div class="row">
         <div class="col-md-6">
@@ -15,12 +17,12 @@
 
       <div class="col-md-6">
         <div class="thumbnail">
-          <div ng-click="vm.goPoi(vm.poiName)">
+          <div ng-click="vm.goPoi(vm.poi.name)">
             <img src="/assets/images/halo.png" class="img-responsive"/>
-            <img ng-src="{{vm.poiImage}}" class="thumbnail img-responsive customPicture"/>
+            <img ng-src="{{vm.poi.profile_image_url}}" class="thumbnail img-responsive customPicture"/>
             <div class="caption">
-              <h2 id="font" class="text-center">{{vm.poiName}}</h2>
-              <p id="font2" >{{vm.poiSummary}}</p>
+              <h2 id="font" class="text-center">{{vm.poi.name}}</h2>
+              <p id="font2" >{{vm.poi.summary}}</p>
             </div>
           </div>  
         </div>
@@ -28,14 +30,14 @@
 
       <div class="col-md-6">
         <div class="thumbnail">
-          <div ng-click="vm.goPoi(vm.posName)">
+          <div ng-click="vm.goPoi(vm.pos.name)">
             <img src="/assets/images/poop.png" class="img-responsive" width="159"/>
 
-              <img ng-src="{{vm.posImage}}" class="thumbnail img-responsive customPicture"/>
+              <img ng-src="{{vm.pos.profile_image_url}}" class="thumbnail img-responsive customPicture"/>
 
             <div class="caption">
-              <h2 id="font" class="text-center">{{vm.posName}}</h2>
-              <p id="font2" >{{vm.posSummary}}</p>
+              <h2 id="font" class="text-center">{{vm.pos.name}}</h2>
+              <p id="font2" >{{vm.pos.summary}}</p>
             </div>
           </div>
         </div>
