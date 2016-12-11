@@ -107,8 +107,6 @@
       vm.genRating = vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs
     };
 
-    vm.drawChart = () => {
-
     let drawPoiChart = () => {
       let ratingsLine=['ratings'];
       let averageLine=['average'];
@@ -164,7 +162,6 @@
       });
       console.log('chart drawn')
       return poiChart;
->>>>>>> [prog] progress on datavis
     }
   }
 })();
