@@ -5,16 +5,11 @@
     .module('point-blank.splash')
     .controller('splash-controller', SplashController);
 
-  SplashController.$inject = ['splashService', '$location', '$state'];
+  SplashController.$inject = ['splashService', '$location', '$state','$timeout'];
 
-  function SplashController (splashService, $location, $state) {
+  function SplashController (splashService, $location, $state, $timeout) {
     var vm = this;
-    vm.poiName = '';
-    vm.poiImage = '';
-    vm.poiSummary = '';
-    vm.posName = '';
-    vm.posImage = '';
-    vm.posSummary = '';
+
 
     vm.goPoi = function (input) {
       console.log('Here is the input we are sending in state change:', input);
@@ -24,31 +19,28 @@
     };
 
     let poiInit = function () {
-      splashService.getPOIList()
-        .then(function (response) {
-          let goodPeople = [];
-          let badPeople = [];
+      vm.hours = 24;
+      vm.days = 12;
+      vm.minutes = 30;
+      vm.seconds = 13;
 
-          response.data.forEach(function (person) {
-            if (person.general_rating < 50) {
-              badPeople.push(person);
-            } else {
-              goodPeople.push(person);
-            }
-          });
+      splashService.getPOD()
+      .then(result=>{
+        if(result){
+          vm.pod = result.data
+          vm.poi = vm.pod[0]
+          vm.pos = vm.pod[1]
+        }
+      })
+      .then(()=>{
+        return splashService.getPODstats()
+      })
+      .then(result=>{
+        if(result) vm.stats = result.data
+        console.log("Pod details", vm.pod, vm.stats);
+      })
+      .catch(err=>console.log(err));
 
-          let randomPOI = goodPeople[Math.floor(Math.random() * goodPeople.length)];
-          let randomPOS = badPeople[Math.floor(Math.random() * badPeople.length)];
-
-          vm.poiName = randomPOI.name;
-          vm.poiImage = randomPOI.profile_image_url;
-          vm.poiSummary = randomPOI.summary;
-
-          vm.posName = randomPOS.name;
-          vm.posImage = randomPOS.profile_image_url;
-          vm.posSummary = randomPOS.summary;
-        })
-      .catch(err=> console.log(err));
     };
 
     poiInit();
