@@ -17,4 +17,7 @@ router.route('/poi')
 router.route('/pod')
   .get(redisControllers.getPOD)
 
+router.route('/pod/stats')
+  .get(redisControllers.getPODstats)
+
 module.exports = router;

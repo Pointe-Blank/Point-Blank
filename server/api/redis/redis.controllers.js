@@ -1,6 +1,7 @@
 
 const red_client = require('../../config/redis.config.js');
 const models = require('../../config/db.config.js');
+const helpers = require('./redis.helpers.js');
 
 module.exports = {
   getAll: (req, res, next) => {
@@ -20,7 +21,7 @@ module.exports = {
 
   getUser: (req, res, next) => {
 
-     red_client.get('Users')
+    red_client.get('Users')
      .then(result => {
       if(result) res.json(JSON.parse(result));
       else{
@@ -63,20 +64,26 @@ module.exports = {
       }
     })
     .then(result=>{
-      let allReviews = [];
-      result.map(item => {
-        allReviews.push(item.dataValues);
-      })
-      res.json(allReviews);
-      let str_result = JSON.stringify(allReviews);
-      return str_result;
+      if(result){
+        let allReviews = [];
+        result.map(item => {
+          allReviews.push(item.dataValues);
+        })
+        res.json(allReviews);
+        let str_result = JSON.stringify(allReviews);
+        return str_result;
+      }
     })
     .then(str=>{
-      console.log("Storing reviews in cache")
-      return red_client.set('Reviews', str)
+      if(str){
+        console.log("Storing reviews in cache")
+        return red_client.set('Reviews', str)
+      }
     })
     .then(status=>{
-      console.log("Redis cache Reviews: ", status);
+      if(status){
+        console.log("Redis cache Reviews: ", status);
+      }
     })
     .catch(err=>{
       console.log("Error trying to get all Reviews", err);
@@ -98,20 +105,26 @@ module.exports = {
       }
     })
     .then(result=>{
-      let allPOIs = [];
-      result.map(item => {
-        allPOIs.push(item.dataValues);
-      })
-      res.json(allPOIs);
-      let str_result = JSON.stringify(allPOIs);
-      return str_result;
+      if(result){
+        let allPOIs = [];
+        result.map(item => {
+          allPOIs.push(item.dataValues);
+        })
+        res.json(allPOIs);
+        let str_result = JSON.stringify(allPOIs);
+        return str_result;
+      }
     })
     .then(str=>{
-      console.log("Storing POIs in cache")
-      return red_client.set('POIs', str)
+      if(str){
+        console.log("Storing POIs in cache")
+        return red_client.set('POIs', str)
+      }
     })
     .then(status=>{
-      console.log("Redis cache POIs: ", status);
+      if(status){
+        console.log("Redis cache POIs: ", status);
+      }
     })
     .catch(err=>{
       console.log("Error trying to get all POIs", err);
@@ -122,9 +135,7 @@ module.exports = {
 
     red_client.get('POD')
     .then(result => {
-      // console.log("FOUND POD", typeof result, result);
       if(result){
-        // console.log("sending pod", typeof JSON.parse(result))
         res.json(JSON.parse(result))
         return null;
       }else{
@@ -133,17 +144,12 @@ module.exports = {
       }
     })
     .then(allPOIs => {
-      
-      /**
-       * Get random POI and POS
-       *
-       */
       if(allPOIs){
-        // console.log('ALLLL POIS', allPOIs)
+
         let poiList = [];
         let posList = [];
-        // console.log("HEREEEEE",allPOIs);
         let parsed = JSON.parse(allPOIs)
+
         parsed.filter(person=>{
           if(person.general_rating>50){
             poiList.push(person)
@@ -156,26 +162,39 @@ module.exports = {
           poiList[Math.floor(Math.random()*poiList.length)],
           posList[Math.floor(Math.random()*posList.length)]
         ]
-        res.json(randPod);
+        res.json(randPod)
+        return red_client.multi([
+          ["set","POD", JSON.stringify(randPod)],
+          ['expireat', 'POD', parseInt((+new Date)/1000) + 86400 ],
+          ["ttl", "POD"]
+        ]).exec()
 
-        return red_client.set('POD', JSON.stringify(randPod));
       }else{
         return null
       }
     })
     .then(result=>{
       if(result){
-        // console.log("response for storing POD:", result);
-        return red_client.expireat('POD', parseInt((+new Date)/1000) + 86400)
-      }
-    })
-    .then(result=>{
-      if(result){
-        console.log("response for Setting expiration of POD POD:", result);
+        console.log("Stored new POD (set, expiresat, ttl):", result);
       }
     })
     .catch(err=>{
       console.log("ERROR getting POD", err);
+    })
+
+  },
+
+  getPODstats: (req, res, next) =>{
+
+    red_client.multi([
+          ['expireat', 'POD', parseInt((+new Date)/1000) + 86400 ],
+          ["ttl", "POD"]
+    ]).exec()
+    .then(result=>{
+      if(result) res.json(result);
+    })
+    .catch(err =>{
+      console.log("Error getting POD stats", err)
     })
 
   },

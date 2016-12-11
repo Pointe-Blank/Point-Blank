@@ -1,5 +1,5 @@
 const models = require('../../config/db.config.js');
-
+const redHelpers = require('../redis/redis.helpers.js');
 
 exports.getAllReviews = function (req, res) {
   models.Review.findAll()
@@ -39,10 +39,14 @@ exports.addOneReview = function (req, res) {
     SumUserRevs: req.body.SumUserRevs
 
   })
-    .then(function (review) {
-      res.status(201).json(review);
-    })
-    .catch(function (err) {
-      res.status(400).send(err);
-    });
+  .then(function (review) {
+    res.status(201).json(review);
+    return redHelpers.initAll();
+  })
+  .then(result=>{
+    if(result) console.log("Updated Review cache: ", result)
+  })
+  .catch(function (err) {
+    res.status(400).send(err);
+  });
 };
