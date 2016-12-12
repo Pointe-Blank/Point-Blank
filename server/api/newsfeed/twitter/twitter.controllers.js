@@ -15,6 +15,7 @@ let authOptions = {
 };
 
 const queryTwitter = (req, res) => {
+  let token;
   console.log('Here are our authoptions', authOptions);
   // let searchOptions = {
   //   uri: 'https://api.twitter.com/1.1/search/tweets.json',
@@ -29,8 +30,10 @@ const queryTwitter = (req, res) => {
 
   rp(authOptions)
     .then(function(authorization) {
-      console.log('Retrieved authorization token');
-      res.json(JSON.parse(authorization));
+      let tokenResponse = JSON.parse(authorization);
+      let accessToken = tokenResponse.access_token;
+      console.log('Retrieved authorization token', accessToken);
+      res.json(tokenResponse);
     })
     // .then(function(returnedTweets) {
     //   console.log(returnedTweets);
