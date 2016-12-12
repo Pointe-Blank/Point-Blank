@@ -85,7 +85,15 @@
         axis: {
           x: {
             show: false
+          },
+          y: {
+            min: 0,
+            max: 100,
+            padding: 5
           }
+        },
+        zoom: {
+          enabled: true
         },
         point: {
           show: false

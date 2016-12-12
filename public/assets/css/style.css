@@ -68,6 +68,11 @@ img{
   margin: 0 auto;
 }
 
+#poiChart {
+  width:100%;
+  object-fit:contain;
+}
+
 #portrait {
   height: 500px;
   width: 315px;
