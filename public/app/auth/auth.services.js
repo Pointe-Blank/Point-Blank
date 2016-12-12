@@ -65,6 +65,7 @@ angular
     login: login,
     logout: logout,
     userProfile: userProfile,
+    connectProfile: connectProfile,
     registerAuthenticationListener: registerAuthenticationListener
   }
 })

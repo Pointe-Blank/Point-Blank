@@ -63,7 +63,8 @@
       })
       .state('poi.data', {
         url: '/data',
-        templateUrl: 'app/data-view/data/data.template.html'
+        templateUrl: 'app/data-view/data/data.template.html',
+        controller: 'data-controller as vm'
       })
 
     $urlRouterProvider.otherwise('/');
@@ -102,5 +103,8 @@
     // the user's authentication state when the page is
     // refreshed and maintain authentication
     authManager.checkAuthOnRefresh();
+    if (authService.userProfile) {
+      authService.connectProfile(authService.userProfile)
+    }
   }
 })();
