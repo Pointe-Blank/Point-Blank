@@ -117,6 +117,7 @@
       }
       poireview.createdAt = new Date().toISOString()
       vm.reviews.unshift(poireview);
+      $rootScope.$broadcast('reviewPosted')
       console.log('creating review:',poireview)
       poiService.addReviewPoiData(poireview);
       vm.lastRev = poireview;

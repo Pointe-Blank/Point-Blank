@@ -9,22 +9,43 @@
 
   function DataController ($scope, $state, $rootScope, $timeout) {
     const vm = this;
+    let poiChart;
+    let ratingsLine=['ratings'];
+    let averageLine=['average'];
+    let reviewers=['reviewer'];
+    let dates=['dates'];
+    let ids=['ids'];
     
     vm.parent = $scope.$parent.vm;
 
     console.log('cacheRecieved:',vm.parent.cacheRecieved)
-    vm.parent.cacheRecieved ? drawPoiChart() : 
-      $timeout(()=>{drawPoiChart()}, 0)
+    vm.parent.cacheRecieved ? poiChart = drawPoiChart() : 
+      $timeout(()=>{poiChart = drawPoiChart()}, 0)
+
+    $scope.$on('reviewPosted', () => {
+      console.log('review posted!')
+      // vm.parent.reviews.push(vm.parent.reviews.shift())
+      // console.log(vm.parent.reviews)
+      // drawPoiChart();
+      let newRev = vm.parent.reviews[0]
+      ratingsLine.push(newRev.rating),
+      averageLine.push(newRev.SumUserRevs / newRev.NumUserRevs),
+      reviewers.push(newRev.reviewer_name),
+      dates.push(newRev.createdAt)
+      poiChart.load({
+        columns: [
+          ratingsLine,
+          averageLine,
+          reviewers,
+          dates
+        ],
+      })
+    })
 
     function drawPoiChart() {
       vm.thisReview = vm.parent.genRating;
       vm.thisReviewer = "average rating";
       vm.thisRevTime = null;
-      let ratingsLine=['ratings'];
-      let averageLine=['average'];
-      let reviewers=['reviewer'];
-      let dates=['dates'];
-      let ids=['ids'];
       vm.parent.reviews.forEach(review => {
         ratingsLine.push(review.rating);
         averageLine.push(review.SumUserRevs / review.NumUserRevs);
@@ -34,10 +55,10 @@
           review.createdAt
           .split('Z')[0]
           .replace('T', ' ')
-          .split('.')[0]);
+          .split('.')[0]
+          .replace(' ', ' at '));
       })
-      console.log('drawing chart');
-      let poiChart = c3.generate({
+      let chart = c3.generate({
         bindto: '#poiChart',
         data: {
           columns: [
@@ -70,8 +91,7 @@
           hide: ['reviewer', 'dates']
         }
       });
-      console.log('chart drawn')
-      return poiChart;
+      return chart;
     }
   }
 })();
