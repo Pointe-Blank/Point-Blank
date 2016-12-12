@@ -22,6 +22,11 @@
       route:'poi.reviews',
       active: true
     }, {
+      heading: 'Data',
+      route:'poi.data',
+      active: false
+    },
+    {
       heading: 'Guardian News',
       route: 'poi.guardian',
       active: false

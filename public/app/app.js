@@ -61,6 +61,10 @@
         url: '/nytimes',
         templateUrl: 'app/data-view/nytimes/nytimes.template.html'
       })
+      .state('poi.data', {
+        url: '/data',
+        templateUrl: 'app/data-view/data/data.template.html'
+      })
 
     $urlRouterProvider.otherwise('/');
 
