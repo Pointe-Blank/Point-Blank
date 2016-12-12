@@ -10,6 +10,7 @@
       'point-blank.search',
       'data-view.reviews',
       'data-view.guardian',
+      'data-view.nytimes',
       'ui.router' 
     ])
     .config(config)

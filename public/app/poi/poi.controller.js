@@ -115,6 +115,7 @@
         poireview.NumUserRevs = 1;
         poireview.SumUserRevs = poireview.rating;
       }
+      poireview.createdAt = new Date().toISOString()
       vm.reviews.unshift(poireview);
       console.log('creating review:',poireview)
       poiService.addReviewPoiData(poireview);

@@ -12,13 +12,13 @@
     const parent = $scope.$parent.vm;
     vm.news = [];
     NytimesServices
-      .getNews('"' + parent.poiName + '"')
-      .then(function(newsArticles) {
-        console.log('We have retrieved the news', newsArticles);
-        vm.news = newsArticles;
-      })
-      .catch(function(error) {
-        throw error;
-      });
+      // .getNews('"' + parent.poiName + '"')
+      // .then(function(newsArticles) {
+      //   console.log('We have retrieved the news', newsArticles);
+      //   vm.news = newsArticles;
+      // })
+      // .catch(function(error) {
+      //   throw error;
+      // });
   };
 })();
