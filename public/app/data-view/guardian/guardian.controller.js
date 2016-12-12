@@ -14,8 +14,8 @@
     guardianServices
       .getNews('"' + parent.poiName + '"')
       .then(function(newsArticles) {
-        console.log('We have retrieved the news', newsArticles);
-        vm.news = newsArticles;
+        console.log('We have retrieved the news', newsArticles.response.results);
+        vm.news = newsArticles.response.results;
       })
       .catch(function(error) {
         throw error;

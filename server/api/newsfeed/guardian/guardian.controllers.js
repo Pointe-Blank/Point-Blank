@@ -6,7 +6,7 @@ const queryGuardian = (req, res) => {
   api.content
     .search(req.query.querystring, {
       format: 'json',
-      pageSize: 15
+      pageSize: 10
     })
     .then((returnedNews) => {
       res.send(JSON.parse(returnedNews.body));
