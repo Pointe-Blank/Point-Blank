@@ -59,7 +59,11 @@
       })
       .state('poi.nytimes', {
         url: '/nytimes',
-        templateUrl: 'app/data-view/nytimes/nytimes.template.html'
+        templateUrl: 'app/data-view/nytimes/nytimes.template.html',
+        controller: 'nytimes-controller as vm',
+        access: {
+          restricted: true
+        }
       })
       .state('poi.data', {
         url: '/data',
