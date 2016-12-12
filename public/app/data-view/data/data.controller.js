@@ -5,25 +5,16 @@
     .module('data-view.reviews')
     .controller('data-controller', DataController);
 
-  DataController.$inject = ['$scope', '$rootScope', '$state'];
+  DataController.$inject = ['$scope', '$rootScope', '$state', '$timeout'];
 
-  function DataController ($scope, $state, $rootScope) {
+  function DataController ($scope, $state, $rootScope, $timeout) {
     const vm = this;
     
     vm.parent = $scope.$parent.vm;
 
     console.log('cacheRecieved:',vm.parent.cacheRecieved)
-    vm.parent.cacheRecieved ? drawPoiChart() : vm.parent.init()
-      /**
-       * This leads to the cache being initialized twice
-       * (once on the parent scope and once here). Should
-       * we move all cache initialization into the children?
-       */
-      .then(() => {
-        console.log("re-initialized cache")
-        drawPoiChart();
-      })
-      .catch(err=>console.log(err))
+    vm.parent.cacheRecieved ? drawPoiChart() : 
+      $timeout(()=>{drawPoiChart()}, 0)
 
     function drawPoiChart() {
       vm.thisReview = vm.parent.genRating;
