@@ -8,6 +8,7 @@
       'point-blank.splash', 
       'point-blank.poi', 
       'point-blank.search',
+      'point-blank.profile',
       'data-view.reviews',
       'data-view.guardian',
       'data-view.nytimes',
@@ -33,6 +34,11 @@
         access: {
           restricted: true
         }
+      })
+      .state('profile', {
+        url:'/profile/:id',
+        templateUrl: 'app/profile/profile.template.html',
+        controller: 'profile-controller as vm'
       })
       .state('poi', {
         url: '/poi/:name',
