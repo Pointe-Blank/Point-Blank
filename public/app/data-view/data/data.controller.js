@@ -24,9 +24,6 @@
 
     $scope.$on('reviewPosted', () => {
       console.log('review posted!')
-      // vm.parent.reviews.push(vm.parent.reviews.shift())
-      // console.log(vm.parent.reviews)
-      // drawPoiChart();
       vm.parent.reviews.push(vm.parent.reviews.shift())
       let newRev = vm.parent.reviews[vm.parent.reviews.length-1]
       ratingsLine.push(newRev.rating),
@@ -83,6 +80,11 @@
             vm.thisReviewer = "average rating";
             vm.thisRevTime = null;
             $scope.$apply();
+          }
+        },
+        axis: {
+          x: {
+            show: false
           }
         },
         point: {
