@@ -5,11 +5,11 @@
     .module('point-blank.splash')
     .controller('splash-controller', SplashController);
 
-  SplashController.$inject = ['splashService', '$location', '$state','$timeout'];
+  SplashController.$inject = ['splashService', '$location', '$state','$timeout','$interval'];
 
-  function SplashController (splashService, $location, $state, $timeout) {
+  function SplashController (splashService, $location, $state, $timeout, $interval, $stateParams) {
     var vm = this;
-
+    
 
     vm.goPoi = function (input) {
       console.log('Here is the input we are sending in state change:', input);
@@ -18,13 +18,9 @@
       });
     };
 
-    let poiInit = function () {
-      vm.hours = 24;
-      vm.days = 12;
-      vm.minutes = 30;
-      vm.seconds = 13;
+    vm.poiInit = function () {
 
-      splashService.getPOD()
+      return splashService.getPOD()
       .then(result=>{
         if(result){
           vm.pod = result.data
@@ -36,13 +32,31 @@
         return splashService.getPODstats()
       })
       .then(result=>{
-        if(result) vm.stats = result.data
-        console.log("Pod details", vm.pod, vm.stats);
+        if(result) vm.TTL = result.data
+
+        console.log("seconds left", result.data)
+        console.log("Pod details", vm.pod, vm.TTL);
+
+        $interval(()=>{
+          if(vm.TTL>0){
+            vm.TTL--;
+            vm.hours = Math.floor(vm.TTL / 3600);
+            let diff = (vm.TTL/ 3600)-vm.hours;
+            vm.minutes = Math.floor(diff * 60);
+            vm.seconds = Math.floor(((diff * 60)%1)*60);
+          }else{
+            let current = $state.current;
+            let params = angular.copy($stateParams);
+            $state.transitionTo(current, params, { reload: true, inherit: true, notify: true });
+          }
+        }, 1000)
+
       })
       .catch(err=>console.log(err));
 
     };
 
-    poiInit();
+    vm.poiInit()
+    
   }
 })();

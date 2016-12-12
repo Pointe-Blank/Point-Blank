@@ -186,11 +186,9 @@ module.exports = {
 
   getPODstats: (req, res, next) =>{
 
-    red_client.multi([
-          ['expireat', 'POD', parseInt((+new Date)/1000) + 86400 ],
-          ["ttl", "POD"]
-    ]).exec()
+    red_client.ttl("POD")
     .then(result=>{
+      console.log(result);
       if(result) res.json(result);
     })
     .catch(err =>{

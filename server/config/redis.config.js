@@ -19,8 +19,15 @@ client.on("error", function (err) {
  * Verify connection and intitialize redis with all the DB data
  */
 client.on('connect',()=>{
-  console.log(`Redis is connected  to ${host}:${port}`);
-  require('../api/redis/redis.helpers.js').initAll();
+  console.log(`Redis connection established to ${host}:${port}`);
+  require('../api/redis/redis.helpers.js').initAll()
+  // .then(result=>{
+  //   if(result) require('../api/redis/redis.helpers.js').initNews()
+  // })
+  .catch(err=>{
+    console.log(err)
+  })
+
 })
 
 module.exports = client;
