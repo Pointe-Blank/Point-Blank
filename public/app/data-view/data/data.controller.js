@@ -27,9 +27,10 @@
       // vm.parent.reviews.push(vm.parent.reviews.shift())
       // console.log(vm.parent.reviews)
       // drawPoiChart();
-      let newRev = vm.parent.reviews[0]
+      vm.parent.reviews.push(vm.parent.reviews.shift())
+      let newRev = vm.parent.reviews[vm.parent.reviews.length-1]
       ratingsLine.push(newRev.rating),
-      averageLine.push(newRev.SumUserRevs / newRev.NumUserRevs),
+      averageLine.push(Math.round(newRev.SumUserRevs / newRev.NumUserRevs * 100)/100),
       reviewers.push(newRev.reviewer_name),
       dates.push(newRev.createdAt)
       poiChart.load({
@@ -48,7 +49,7 @@
       vm.thisRevTime = null;
       vm.parent.reviews.forEach(review => {
         ratingsLine.push(review.rating);
-        averageLine.push(review.SumUserRevs / review.NumUserRevs);
+        averageLine.push(Math.round(review.SumUserRevs / review.NumUserRevs * 100)/100);
         reviewers.push(review.reviewer_name);
         ids.push(review.UserId);
         dates.push(
