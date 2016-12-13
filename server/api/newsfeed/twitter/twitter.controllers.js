@@ -15,24 +15,26 @@ let authOptions = {
 };
 
 const queryTwitter = (req, res) => {
-  let token;
   console.log('Here are our authoptions', authOptions);
-  // let searchOptions = {
-  //   uri: 'https://api.twitter.com/1.1/search/tweets.json',
-  //   qs: {
-  //     'q': req.query.querystring
-  //   },
-  //   headers: {
-  //     'Authorization': 'Request-Promise'
-  //   },
-  //   json: true
-  // };
+  let searchOptions = {
+    uri: 'https://api.twitter.com/1.1/search/tweets.json',
+    qs: {
+      'q': req.query.querystring
+    },
+    headers: {
+      'Authorization': 'Bearer ' 
+    },
+    json: true
+  };
 
   rp(authOptions)
     .then(function(authorization) {
       let tokenResponse = JSON.parse(authorization);
       let accessToken = tokenResponse.access_token;
+      searchOptions.headers.Authorization += accessToken;
       console.log('Retrieved authorization token', accessToken);
+      console.log('Added access token to search request', searchOptions.headers.Authorization);
+      console.log('This is the search object', searchOptions);
       res.json(tokenResponse);
     })
     // .then(function(returnedTweets) {
