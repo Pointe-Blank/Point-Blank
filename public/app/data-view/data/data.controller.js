@@ -14,7 +14,7 @@
     let averageLine=['average'];
     let reviewers=['reviewer'];
     let dates=['dates'];
-    let ids=['ids'];
+    vm.ids=['ids'];
     
     vm.parent = $scope.$parent.vm;
 
@@ -23,7 +23,7 @@
       $timeout(() => {
         poiChart = drawPoiChart();
         console.log('redrawing chart')
-      }, 50)
+      }, 100)
 
     $scope.$on('reviewPosted', () => {
       console.log('review posted!')
@@ -51,7 +51,7 @@
         ratingsLine.push(review.rating);
         averageLine.push(Math.round(review.SumUserRevs / review.NumUserRevs * 100)/100);
         reviewers.push(review.reviewer_name);
-        ids.push(review.UserId);
+        vm.ids.push(review.UserId);
         dates.push(
           review.createdAt
           .split('Z')[0]
@@ -66,8 +66,7 @@
             ratingsLine,
             averageLine,
             reviewers,
-            dates,
-            ids
+            dates
           ],
           types: {
             ratings: 'scatter',
@@ -75,8 +74,8 @@
           },
           onmouseover: data => {
             vm.thisReview = data.value;
-            vm.thisReviewer = "rated by: " + reviewers[data.index];
-            vm.thisRevTime = "on: " + dates[data.index];
+            vm.thisReviewer = "rated by: " + reviewers[data.index+1];
+            vm.thisRevTime = "on: " + dates[data.index+1];
             $scope.$apply();
           },
           onmouseout: () => {
@@ -87,7 +86,7 @@
           },
           onclick: data => {
             $state.go('profile', {
-              id:ids[data.index]
+              id:vm.ids[data.index+1]
             });
           }
         },
@@ -108,7 +107,7 @@
           show: false
         },
         legend: {
-          hide: ['reviewer', 'dates', 'ids']
+          hide: ['reviewer', 'dates']
         }
       });
       return chart;

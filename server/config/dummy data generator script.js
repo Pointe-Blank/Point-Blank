@@ -6499,27 +6499,62 @@ let generateSqlString = () => {
 
   let pois = [];
   for (let i = 1; i < 18; i++){
-    pois.push([i, Math.random()*100])
+    pois.push({
+      id: i,
+      genScore: Math.random()*100,
+      numRevs: 0,
+      sumRevs: 0
+    })
   }
 
   let sqlString = "\n"+
                   "USE pointblank;\n"+
                   "DELETE FROM review;\n"+
+                  "ALTER TABLE review AUTO_INCREMENT = 1;\n"+
                   "DELETE FROM user;\n"
-
-  for (let i=1; i < 11; i++) {
+                  "ALTER TABLE user AUTO_INCREMENT = 1;\n"
+                  
+  let users = 250;                
+  for (let i=1; i < users; i++) {
+    if ((users/i)%10 === 0) {
+      let affectedPoi = pois[Math.floor(Math.random(pois.length))];
+      let affectAmount = 0.25 + Math.random()*0.5;
+      affectedPoi.genScore *= affectAmount;
+    }
+    if (((users+i)/3)%7 === 0) {
+      let affectedPoi = pois[Math.floor(Math.random(pois.length))];
+      let affectAmount = 1 + Math.random();
+      affectedPoi.genScore *= affectAmount;
+      if (affectedPoi.genScore > 100) {
+        affectedPoi.genScore = 100 - Math.random()*20;
+      }
+    }
     let name = firstNames[
       Math.floor(Math.random()*firstNames.length)
     ] +" "+ lastNames[
       Math.floor(Math.random()*lastNames.length)
     ]
-    let userString = "INSERT into `user` " +
-                    "(`name`,`createdAt`, `updatedAt`) VALUES('" +
-                    name+"', NOW(), NOW());\n";
+    let userString = "INSERT into `user` "+
+                     "(`name`,`createdAt`, `updatedAt`) "+
+                     "VALUES('"+name+"', NOW(), NOW());\n";
     sqlString += userString;
-    let haterScore = Math.random()*100;
-    pois.forEach((poi, i) => {
-      
+    let haterScore = Math.random();
+    pois.forEach((poi, ind) => {
+      let review = Math.floor(100 - ((Math.random() + 2*haterScore)/2) * poi.genScore);
+      if (review > 100) review = 100;
+      if (i % ind === 0) review = Math.floor(review*0.3);
+      let randomHatred = Math.ceil(Math.random() * 10)
+      if (randomHatred === 9) review = 2;
+      poi.numRevs++;
+      poi.sumRevs+=review;
+      let revString = "INSERT into `review` "+
+                      "(`rating`,`reviewer_name`,`NumUserRevs`,"+
+                      "`SumUserRevs`,`createdAt`,`updatedAt`,"+
+                      "`POIId`,`UserId`)\n  VALUES("+review+", '"+name+
+                      "',"+poi.numRevs+","+poi.sumRevs+",NOW(),NOW(),"+
+                      poi.id+",(select id from user where name = '"+
+                      name+"'));\n"
+      sqlString += revString;
     })
   }
   return(sqlString)
