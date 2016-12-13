@@ -78,6 +78,28 @@
     <script src="/app/data-view/nytimes/nytimes.controller.js"></script>
     <script src="/app/data-view/nytimes/nytimes.services.js"></script>
 
+    <!--Twitter Newsfeed-->
+    <script src="/app/data-view/twitter/twitter.module.js"></script>
+    <script src="/app/data-view/twitter/twitter.controller.js"></script>
+    <script>
+      window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+
+        return t;
+      }(document, "script", "twitter-wjs"));
+    </script>
+
     <!--Data Feed-->
     <script src="/app/data-view/data/data.module.js"></script>
     <script src="/app/data-view/data/data.controller.js"></script>

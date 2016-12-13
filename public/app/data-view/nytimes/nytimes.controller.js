@@ -9,10 +9,10 @@
 
   function NytimesController ($scope, $state, NytimesServices) {
     const vm = this;
-    const parent = $scope.$parent.vm;
+    vm.parent = $scope.$parent.vm;
     vm.news = [];
     NytimesServices
-      .getNews('"' + parent.poiName + '"')
+      .getNews('"' + vm.parent.poiName + '"')
       .then(function(newsArticles) {
         console.log('We have retrieved the news', newsArticles.response.docs);
         vm.news = newsArticles.response.docs;

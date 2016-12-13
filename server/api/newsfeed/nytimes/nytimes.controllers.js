@@ -1,7 +1,6 @@
 const rp = require('request-promise');
 
 const queryNytimes = (req, res) => {
-  console.log('Here is the nytimes request query', req.query);
   let options = {
     uri: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
     qs: {

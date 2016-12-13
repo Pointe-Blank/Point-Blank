@@ -12,6 +12,7 @@
       'data-view.reviews',
       'data-view.guardian',
       'data-view.nytimes',
+      'data-view.twitter',
       'ui.router' 
     ])
     .config(config)
@@ -76,6 +77,14 @@
         url: '/data',
         templateUrl: 'app/data-view/data/data.template.html',
         controller: 'data-controller as vm'
+      })
+      .state('poi.twitter', {
+        url: '/twitter',
+        templateUrl: 'app/data-view/twitter/twitter.template.html',
+        controller: 'twitter-controller as vm',
+        access: {
+          restricted: true
+        }
       })
 
     $urlRouterProvider.otherwise('/');
