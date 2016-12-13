@@ -69,28 +69,28 @@
       });
     };
 
-    const getTweets = function(poiName) {
-      return $http({
-        method: 'GET',
-        url: '/newsfeed/twitter/:querystring',
-        params: {
-          querystring: poiName
-        }
-      })
-      .then(function(retrievedTweets) {
-        return retrievedTweets.data;
-      })
-      .catch(function(error) {
-        throw error;
-      });
-    };
+    // const getTweets = function(poiName) {
+    //   return $http({
+    //     method: 'GET',
+    //     url: '/newsfeed/twitter/:querystring',
+    //     params: {
+    //       querystring: poiName
+    //     }
+    //   })
+    //   .then(function(retrievedTweets) {
+    //     return retrievedTweets.data;
+    //   })
+    //   .catch(function(error) {
+    //     throw error;
+    //   });
+    // };
 
     return {
       addReviewPoiData: addReviewPoiData,
       getCache: getCache,
       getGuardianNews: getGuardianNews,
-      getNytimesNews: getNytimesNews,
-      getTweets: getTweets
+      getNytimesNews: getNytimesNews
+      // getTweets: getTweets
     };
   }
 })();

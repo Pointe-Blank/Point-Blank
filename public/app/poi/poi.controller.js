@@ -18,7 +18,7 @@
     vm.cache;
     vm.guardianNews;
     vm.nytimesNews;
-    vm.tweets;
+    // vm.tweets;
 
     $scope.tabs = [{
       heading: 'Reviews',
@@ -43,18 +43,21 @@
       active: false
     }]
 
-    $scope.$on('$stateChangeSuccess', function() {
-      $scope.tabs.forEach(function(tab) {
-        tab.active = $state.is(tab.route);
-      });
+    $scope.$on('$stateChangeSuccess', function(event) {
+      console.log('Here is the event on state change', event);
+      // $scope.tabs.forEach(function(tab) {
+      //   tab.active = $state.is(tab.route);
+      // });
     });
 
     let validStates = [
       'poi.reviews', 
       'poi.guardian', 
-      'poi.nytimes', 
+      'poi.nytimes',
+      'poi.twitter', 
       'poi.data'
     ];
+
     if (validStates.indexOf($state.current.name) === -1) {
       $state.go('poi.reviews');
     }
@@ -131,14 +134,14 @@
         throw error;
       });
     
-    poiService
-      .getTweets('#' + searchquery)
-      .then(function(tweets) {
-        console.log('Here are the retrieved tweets', tweets);
-        vm.tweets = tweets.statuses;
-      })
-      .catch(function(error) {
-        throw error;
-      });
+    // poiService
+    //   .getTweets('#' + searchquery)
+    //   .then(function(tweets) {
+    //     console.log('Here are the retrieved tweets', tweets);
+    //     vm.tweets = tweets.statuses;
+    //   })
+    //   .catch(function(error) {
+    //     throw error;
+    //   });
   }
 })();
