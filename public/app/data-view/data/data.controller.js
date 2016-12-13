@@ -87,8 +87,7 @@
           },
           onclick: data => {
             $state.go('profile', {
-              id:ids[data.index],
-              name:reviewers[data.index]
+              id:ids[data.index]
             });
           }
         },
