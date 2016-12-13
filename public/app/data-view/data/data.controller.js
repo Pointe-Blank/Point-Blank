@@ -7,7 +7,7 @@
 
   DataController.$inject = ['$scope', '$rootScope', '$state', '$timeout'];
 
-  function DataController ($scope, $state, $rootScope, $timeout) {
+  function DataController ($scope, $rootScope, $state, $timeout) {
     const vm = this;
     let poiChart;
     let ratingsLine=['ratings'];
@@ -20,7 +20,10 @@
 
     console.log('cacheRecieved:',vm.parent.cacheRecieved)
     vm.parent.cacheRecieved ? poiChart = drawPoiChart() : 
-      $timeout(()=>{poiChart = drawPoiChart()}, 0)
+      $timeout(() => {
+        poiChart = drawPoiChart();
+        console.log('redrawing chart')
+      }, 50)
 
     $scope.$on('reviewPosted', () => {
       console.log('review posted!')
@@ -64,6 +67,7 @@
             averageLine,
             reviewers,
             dates,
+            ids
           ],
           types: {
             ratings: 'scatter',
@@ -71,8 +75,8 @@
           },
           onmouseover: data => {
             vm.thisReview = data.value;
-            vm.thisReviewer = "rated by: "+reviewers[data.index];
-            vm.thisRevTime = "on: "+dates[data.index]
+            vm.thisReviewer = "rated by: " + reviewers[data.index];
+            vm.thisRevTime = "on: " + dates[data.index];
             $scope.$apply();
           },
           onmouseout: () => {
@@ -80,6 +84,11 @@
             vm.thisReviewer = "average rating";
             vm.thisRevTime = null;
             $scope.$apply();
+          },
+          onclick: data => {
+            $state.go('profile', {
+              id:ids[data.index]
+            });
           }
         },
         axis: {
@@ -99,7 +108,7 @@
           show: false
         },
         legend: {
-          hide: ['reviewer', 'dates']
+          hide: ['reviewer', 'dates', 'ids']
         }
       });
       return chart;
