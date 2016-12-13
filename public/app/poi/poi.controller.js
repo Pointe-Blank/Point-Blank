@@ -16,6 +16,8 @@
     vm.reviewRating = 50;
     vm.genRating;
     vm.cache;
+    vm.guardianNews;
+    vm.nytimesNews;
     vm.tweets;
 
     $scope.tabs = [{
@@ -108,6 +110,16 @@
     };
 
     let searchquery = vm.poiName.replace(/\s+/g, '');
+
+    poiService
+      .getGuardianNews('"' + vm.poiName + '"')
+      .then(function(newsArticles) {
+        console.log('We have retrieved the news', newsArticles.response);
+        vm.guardianNews = newsArticles.response.results;
+      })
+      .catch(function(error) {
+        throw error;
+      });
     
     poiService
       .getTweets('#' + searchquery)

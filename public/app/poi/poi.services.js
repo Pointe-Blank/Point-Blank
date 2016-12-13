@@ -37,6 +37,22 @@
       })
     };
 
+    const getGuardianNews = function(poiName) {
+      return $http({
+        method: 'GET',
+        url: '/newsfeed/guardian/:querystring',
+        params: {
+          querystring: poiName
+        }
+      })
+      .then(function(retrievedNews) {
+        return retrievedNews.data;
+      })
+      .catch(function(error) {
+        throw error;
+      });
+    };
+
     const getTweets = function(poiName) {
       return $http({
         method: 'GET',
@@ -56,6 +72,7 @@
     return {
       addReviewPoiData: addReviewPoiData,
       getCache: getCache,
+      getGuardianNews: getGuardianNews,
       getTweets: getTweets
     };
   }
