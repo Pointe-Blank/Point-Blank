@@ -16,6 +16,7 @@ let authOptions = {
 
 const queryTwitter = (req, res) => {
   console.log('Here are our authoptions', authOptions);
+  console.log('Here is our querystring', req.query.querystring);
   let searchOptions = {
     uri: 'https://api.twitter.com/1.1/search/tweets.json',
     qs: {
@@ -35,17 +36,16 @@ const queryTwitter = (req, res) => {
       console.log('Retrieved authorization token', accessToken);
       console.log('Added access token to search request', searchOptions.headers.Authorization);
       console.log('This is the search object', searchOptions);
-      res.json(tokenResponse);
+      return rp(searchOptions)
     })
-    // .then(function(returnedTweets) {
-    //   console.log(returnedTweets);
-    //   res.json(returnedTweets);
-    // })
+    .then(function(returnedTweets) {
+      console.log(returnedTweets);
+      res.json(returnedTweets);
+    })
     .catch(function(error) {
       console.log('Error retrieving tweets');
       res.json(error);
     });
-
 };
 
 module.exports = {
