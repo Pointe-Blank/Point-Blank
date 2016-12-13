@@ -1,2 +1,7 @@
-<a class="twitter-timeline"  href="https://twitter.com/hashtag/TwitterStories" data-widget-id="808471892721963009">#TwitterStories Tweets</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<h3 class="aligned">#{{vm.parent.poiName}}</h3>
+
+<div class = "aligned" id="container">
+  <div ng-repeat="tweet in vm.tweets | orderBy: tweet.created_at">
+    {{vm.generateTimeline(tweet.id_str)}}
+  </div>
+</div>

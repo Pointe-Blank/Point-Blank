@@ -20,7 +20,8 @@ const queryTwitter = (req, res) => {
   let searchOptions = {
     uri: 'https://api.twitter.com/1.1/search/tweets.json',
     qs: {
-      'q': req.query.querystring
+      'q': req.query.querystring,
+      'result_type': 'popular'
     },
     headers: {
       'Authorization': 'Bearer ' 

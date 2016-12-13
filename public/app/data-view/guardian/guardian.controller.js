@@ -9,10 +9,10 @@
 
   function GuardianController ($scope, $state, guardianServices) {
     const vm = this;
-    const parent = $scope.$parent.vm;
+    vm.parent = $scope.$parent.vm;
     vm.news = [];
     guardianServices
-      .getNews('"' + parent.poiName + '"')
+      .getNews('"' + vm.parent.poiName + '"')
       .then(function(newsArticles) {
         console.log('We have retrieved the news', newsArticles.response);
         vm.news = newsArticles.response.results;

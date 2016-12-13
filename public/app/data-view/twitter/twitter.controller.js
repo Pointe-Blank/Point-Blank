@@ -9,13 +9,27 @@
 
   function TwitterController ($scope, $state, twitterServices) {
     const vm = this;
-    const parent = $scope.$parent.vm;
+    vm.parent = $scope.$parent.vm;
     vm.tweets = [];
+
+    console.log('Here we have access to the twitter functions', twttr);
+
+    vm.generateTimeline = function(tweetId) {
+      twttr.ready(
+        function(twttr) {
+          twttr.widgets.createTweet(tweetId, document.getElementById('container'));
+        }
+      );
+    };
+    
+    let searchquery = vm.parent.poiName.replace(/\s+/g, '');
+    
     twitterServices
-      .getTweets('#' + parent.poiName)
+      .getTweets('#' + searchquery)
       .then(function(tweets) {
-        console.log('We have retrieved the tweets', tweets);
-        // vm.tweets;
+        console.log('Returned tweets', tweets);
+        vm.tweets = tweets.statuses;
+        console.log('Here are the tweets', vm.tweets);
       })
       .catch(function(error) {
         throw error;
