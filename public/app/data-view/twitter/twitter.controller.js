@@ -17,7 +17,14 @@
     vm.generateTimeline = function(tweetId) {
       twttr.ready(
         function(twttr) {
-          twttr.widgets.createTweet(tweetId, document.getElementById('container'));
+          twttr.widgets
+            .createTweet(tweetId, document.getElementById('container'))
+            .then(function(createdTweet) {
+              console.log('Successfully created a tweet widget.')
+            })
+            .catch(function(error) {
+              console.log('Error creating tweet widget.');
+            });
         }
       );
     };

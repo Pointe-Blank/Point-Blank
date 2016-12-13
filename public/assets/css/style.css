@@ -195,3 +195,7 @@ ul.tab li a {
 
 /* Change background color of links on hover */
 ul.tab li a:hover {background-color: #ddd;}
+
+#inner {
+  margin-left: 155px;
+}

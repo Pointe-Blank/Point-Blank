@@ -1,7 +1,9 @@
 <h3 class="aligned">#{{vm.parent.poiName}}</h3>
 
-<div class = "aligned" id="container">
-  <div ng-repeat="tweet in vm.tweets | orderBy: tweet.created_at">
-    {{vm.generateTimeline(tweet.id_str)}}
+<div id="inner">
+  <div id="container">
+    <div ng-repeat="tweet in vm.tweets | orderBy: tweet.created_at">
+      {{vm.generateTimeline(tweet.id_str)}}
+    </div>
   </div>
 </div>
