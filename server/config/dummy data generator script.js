@@ -6514,8 +6514,21 @@ let generateSqlString = () => {
                   "DELETE FROM user;\n"
                   "ALTER TABLE user AUTO_INCREMENT = 1;\n"
                   
-
-  for (let i=1; i < 50; i++) {
+  let users = 250;                
+  for (let i=1; i < users; i++) {
+    if ((users/i)%10 === 0) {
+      let affectedPoi = pois[Math.floor(Math.random(pois.length))];
+      let affectAmount = 0.25 + Math.random()*0.5;
+      affectedPoi.genScore *= affectAmount;
+    }
+    if (((users+i)/3)%7 === 0) {
+      let affectedPoi = pois[Math.floor(Math.random(pois.length))];
+      let affectAmount = 1 + Math.random();
+      affectedPoi.genScore *= affectAmount;
+      if (affectedPoi.genScore > 100) {
+        affectedPoi.genScore = 100 - Math.random()*20;
+      }
+    }
     let name = firstNames[
       Math.floor(Math.random()*firstNames.length)
     ] +" "+ lastNames[
@@ -6526,8 +6539,10 @@ let generateSqlString = () => {
                      "VALUES('"+name+"', NOW(), NOW());\n";
     sqlString += userString;
     let haterScore = Math.random();
-    pois.forEach((poi, i) => {
-      let review = Math.floor(100 - haterScore * poi.genScore);
+    pois.forEach((poi, ind) => {
+      let review = Math.floor(100 - ((Math.random() + 2*haterScore)/2) * poi.genScore);
+      if (review > 100) review = 100;
+      if (i % ind === 0) review = Math.floor(review*0.1);
       poi.numRevs++;
       poi.sumRevs+=review;
       let revString = "INSERT into `review` "+
