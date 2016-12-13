@@ -53,6 +53,22 @@
       });
     };
 
+    const getNytimesNews = function(poiName) {
+      return $http({
+        method: 'GET',
+        url: '/newsfeed/nytimes/:querystring',
+        params: {
+          querystring: poiName
+        }
+      })
+      .then(function(retrievedNews) {
+        return retrievedNews.data;
+      })
+      .catch(function(error) {
+        throw error;
+      });
+    };
+
     const getTweets = function(poiName) {
       return $http({
         method: 'GET',
@@ -73,6 +89,7 @@
       addReviewPoiData: addReviewPoiData,
       getCache: getCache,
       getGuardianNews: getGuardianNews,
+      getNytimesNews: getNytimesNews,
       getTweets: getTweets
     };
   }

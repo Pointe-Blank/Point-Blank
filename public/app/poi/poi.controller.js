@@ -120,6 +120,16 @@
       .catch(function(error) {
         throw error;
       });
+
+    poiService
+      .getNytimesNews('"' + vm.poiName + '"')
+      .then(function(newsArticles) {
+        console.log('We have retrieved the news', newsArticles.response.docs);
+        vm.nytimesNews = newsArticles.response.docs;
+      })
+      .catch(function(error) {
+        throw error;
+      });
     
     poiService
       .getTweets('#' + searchquery)
