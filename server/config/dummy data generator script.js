@@ -6499,27 +6499,45 @@ let generateSqlString = () => {
 
   let pois = [];
   for (let i = 1; i < 18; i++){
-    pois.push([i, Math.random()*100])
+    pois.push({
+      id: i,
+      genScore: Math.random()*100,
+      numRevs: 0,
+      sumRevs: 0
+    })
   }
 
   let sqlString = "\n"+
                   "USE pointblank;\n"+
                   "DELETE FROM review;\n"+
+                  "ALTER TABLE review AUTO_INCREMENT = 1;\n"+
                   "DELETE FROM user;\n"
+                  "ALTER TABLE user AUTO_INCREMENT = 1;\n"
+                  
 
-  for (let i=1; i < 11; i++) {
+  for (let i=1; i < 50; i++) {
     let name = firstNames[
       Math.floor(Math.random()*firstNames.length)
     ] +" "+ lastNames[
       Math.floor(Math.random()*lastNames.length)
     ]
-    let userString = "INSERT into `user` " +
-                    "(`name`,`createdAt`, `updatedAt`) VALUES('" +
-                    name+"', NOW(), NOW());\n";
+    let userString = "INSERT into `user` "+
+                     "(`name`,`createdAt`, `updatedAt`) "+
+                     "VALUES('"+name+"', NOW(), NOW());\n";
     sqlString += userString;
-    let haterScore = Math.random()*100;
+    let haterScore = Math.random();
     pois.forEach((poi, i) => {
-      
+      let review = Math.floor(100 - haterScore * poi.genScore);
+      poi.numRevs++;
+      poi.sumRevs+=review;
+      let revString = "INSERT into `review` "+
+                      "(`rating`,`reviewer_name`,`NumUserRevs`,"+
+                      "`SumUserRevs`,`createdAt`,`updatedAt`,"+
+                      "`POIId`,`UserId`)\n  VALUES("+review+", '"+name+
+                      "',"+poi.numRevs+","+poi.sumRevs+",NOW(),NOW(),"+
+                      poi.id+",(select id from user where name = '"+
+                      name+"'));\n"
+      sqlString += revString;
     })
   }
   return(sqlString)
