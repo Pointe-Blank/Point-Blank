@@ -1,5 +1,5 @@
-let generateSqlString = () => {
-  let firstNames = ['Aaron',
+var generateSqlString = () => {
+  var firstNames = ['Aaron',
     'Aaron',
     'Abbey',
     'Abbie',
@@ -5494,7 +5494,7 @@ let generateSqlString = () => {
     'Zulema',
     'Zulma',
   ]
-  let lastNames = [
+  var lastNames = [
     'Abbott',
     'Acevedo',
     'Acosta',
@@ -6497,8 +6497,8 @@ let generateSqlString = () => {
     'Zimmerman'
   ];
 
-  let pois = [];
-  for (let i = 1; i < 18; i++){
+  var pois = [];
+  for (var i = 1; i < 18; i++){
     pois.push({
       id: i,
       genScore: Math.random()*100,
@@ -6507,47 +6507,47 @@ let generateSqlString = () => {
     })
   }
 
-  let sqlString = "\n"+
+  var sqlString = "\n"+
                   "USE pointblank;\n"+
                   "DELETE FROM review;\n"+
                   "ALTER TABLE review AUTO_INCREMENT = 1;\n"+
                   "DELETE FROM user;\n"
                   "ALTER TABLE user AUTO_INCREMENT = 1;\n"
                   
-  let users = 250;                
-  for (let i=1; i < users; i++) {
+  var users = 51;                
+  for (var i=1; i < users; i++) {
     if ((users/i)%10 === 0) {
-      let affectedPoi = pois[Math.floor(Math.random(pois.length))];
-      let affectAmount = 0.25 + Math.random()*0.5;
+      var affectedPoi = pois[Math.floor(Math.random(pois.length))];
+      var affectAmount = 0.25 + Math.random()*0.5;
       affectedPoi.genScore *= affectAmount;
     }
     if (((users+i)/3)%7 === 0) {
-      let affectedPoi = pois[Math.floor(Math.random(pois.length))];
-      let affectAmount = 1 + Math.random();
+      var affectedPoi = pois[Math.floor(Math.random(pois.length))];
+      var affectAmount = 1 + Math.random();
       affectedPoi.genScore *= affectAmount;
       if (affectedPoi.genScore > 100) {
         affectedPoi.genScore = 100 - Math.random()*20;
       }
     }
-    let name = firstNames[
+    var name = firstNames[
       Math.floor(Math.random()*firstNames.length)
     ] +" "+ lastNames[
       Math.floor(Math.random()*lastNames.length)
     ]
-    let userString = "INSERT into `user` "+
-                     "(`name`,`createdAt`, `updatedAt`) "+
-                     "VALUES('"+name+"', NOW(), NOW());\n";
+    var userString = "INSERT into `user` "+
+                     "(`name`,`createdAt`, `updatedAt`) \n"+
+                     "VALUES('"+name+"', NOW(), NOW()); \n";
     sqlString += userString;
-    let haterScore = Math.random();
+    var haterScore = 1 / ((100 % name.length)+1);
     pois.forEach((poi, ind) => {
-      let review = Math.floor(100 - ((Math.random() + 2*haterScore)/2) * poi.genScore);
+      if (i % 3*(ind+1)-1 === 0) var review = ind;
+      else if (i % ind === 13) var review = 13;
+      else var review = Math.floor(100 - ((Math.random() + 3*haterScore)/2) * poi.genScore);
       if (review > 100) review = 100;
-      if (i % ind === 0) review = Math.floor(review*0.3);
-      let randomHatred = Math.ceil(Math.random() * 10)
-      if (randomHatred === 9) review = 2;
+      if (review < 0) review = 2;
       poi.numRevs++;
       poi.sumRevs+=review;
-      let revString = "INSERT into `review` "+
+      var revString = "INSERT into `review` "+
                       "(`rating`,`reviewer_name`,`NumUserRevs`,"+
                       "`SumUserRevs`,`createdAt`,`updatedAt`,"+
                       "`POIId`,`UserId`)\n  VALUES("+review+", '"+name+
