@@ -6542,7 +6542,9 @@ let generateSqlString = () => {
     pois.forEach((poi, ind) => {
       let review = Math.floor(100 - ((Math.random() + 2*haterScore)/2) * poi.genScore);
       if (review > 100) review = 100;
-      if (i % ind === 0) review = Math.floor(review*0.1);
+      if (i % ind === 0) review = Math.floor(review*0.3);
+      let randomHatred = Math.ceil(Math.random() * 10)
+      if (randomHatred === 9) review = 2;
       poi.numRevs++;
       poi.sumRevs+=review;
       let revString = "INSERT into `review` "+
