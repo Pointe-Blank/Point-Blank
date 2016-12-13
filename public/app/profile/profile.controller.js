@@ -47,9 +47,9 @@
             ],
             type: 'scatter',
             onmouseover: data => {
-              vm.thisPoi = vm.ratedPois[data.index];
+              vm.thisPoi = vm.ratedPois[data.index+1];
               vm.thisReview = data.value;
-              vm.thisRevTime = vm.dates[data.index]
+              vm.thisRevTime = vm.dates[data.index+1]
               $scope.$apply();
             },
             onclick: data => {
