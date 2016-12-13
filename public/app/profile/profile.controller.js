@@ -45,7 +45,7 @@
               vm.poiIds,
               vm.dates
             ],
-            type: 'scatter',
+            type: 'bar',
             onmouseover: data => {
               vm.thisPoi = vm.ratedPois[data.index+1];
               vm.thisReview = data.value;
