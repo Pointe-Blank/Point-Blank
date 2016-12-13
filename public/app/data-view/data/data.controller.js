@@ -7,37 +7,59 @@
 
   DataController.$inject = ['$scope', '$rootScope', '$state', '$timeout'];
 
-  function DataController ($scope, $state, $rootScope, $timeout) {
+  function DataController ($scope, $rootScope, $state, $timeout) {
     const vm = this;
+    let poiChart;
+    let ratingsLine=['ratings'];
+    let averageLine=['average'];
+    let reviewers=['reviewer'];
+    let dates=['dates'];
+    let ids=['ids'];
     
     vm.parent = $scope.$parent.vm;
 
     console.log('cacheRecieved:',vm.parent.cacheRecieved)
-    vm.parent.cacheRecieved ? drawPoiChart() : 
-      $timeout(()=>{drawPoiChart()}, 0)
+    vm.parent.cacheRecieved ? poiChart = drawPoiChart() : 
+      $timeout(() => {
+        poiChart = drawPoiChart();
+        console.log('redrawing chart')
+      }, 50)
+
+    $scope.$on('reviewPosted', () => {
+      console.log('review posted!')
+      vm.parent.reviews.push(vm.parent.reviews.shift())
+      let newRev = vm.parent.reviews[vm.parent.reviews.length-1]
+      ratingsLine.push(newRev.rating),
+      averageLine.push(Math.round(newRev.SumUserRevs / newRev.NumUserRevs * 100)/100),
+      reviewers.push(newRev.reviewer_name),
+      dates.push(newRev.createdAt)
+      poiChart.load({
+        columns: [
+          ratingsLine,
+          averageLine,
+          reviewers,
+          dates
+        ],
+      })
+    })
 
     function drawPoiChart() {
       vm.thisReview = vm.parent.genRating;
       vm.thisReviewer = "average rating";
       vm.thisRevTime = null;
-      let ratingsLine=['ratings'];
-      let averageLine=['average'];
-      let reviewers=['reviewer'];
-      let dates=['dates'];
-      let ids=['ids'];
       vm.parent.reviews.forEach(review => {
         ratingsLine.push(review.rating);
-        averageLine.push(review.SumUserRevs / review.NumUserRevs);
+        averageLine.push(Math.round(review.SumUserRevs / review.NumUserRevs * 100)/100);
         reviewers.push(review.reviewer_name);
         ids.push(review.UserId);
         dates.push(
           review.createdAt
           .split('Z')[0]
           .replace('T', ' ')
-          .split('.')[0]);
+          .split('.')[0]
+          .replace(' ', ' at '));
       })
-      console.log('drawing chart');
-      let poiChart = c3.generate({
+      let chart = c3.generate({
         bindto: '#poiChart',
         data: {
           columns: [
@@ -45,6 +67,7 @@
             averageLine,
             reviewers,
             dates,
+            ids
           ],
           types: {
             ratings: 'scatter',
@@ -52,8 +75,8 @@
           },
           onmouseover: data => {
             vm.thisReview = data.value;
-            vm.thisReviewer = "rated by: "+reviewers[data.index];
-            vm.thisRevTime = "on: "+dates[data.index]
+            vm.thisReviewer = "rated by: " + reviewers[data.index];
+            vm.thisRevTime = "on: " + dates[data.index];
             $scope.$apply();
           },
           onmouseout: () => {
@@ -61,17 +84,34 @@
             vm.thisReviewer = "average rating";
             vm.thisRevTime = null;
             $scope.$apply();
+          },
+          onclick: data => {
+            $state.go('profile', {
+              id:ids[data.index]
+            });
           }
+        },
+        axis: {
+          x: {
+            show: false
+          },
+          y: {
+            min: 0,
+            max: 100,
+            padding: 5
+          }
+        },
+        zoom: {
+          enabled: true
         },
         point: {
           show: false
         },
         legend: {
-          hide: ['reviewer', 'dates']
+          hide: ['reviewer', 'dates', 'ids']
         }
       });
-      console.log('chart drawn')
-      return poiChart;
+      return chart;
     }
   }
 })();

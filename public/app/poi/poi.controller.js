@@ -65,7 +65,7 @@
             vm.reviews = vm.poi.Reviews;
             vm.lastRev = vm.reviews[vm.reviews.length - 1];
             vm.genRating = vm.lastRev ?
-              vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs :
+              Math.round(vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs * 100)/100 :
               vm.poi.general_rating;
             vm.cacheRecieved = true;
             // console.log('Here we are storing the cache on the poi controller', returnedCache);
@@ -117,10 +117,11 @@
       }
       poireview.createdAt = new Date().toISOString()
       vm.reviews.unshift(poireview);
+      $rootScope.$broadcast('reviewPosted')
       console.log('creating review:',poireview)
       poiService.addReviewPoiData(poireview);
       vm.lastRev = poireview;
-      vm.genRating = vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs
+      vm.genRating = Math.round(vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs * 100)/100
     };
 
   }
