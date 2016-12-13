@@ -16,6 +16,7 @@
     vm.reviewRating = 50;
     vm.genRating;
     vm.cache;
+    vm.tweets;
 
     $scope.tabs = [{
       heading: 'Reviews',
@@ -72,34 +73,12 @@
               Math.round(vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs * 100)/100 :
               vm.poi.general_rating;
             vm.cacheRecieved = true;
-            // console.log('Here we are storing the cache on the poi controller', returnedCache);
-            // console.log('Here we are grabbing Mark from the cache', vm.poi);
-            // console.log("Here we are grabbing Mark's reviews from the cache", vm.reviews);
-            // console.log("Here we are grabbing Mark's last review from the cache", vm.lastRev);
-            // console.log("Here we are grabbing Mark's general rating from the cache", vm.genRating);
           })
           .catch(function(error) {
             throw error;
           })
       );
       return deferred.promise;
-
-      // poiService.grabSinglePoiData(vm.poiName)
-      //   .then(function (results) {
-      //     console.log('Returned results from data fetch', results);
-      //     vm.poi = results;
-      //     vm.reviews = results.Reviews;
-      //     vm.lastRev = vm.reviews[vm.reviews.length-1]
-      //     console.log('reviews:', vm.reviews)
-      //     console.log('lastRev:', vm.lastRev)
-      //     vm.genRating = vm.lastRev ? 
-      //       vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs :
-      //       results.general_rating;
-      //     vm.drawChart();
-      //   })
-      //   .catch(function(err) {
-      //     console.log('!!Error initializing poi', err);
-      //   })
     };
     vm.init();
 
@@ -128,5 +107,16 @@
       vm.genRating = Math.round(vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs * 100)/100
     };
 
+    let searchquery = vm.poiName.replace(/\s+/g, '');
+    
+    poiService
+      .getTweets('#' + searchquery)
+      .then(function(tweets) {
+        console.log('Here are the retrieved tweets', tweets);
+        vm.tweets = tweets.statuses;
+      })
+      .catch(function(error) {
+        throw error;
+      });
   }
 })();

@@ -2,7 +2,7 @@
 
 <div id="inner">
   <div id="container">
-    <div ng-repeat="tweet in vm.tweets | orderBy: tweet.created_at">
+    <div ng-repeat="tweet in vm.parent.tweets | orderBy: tweet.created_at">
       {{vm.generateTimeline(tweet.id_str)}}
     </div>
   </div>

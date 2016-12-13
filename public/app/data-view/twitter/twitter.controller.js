@@ -5,14 +5,11 @@
     .module('data-view.twitter')
     .controller('twitter-controller', TwitterController);
 
-  TwitterController.$inject = ['$scope', '$state', 'twitterServices'];
+  TwitterController.$inject = ['$scope', '$state'];
 
-  function TwitterController ($scope, $state, twitterServices) {
+  function TwitterController ($scope, $state) {
     const vm = this;
     vm.parent = $scope.$parent.vm;
-    vm.tweets = [];
-
-    console.log('Here we have access to the twitter functions', twttr);
 
     vm.generateTimeline = function(tweetId) {
       twttr.ready(
@@ -28,18 +25,5 @@
         }
       );
     };
-    
-    let searchquery = vm.parent.poiName.replace(/\s+/g, '');
-    
-    twitterServices
-      .getTweets('#' + searchquery)
-      .then(function(tweets) {
-        console.log('Returned tweets', tweets);
-        vm.tweets = tweets.statuses;
-        console.log('Here are the tweets', vm.tweets);
-      })
-      .catch(function(error) {
-        throw error;
-      });
   };
 })();

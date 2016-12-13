@@ -23,18 +23,6 @@
       });
     };
 
-    // var grabSinglePoiData = function (poiInfo) {
-    //   return $http({
-    //     method: 'GET',
-    //     url: '/api/poi/' + poiInfo,
-    //     headers: {'Content-Type': 'application/json'},
-    //     data: {'name': 'poiInfo'}
-    //   })
-    //   .then(function (results) {
-    //     return results.data;
-    //   });
-    // };
-
     const getCache = function() {
       return $http({
         method: 'GET',
@@ -49,10 +37,26 @@
       })
     };
 
+    const getTweets = function(poiName) {
+      return $http({
+        method: 'GET',
+        url: '/newsfeed/twitter/:querystring',
+        params: {
+          querystring: poiName
+        }
+      })
+      .then(function(retrievedTweets) {
+        return retrievedTweets.data;
+      })
+      .catch(function(error) {
+        throw error;
+      });
+    };
+
     return {
       addReviewPoiData: addReviewPoiData,
-      // grabSinglePoiData: grabSinglePoiData,
-      getCache: getCache
+      getCache: getCache,
+      getTweets: getTweets
     };
   }
 })();
