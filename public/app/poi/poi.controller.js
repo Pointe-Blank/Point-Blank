@@ -34,6 +34,10 @@
       heading: 'New York Times',
       route: 'poi.nytimes',
       active: false
+    }, {
+      heading: 'Twitter Feed',
+      route: 'poi.twitter',
+      active: false
     }]
 
     $scope.$on('$stateChangeSuccess', function() {
