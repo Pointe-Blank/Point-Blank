@@ -37,26 +37,60 @@
       })
     };
 
-    const getTweets = function(poiName) {
+    const getGuardianNews = function(poiName) {
       return $http({
         method: 'GET',
-        url: '/newsfeed/twitter/:querystring',
+        url: '/newsfeed/guardian/:querystring',
         params: {
           querystring: poiName
         }
       })
-      .then(function(retrievedTweets) {
-        return retrievedTweets.data;
+      .then(function(retrievedNews) {
+        return retrievedNews.data;
       })
       .catch(function(error) {
         throw error;
       });
     };
 
+    const getNytimesNews = function(poiName) {
+      return $http({
+        method: 'GET',
+        url: '/newsfeed/nytimes/:querystring',
+        params: {
+          querystring: poiName
+        }
+      })
+      .then(function(retrievedNews) {
+        return retrievedNews.data;
+      })
+      .catch(function(error) {
+        throw error;
+      });
+    };
+
+    // const getTweets = function(poiName) {
+    //   return $http({
+    //     method: 'GET',
+    //     url: '/newsfeed/twitter/:querystring',
+    //     params: {
+    //       querystring: poiName
+    //     }
+    //   })
+    //   .then(function(retrievedTweets) {
+    //     return retrievedTweets.data;
+    //   })
+    //   .catch(function(error) {
+    //     throw error;
+    //   });
+    // };
+
     return {
       addReviewPoiData: addReviewPoiData,
       getCache: getCache,
-      getTweets: getTweets
+      getGuardianNews: getGuardianNews,
+      getNytimesNews: getNytimesNews
+      // getTweets: getTweets
     };
   }
 })();

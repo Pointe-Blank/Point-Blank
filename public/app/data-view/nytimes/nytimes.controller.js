@@ -5,20 +5,10 @@
     .module('data-view.nytimes')
     .controller('nytimes-controller', NytimesController);
 
-  NytimesController.$inject = ['$scope', '$state', 'nytimesServices'];
+  NytimesController.$inject = ['$scope', '$state'];
 
-  function NytimesController ($scope, $state, NytimesServices) {
+  function NytimesController ($scope, $state) {
     const vm = this;
     vm.parent = $scope.$parent.vm;
-    vm.news = [];
-    NytimesServices
-      .getNews('"' + vm.parent.poiName + '"')
-      .then(function(newsArticles) {
-        console.log('We have retrieved the news', newsArticles.response.docs);
-        vm.news = newsArticles.response.docs;
-      })
-      .catch(function(error) {
-        throw error;
-      });
   };
 })();
