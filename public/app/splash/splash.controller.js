@@ -26,6 +26,7 @@
           vm.pod = result.data
           vm.poi = vm.pod[0]
           vm.pos = vm.pod[1]
+          console.log("poi, pos", vm.poi, vm.pos)
         }
       })
       .then(()=>{

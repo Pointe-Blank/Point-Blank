@@ -11,7 +11,7 @@
     var getInitData = function () {
       return $http({
         method: 'GET',
-        url: '/api/poi',
+        url: '/api/cache/poi',
         headers: {'Content-Type': 'application/json'}
       })
       .then(function (results) {

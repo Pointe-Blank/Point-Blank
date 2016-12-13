@@ -1,9 +1,34 @@
 .photoBox {
     border: 2px solid #DCDCDC;
 }
+.podTitle{
+  display: inline-block
+}
+.gif{
+  max-height: 100px;
+  max-width: 100px;
+}
+.vsPng img{
+  margin-top: 300px;
+  max-height: 200px;
+  max-width: 200px;
+}
+
+footer{
+  margin-top: 300px
+}
 
 .timer{
   text-align: center;
+}
+.thumbnail{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+}
+img{
+  margin: auto
 }
 
 #photo {
@@ -55,7 +80,7 @@
 
 .customPicture {
   width: auto;
-  height: 350px !important;
+  max-height: 325px !important;
 }
 
 .margin-right {
