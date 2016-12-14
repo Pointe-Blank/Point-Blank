@@ -18,8 +18,7 @@
         return results;
       })
       .catch(function(err) {
-        console.log('error data:',err.data)
-        console.log('attemped post:',poireview)
+        throw error;
       });
     };
 
@@ -29,7 +28,6 @@
         url: '/api/cache/all'
       })
       .then(function(returnedCache) {
-        console.log('Here is the returnedCache', returnedCache);
         return returnedCache.data;
       })
       .catch(function(error) {
