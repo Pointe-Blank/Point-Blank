@@ -17,7 +17,6 @@ exports.findUser = (req, res, next) => {
 };
 
 exports.addOneUser = (req, res, next) => {
-  console.log('creating user')
   models.User.create({
     name: req.body.name,
     token: req.body.token,

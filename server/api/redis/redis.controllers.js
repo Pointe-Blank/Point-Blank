@@ -11,11 +11,10 @@ module.exports = {
       let tmp = result.map((item)=>{
         return JSON.parse(item);
       })
-      
       res.json(tmp);
     })
-    .catch(err=>{
-      console.log("testing Error: Error trying to get all lessons", err);
+    .catch(err => {
+       throw err;
     })
   },
 
@@ -25,8 +24,6 @@ module.exports = {
      .then(result => {
       if(result) res.json(JSON.parse(result));
       else{
-        console.log("POIs not found in cache...")
-        console.log("Querying POIs....")
         return models.User.findAll({
           include: [models.Review]
         })
@@ -41,15 +38,11 @@ module.exports = {
       let str_result = JSON.stringify(allUsers);
       return str_result;
     })
-    .then(str=>{
-      console.log("Storing Users in cache")
+    .then(str => {
       return red_client.set('Users', str)
     })
-    .then(status=>{
-      console.log("Redis cache POIs: ", status);
-    })
-    .catch(err=>{
-      console.log()
+    .catch(err => {
+       throw err;
     })
   },
 
@@ -57,13 +50,9 @@ module.exports = {
     red_client.get('Reviews')
     .then(result => {
       if(result) res.json(JSON.parse(result));
-      else{
-        console.log("Reviews not found in cache...")
-        console.log("Querying Reviews....")
-        return models.Review.findAll({})
-      }
+      else return models.Review.findAll({})
     })
-    .then(result=>{
+    .then(result => {
       if(result){
         let allReviews = [];
         result.map(item => {
@@ -74,31 +63,24 @@ module.exports = {
         return str_result;
       }
     })
-    .then(str=>{
-      if(str){
-        console.log("Storing reviews in cache")
-        return red_client.set('Reviews', str)
-      }
+    .then(str => {
+      if(str) return red_client.set('Reviews', str)
     })
-    .then(status=>{
-      if(status){
-        console.log("Redis cache Reviews: ", status);
-      }
-    })
-    .catch(err=>{
-      console.log("Error trying to get all Reviews", err);
+    .catch(err => {
+       throw err;
     })
 
   },
 
   getPOI: (req, res, next) => {
-
+    /**
+     * Return the cached POIs or query for them, send it back to
+     * the client, and store in cache
+     */
     red_client.get('POIs')
     .then(result => {
       if(result) res.json(JSON.parse(result));
       else{
-        console.log("POIs not found in cache...")
-        console.log("Querying POIs....")
         return models.POI.findAll({
           include: [models.Review]
         })
@@ -115,31 +97,26 @@ module.exports = {
         return str_result;
       }
     })
-    .then(str=>{
-      if(str){
-        console.log("Storing POIs in cache")
-        return red_client.set('POIs', str)
-      }
+    .then(str => {
+      if(str) return red_client.set('POIs', str)
     })
-    .then(status=>{
-      if(status){
-        console.log("Redis cache POIs: ", status);
-      }
-    })
-    .catch(err=>{
-      console.log("Error trying to get all POIs", err);
+    .catch(err => {
+       throw err;
     })
   },
 
   getPOD: (req, res, next) =>{
-
+    /**
+     * Generate a random POI and a random POS and 
+     * set the TTL for one day
+     * 
+     */
     red_client.get('POD')
     .then(result => {
       if(result){
         res.json(JSON.parse(result))
         return null;
       }else{
-        console.log("NO POD found");
         return red_client.get('POIs')
       }
     })
@@ -173,26 +150,20 @@ module.exports = {
         return null
       }
     })
-    .then(result=>{
-      if(result){
-        console.log("Stored new POD (set, expiresat, ttl):", result);
-      }
-    })
     .catch(err=>{
-      console.log("ERROR getting POD", err);
+       throw err;
     })
 
   },
 
-  getPODstats: (req, res, next) =>{
+  getPODstats: (req, res, next) => {
 
     red_client.ttl("POD")
-    .then(result=>{
-      console.log(result);
+    .then(result => { 
       if(result) res.json(result);
     })
-    .catch(err =>{
-      console.log("Error getting POD stats", err)
+    .catch(err => {
+      throw err;
     })
 
   },
@@ -216,7 +187,6 @@ module.exports = {
      *  Storing Users in cache
      */
     .then(response=>{
-      console.log("Success storing Reviews")
       return models.User.findAll({
         include: [models.Review]
       })
@@ -236,13 +206,12 @@ module.exports = {
     /**
      *  Storing Users in cache
      */
-    .then(response=>{
-      console.log("Success storing Users")
+    .then(response => {
       return models.POI.findAll({
         include: [models.Review]
       })
     })
-    .then(result=>{
+    .then(result => {
       let allItems = [];
       result.map(item => {
         allItems.push(item.dataValues);
@@ -250,14 +219,11 @@ module.exports = {
       let str_result = JSON.stringify(allItems);
       return str_result;
     })
-    .then(str=>{
+    .then(str => {
       return red_client.set('POIs', str)
     })
-    .then(response=>{
-      console.log("Success storing POIs, Users, and Reviews in cache")
-    })
-    .catch(err=>{
-      console.log("ERROR: REDIS.CONFIG: ", err);
+    .catch(err => {
+      throw err;
     })
   }
 }

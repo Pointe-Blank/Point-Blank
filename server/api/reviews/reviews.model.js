@@ -1,9 +1,6 @@
-// reviews schema/model
-// const Sequelize = require('sequelize');
-// const dbConnection = require('../../config/db.config.js');
-// const POI = require('../poi/poi.model.js');
-// const User = require('../users/users.model.js');
+
 const models = require('../../config/db.config.js');
+
 module.exports = (sequelize, DataTypes) => {
 
   const Review = sequelize.define('Review', {

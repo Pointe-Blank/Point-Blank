@@ -5,6 +5,13 @@ const guardian = require('guardian-js');
 const api = new guardian(process.env.GUARDIAN_API_KEY, false);
 const Promise = require('bluebird');
 const rp = require('request-promise');
+
+/**
+ * The purpose of these functions are to cache the commonly used
+ * queries into reddis. Each function will return what is in redis if
+ * it exists, if not, it will do a sequelize query and store it into 
+ * reddis
+ */
 module.exports = {
 
   initUser: () => {
@@ -22,12 +29,11 @@ module.exports = {
         return red_client.set('Users', JSON.stringify(result))
       }
     })
-    .then(response=>{
-      console.log("Success initializing Users", response);
+    .then(response => {
       return response;
     })
-    .catch(err=>{
-      console.log("Error intializing Users", err)
+    .catch(err => {
+       throw err;
     })
     
   },
@@ -48,11 +54,10 @@ module.exports = {
       }
     })
     .then(response=>{
-      console.log("Success initializing POIs", response);
       return response;
     })
     .catch(err=>{
-      console.log("Error intializing POIs", err)
+      throw err;
     })
     
   }, 
@@ -70,12 +75,11 @@ module.exports = {
         return red_client.set('Reviews', JSON.stringify(result))
       }
     })
-    .then(response=>{
-      console.log("Success initializing Reviews", response);
+    .then(response => {
       return response;
     })
-    .catch(err=>{
-      console.log("Error intializing Reviews", err)
+    .catch(err => {
+       throw err;
     })
     
   },
@@ -84,7 +88,6 @@ module.exports = {
 
     return red_client.get('POIs')
     .then(result=>{
-      //console.log("get POIs", result)
       if(!result) return []
       else{
         let poiList = JSON.parse(result);
@@ -102,7 +105,11 @@ module.exports = {
             },
             json: true
           };
-          
+          /** return back a promise for each item
+           * uncomment the nyNews attribute if you can 
+           * figure out a way to get past the 5 api calls/second limit
+           * from the ny times
+           */
           return Promise.props({
                   name: poi.name,
                   summary: poi.summary,
@@ -117,10 +124,7 @@ module.exports = {
                                 format: 'json',
                                 pageSize: 10
                               })
-                              .then(result=>{
-                                if(index===0){
-                                  //console.log("look here", JSON.parse(result.body).response.results[0])
-                                }
+                              .then(result => {
                                 return JSON.parse(result.body).response.results
                               }),
                   // nyNews: Promise.delay(500)
@@ -138,42 +142,39 @@ module.exports = {
         })
 
         Promise.all(data)
-        .then((result)=>{
-          //console.log("Success POIs with news articles", result[0].newsArt);
+        .then(result => {
           return red_client.set('POIs', JSON.stringify(result))
         })
-        .then(response=>{
-          console.log("Success POIs with news articles");
+        .then(response => {
           return response;
         })
 
       }
     })
-    .catch(err=>{
-      console.log("Error intializing Reviews", err)
+    .catch(err => {
+       throw err;
     })
     
   },
 
   initAll: () => {
-
+    /**
+     * Initialize redis and cache all the get calls that will commonly be used
+     * 
+     */
     return module.exports.initUser()
-    .then(result=>{
+    .then(result => {
       if(result) return module.exports.initPOI()
     })
-    .then(result=>{
+    .then(result => {
       if(result) return module.exports.initReview()
     })
-    .then(result=>{
-      if(result){
-        console.log("Finished initializing cache")
-        return true
-      }else{
-        return false;
-      } 
+    .then(result => {
+      if(result) return true
+      else return false;
     })
-    .catch(err=>{
-      console.log("Error in initAll reddis helpers", err)
+    .catch(err => {
+       throw err;
     })
     
   }
