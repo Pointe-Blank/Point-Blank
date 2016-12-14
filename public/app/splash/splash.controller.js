@@ -9,15 +9,11 @@
 
   function SplashController (splashService, $location, $state, $timeout, $interval, $stateParams) {
     var vm = this;
-    
-
     vm.goPoi = function (input) {
-      console.log('Here is the input we are sending in state change:', input);
       $state.go('poi', {
         name: input
       });
     };
-
     vm.poiInit = function () {
 
       return splashService.getPOD()
@@ -26,7 +22,6 @@
           vm.pod = result.data
           vm.poi = vm.pod[0]
           vm.pos = vm.pod[1]
-          console.log("poi, pos", vm.poi, vm.pos)
         }
       })
       .then(()=>{
@@ -34,10 +29,6 @@
       })
       .then(result=>{
         if(result) vm.TTL = result.data
-
-        console.log("seconds left", result.data)
-        console.log("Pod details", vm.pod, vm.TTL);
-
         $interval(()=>{
           if(vm.TTL>0){
             vm.TTL--;
@@ -56,8 +47,6 @@
       .catch(err=>console.log(err));
 
     };
-
     vm.poiInit()
-    
   }
 })();

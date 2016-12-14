@@ -18,8 +18,14 @@
     vm.cache;
     vm.guardianNews;
     vm.nytimesNews;
-    // vm.tweets;
 
+    /**
+     * use $scope.tabs to manage nested views
+     * setting active to true makes it the view that renders when the parent view is loaded
+     * use the route to pass in the state as defined in app.js
+     * note that the nested state needs to be an extension of the parent state
+     * i.e. the nested reviews state is denoted by poi.reviews
+     */ 
     $scope.tabs = [{
       heading: 'Reviews',
       route:'poi.reviews',
@@ -43,8 +49,10 @@
       active: false
     }]
 
+    /**
+     * set the active based on which tab has been clicked on 
+     */ 
     $scope.$on('$stateChangeSuccess', function(event) {
-      // console.log('Here is the event on state change', event);
       $scope.tabs.forEach(function(tab) {
         tab.active = $state.is(tab.route);
       });
@@ -58,6 +66,9 @@
       'poi.data'
     ];
 
+    /**
+     * set default nested view to poi reviews
+     */ 
     if (validStates.indexOf($state.current.name) === -1) {
       $state.go('poi.reviews');
     }
@@ -136,10 +147,13 @@
 
     let searchquery = vm.poiName.replace(/\s+/g, '');
 
+    /**
+     * guardian and nytimes require "" around the search term 
+     * to retrieve articles with that specific search term
+     */ 
     poiService
       .getGuardianNews('"' + vm.poiName + '"')
       .then(function(newsArticles) {
-        console.log('We have retrieved the news', newsArticles.response);
         vm.guardianNews = newsArticles.response.results;
       })
       .catch(function(error) {
@@ -149,21 +163,19 @@
     poiService
       .getNytimesNews('"' + vm.poiName + '"')
       .then(function(newsArticles) {
-        console.log('We have retrieved the news', newsArticles.response.docs);
         vm.nytimesNews = newsArticles.response.docs;
       })
       .catch(function(error) {
         throw error;
       });
     
-    // poiService
-    //   .getTweets('#' + searchquery)
-    //   .then(function(tweets) {
-    //     console.log('Here are the retrieved tweets', tweets);
-    //     vm.tweets = tweets.statuses;
-    //   })
-    //   .catch(function(error) {
-    //     throw error;
-    //   });
+    poiService
+      .getTweets('#' + searchquery)
+      .then(function(tweets) {
+        vm.tweets = tweets.statuses;
+      })
+      .catch(function(error) {
+        throw error;
+      });
   }
 })();

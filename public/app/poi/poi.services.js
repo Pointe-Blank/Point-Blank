@@ -14,12 +14,11 @@
         url: '/api/review',
         data: poireview
       })
-      .then(function (results) {
+      .then(function(results) {
         return results;
       })
-      .catch(err=>{
-        console.log('error data:',err.data)
-        console.log('attemped post:',poireview)
+      .catch(function(err) {
+        throw error;
       });
     };
 
@@ -29,7 +28,6 @@
         url: '/api/cache/all'
       })
       .then(function(returnedCache) {
-        console.log('Here is the returnedCache', returnedCache);
         return returnedCache.data;
       })
       .catch(function(error) {
@@ -69,28 +67,28 @@
       });
     };
 
-    // const getTweets = function(poiName) {
-    //   return $http({
-    //     method: 'GET',
-    //     url: '/newsfeed/twitter/:querystring',
-    //     params: {
-    //       querystring: poiName
-    //     }
-    //   })
-    //   .then(function(retrievedTweets) {
-    //     return retrievedTweets.data;
-    //   })
-    //   .catch(function(error) {
-    //     throw error;
-    //   });
-    // };
+    const getTweets = function(poiName) {
+      return $http({
+        method: 'GET',
+        url: '/newsfeed/twitter/:querystring',
+        params: {
+          querystring: poiName
+        }
+      })
+      .then(function(retrievedTweets) {
+        return retrievedTweets.data;
+      })
+      .catch(function(error) {
+        throw error;
+      });
+    };
 
     return {
       addReviewPoiData: addReviewPoiData,
       getCache: getCache,
       getGuardianNews: getGuardianNews,
-      getNytimesNews: getNytimesNews
-      // getTweets: getTweets
+      getNytimesNews: getNytimesNews,
+      getTweets: getTweets
     };
   }
 })();
