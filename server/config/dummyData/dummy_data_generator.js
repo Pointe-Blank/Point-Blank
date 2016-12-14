@@ -1,4 +1,17 @@
+/**
+ * A function to generate user and review dummy data for the database.
+ * Outputs a string of .sql commands
+ * 
+ * DO NOT attempt to copy this script directly into your console. Instead,
+ * load the dummyData.html file from this directory into your browser and 
+ * it will run the script for you.
+ * 
+ * After running the script, copy the output into userReviewDummyData.sql
+ * and follow the directions from that file.
+ */
+
 var generateSqlString = () => {
+  /** large array of names to randomly pull from */
   var firstNames = ['Aaron',
     'Aaron',
     'Abbey',
@@ -6497,38 +6510,74 @@ var generateSqlString = () => {
     'Zimmerman'
   ];
 
+  /** set poiLength to the number of pois in the database */
   var pois = [];
-  for (var i = 1; i < 18; i++){
+  var poiLength = []
+  /** 
+   * iteration starts at 1 rather than 0 because the sql
+   * database entries for the pois begin indexing at 1
+   */
+  for (var i = 1; i < poiLength; i++){
     pois.push({
       id: i,
+      /** 
+       * genScore is the weighting. numRevs and sumRevs
+       * are for calculating the average rating.
+       */
       genScore: Math.random()*100,
       numRevs: 0,
       sumRevs: 0
     })
   }
 
+  /** 
+   * If you wish to clear the database of old data,
+   * uncomment the DELETE and ALTER lines.
+   */
   var sqlString = "\n"+
-                  "USE pointblank;\n"+
-                  "DELETE FROM review;\n"+
-                  "ALTER TABLE review AUTO_INCREMENT = 1;\n"+
-                  "DELETE FROM user;\n"
-                  "ALTER TABLE user AUTO_INCREMENT = 1;\n"
-                  
-  var users = 51;                
+                  "USE pointblank;\n"
+                  // +"DELETE FROM review;\n"+
+                  // +"ALTER TABLE review AUTO_INCREMENT = 1;\n"
+                  // +"DELETE FROM user;\n"
+                  // "ALTER TABLE user AUTO_INCREMENT = 1;\n"
+
+  /** Each user will create one rating for each POI. Therefore, the
+   * total number of entries created will be 'users' x 'poiLength'.
+   * 
+   * Anything more than a few hundred may take significant time to run,
+   * both when generating the string and when loading into mySql.
+   */                
+  var users = 101;                
   for (var i=1; i < users; i++) {
-    if ((users/i)%10 === 0) {
+    /** 
+     * the first two 'if' blocks throw periodic changes to randomly
+     * selected pois' genScores, in order to represent how the public's
+     * opinion may change over time.
+     */
+    if (i%10 === 0) {
       var affectedPoi = pois[Math.floor(Math.random(pois.length))];
+      if (affectedPoi.id === 5 || affectedPoi.id === 6) {
+        affectedPoi = pois[Math.floor(Math.random(pois.length))];
+      }
       var affectAmount = 0.25 + Math.random()*0.5;
       affectedPoi.genScore *= affectAmount;
-    }
-    if (((users+i)/3)%7 === 0) {
-      var affectedPoi = pois[Math.floor(Math.random(pois.length))];
-      var affectAmount = 1 + Math.random();
-      affectedPoi.genScore *= affectAmount;
-      if (affectedPoi.genScore > 100) {
-        affectedPoi.genScore = 100 - Math.random()*20;
+      affectedPoi.sumRevs *= affectAmount;
+      if (affectedPoi.sumRevs / affectedPoi.numRevs < 10) {
+        affectedPoi.sumRevs *= (1/(affectAmount))
       }
     }
+    if (i%7 === 0) {
+      var affectedPoi = pois[Math.floor(Math.random(pois.length))];
+      var affectAmount = 1.25 + Math.random();
+      affectedPoi.genScore *= affectAmount;
+      affectedPoi.sumRevs *= affectAmount;
+      if (affectedPoi.sumRevs / affectedPoi.numRevs > 90) {
+        affectedPoi.sumRevs *= (1/(2*affectAmount))
+      }
+    }
+    /** 
+     * randomly select a name and create a user for that name 
+     */ 
     var name = firstNames[
       Math.floor(Math.random()*firstNames.length)
     ] +" "+ lastNames[
@@ -6538,15 +6587,26 @@ var generateSqlString = () => {
                      "(`name`,`createdAt`, `updatedAt`) \n"+
                      "VALUES('"+name+"', NOW(), NOW()); \n";
     sqlString += userString;
+    /** 
+     * a user's 'haterscore' represents hom likely they are to
+     * like/dislike a poi.
+     */
     var haterScore = 1 / ((100 % name.length)+1);
+    /**
+     * calculate the rating for each POI, based on teh poi's genscore,
+     * the user's haterscore, and a degree of randomness
+     */
     pois.forEach((poi, ind) => {
       if (i % 3*(ind+1)-1 === 0) var review = ind;
       else if (i % ind === 13) var review = 13;
-      else var review = Math.floor(100 - ((Math.random() + 3*haterScore)/2) * poi.genScore);
+      else var review = Math.floor(poi.genScore*(haterScore+Math.random()));
       if (review > 100) review = 100;
       if (review < 0) review = 2;
       poi.numRevs++;
       poi.sumRevs+=review;
+      /** 
+       * add the review to the sql command string 
+       */
       var revString = "INSERT into `review` "+
                       "(`rating`,`reviewer_name`,`NumUserRevs`,"+
                       "`SumUserRevs`,`createdAt`,`updatedAt`,"+
@@ -6559,3 +6619,8 @@ var generateSqlString = () => {
   }
   return(sqlString)
 }
+/**
+ * append the output to the DOM
+ */
+var dummyData = document.getElementById('dummy-data');
+dummyData.innerHTML = generateSqlString();

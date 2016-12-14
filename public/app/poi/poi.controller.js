@@ -44,10 +44,10 @@
     }]
 
     $scope.$on('$stateChangeSuccess', function(event) {
-      console.log('Here is the event on state change', event);
-      // $scope.tabs.forEach(function(tab) {
-      //   tab.active = $state.is(tab.route);
-      // });
+      // console.log('Here is the event on state change', event);
+      $scope.tabs.forEach(function(tab) {
+        tab.active = $state.is(tab.route);
+      });
     });
 
     let validStates = [

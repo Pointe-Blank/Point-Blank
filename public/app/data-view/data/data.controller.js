@@ -9,22 +9,33 @@
 
   function DataController ($scope, $rootScope, $state, $timeout) {
     const vm = this;
-    let poiChart;
+    vm.parent = $scope.$parent.vm;
+    /**
+     * set up arrays to be used as columns in the C3 chart. The first index of
+     * the arrays must be the column name. The data will then be pushed in to
+     * the following indices.
+     */
     let ratingsLine=['ratings'];
     let averageLine=['average'];
     let reviewers=['reviewer'];
     let dates=['dates'];
-    vm.ids=['ids'];
-    
-    vm.parent = $scope.$parent.vm;
+    let ids=['ids'];
+    /** an empty variable that the chart will be placed into */
+    let poiChart;
 
-    console.log('cacheRecieved:',vm.parent.cacheRecieved)
+    /**
+     * If the data from the cache has been recieved, draw the chart. Otherwise,
+     * fetch the cache then draw the chart
+     */
     vm.parent.cacheRecieved ? poiChart = drawPoiChart() : 
-      $timeout(() => {
-        poiChart = drawPoiChart();
-        console.log('redrawing chart')
-      }, 100)
-
+      vm.parent.init().then(() => {
+        console.log("cache recieved")
+        drawPoiChart()
+      });
+    
+    /**
+     * 
+     */
     $scope.$on('reviewPosted', () => {
       console.log('review posted!')
       vm.parent.reviews.push(vm.parent.reviews.shift())
@@ -51,7 +62,7 @@
         ratingsLine.push(review.rating);
         averageLine.push(Math.round(review.SumUserRevs / review.NumUserRevs * 100)/100);
         reviewers.push(review.reviewer_name);
-        vm.ids.push(review.UserId);
+        ids.push(review.UserId);
         dates.push(
           review.createdAt
           .split('Z')[0]
@@ -81,12 +92,12 @@
           onmouseout: () => {
             vm.thisReview = vm.parent.genRating;
             vm.thisReviewer = "average rating";
-            vm.thisRevTime = null;
+            vm.thisRevTime = "";
             $scope.$apply();
           },
           onclick: data => {
             $state.go('profile', {
-              id:vm.ids[data.index+1]
+              id:ids[data.index+1]
             });
           }
         },

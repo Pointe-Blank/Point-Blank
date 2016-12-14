@@ -4,6 +4,9 @@ angular
 
   let  userProfile = JSON.parse(localStorage.getItem('profile')) || null;
 
+  /**
+   * 'lock' is the auth0 modal that will appear on screen for login.
+   */
   function login() {
     lock.show();
   }
@@ -13,33 +16,42 @@ angular
     localStorage.removeItem('profile');
     authManager.unauthenticate();
     userProfile = null;
-    console.log('logout')
   }
 
+  /**
+   * The profile sent back from auth0 must be connected to the user's
+   * profile in our database
+   */
   function connectProfile(profile){
     $http.post('/api/users/login', {
       token: profile.user_id
     })
     .then((user) => {
-      console.log('sent back from user db:', user)
+      /**
+       * If the user exists, in our database, log him/her in.
+       */
       if(user.data[0]) {
         userProfile = user.data[0];
-        console.log('found user profile:',userProfile)
         $rootScope.id = userProfile.id;
         $rootScope.name = userProfile.name;
+      /**
+       * Otherwise, create an entry for the user in the database
+       * by sending a POST request to the users/register route.
+       */
       } else {
         $http.post('/api/users/register', {
           name: profile.name,
           token: profile.user_id,
           facebookId: profile.identities[0].user_id        
         })
-        .then((user) => {
+        .then(user => {
           userProfile = user.data;
-          console.log('created user profile:',userProfile)
           $rootScope.id = userProfile.id;
           $rootScope.name = userProfile.name;
         })
-        .catch((err) => console.log('!!'+err));              
+        .catch(error => {
+          throw error;
+        });              
       };
     });
   }
@@ -52,10 +64,9 @@ angular
       authManager.authenticate();
 
       lock.getProfile(authResult.idToken, function(error, profile) {
-        if (error) console.log(error);
+        if (error) throw error;
         localStorage.setItem('profile', JSON.stringify(profile));
         $rootScope.$broadcast('userProfileSet', profile);
-        console.log('auth0 profile:',profile)
         connectProfile(profile);
       });
     });
