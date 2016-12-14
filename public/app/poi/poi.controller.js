@@ -44,10 +44,10 @@
     }]
 
     $scope.$on('$stateChangeSuccess', function(event) {
-      console.log('Here is the event on state change', event);
-      // $scope.tabs.forEach(function(tab) {
-      //   tab.active = $state.is(tab.route);
-      // });
+      // console.log('Here is the event on state change', event);
+      $scope.tabs.forEach(function(tab) {
+        tab.active = $state.is(tab.route);
+      });
     });
 
     let validStates = [
@@ -62,6 +62,11 @@
       $state.go('poi.reviews');
     }
 
+    /**
+     * the poi.data child-module checks if the cache has been
+     * recieved on this parent module. Initially set cacheRecieved
+     * false, then set it to true after recieving cache.
+     */
     vm.cacheRecieved = false;
     vm.init = function () {
       let deferred = $q.defer()
@@ -73,6 +78,12 @@
               return person.name === vm.poiName;
             })[0];
             vm.reviews = vm.poi.Reviews;
+            /**
+             * The poi's average rating is not stored on teh poi model.
+             * Instead, running sums are stored on each review instance.
+             * The average is calculated from these sums on the most recent
+             * review. 
+             */
             vm.lastRev = vm.reviews[vm.reviews.length - 1];
             vm.genRating = vm.lastRev ?
               Math.round(vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs * 100)/100 :
@@ -96,17 +107,28 @@
         review_content: vm.review_content,
         rating: vm.reviewRating
       };
+      /**
+       * NumUserRevs and SumUser are used to calculate average ratings. They
+       * must increment with each successive rating.
+       */
       if (vm.lastRev) {
         poireview.NumUserRevs = vm.lastRev.NumUserRevs +1;
         poireview.SumUserRevs = vm.lastRev.SumUserRevs + vm.reviewRating;
       } else {
         poireview.NumUserRevs = 1;
         poireview.SumUserRevs = poireview.rating;
-      }
-      poireview.createdAt = new Date().toISOString()
+      };
+      poireview.createdAt = new Date().toISOString();
+      /**
+       * place the review at the head of the reviews array so that it appears in
+       * the proper place in the review feed. 
+       * 
+       * There is a known bug where this sometimes causes a review's data to apear at the
+       * wrong end of the chart. It would probably be best to push rather than unshift,
+       * both in terms of addressing this bug and decreasing time complexity.
+       */
       vm.reviews.unshift(poireview);
-      $rootScope.$broadcast('reviewPosted')
-      console.log('creating review:',poireview)
+      $rootScope.$broadcast('reviewPosted');
       poiService.addReviewPoiData(poireview);
       vm.lastRev = poireview;
       vm.genRating = Math.round(vm.lastRev.SumUserRevs / vm.lastRev.NumUserRevs * 100)/100

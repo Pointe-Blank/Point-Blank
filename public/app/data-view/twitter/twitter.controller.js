@@ -11,7 +11,7 @@
     const vm = this;
     vm.parent = $scope.$parent.vm;
     vm.tweets;
-    this.generateTimeline = function(tweetId) {
+    vm.generateTimeline = function(tweetId) {
       console.log('In the generateTimeline function in twitter controller');
       twttr.ready(
         function(twttr) {
@@ -27,7 +27,7 @@
       );
     };
 
-    this.getTweets = function(poiName) {
+    vm.getTweets = function(poiName) {
       return $http({
         method: 'GET',
         url: '/newsfeed/twitter/:querystring',
@@ -43,7 +43,7 @@
       });
     };
 
-    this.getTweets(vm.parent.poiName)
+    vm.getTweets(vm.parent.poiName)
       .then(function(returnedTweets) {
         console.log('Returning tweets', returnedTweets);
         vm.tweets = returnedTweets.statuses;

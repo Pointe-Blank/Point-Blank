@@ -182,7 +182,7 @@ ul.tab {
 /* Float the list items side by side */
 ul.tab li {
   float: left;
-  margin-left: 102px;
+  /*margin-left: 102px;*/
 }
 
 /* Style the links inside the list items */
@@ -201,4 +201,8 @@ ul.tab li a:hover {background-color: #ddd;}
 
 #inner {
   margin-left: 155px;
+}
+
+.chartdiv {
+  height: 450px; 
 }

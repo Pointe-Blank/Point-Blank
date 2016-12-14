@@ -9,49 +9,73 @@
 
   function DataController ($scope, $rootScope, $state, $timeout) {
     const vm = this;
-    let poiChart;
+    vm.parent = $scope.$parent.vm;
+    /**
+     * set up arrays to be used as columns in the C3 chart. The first index of
+     * the arrays must be the column name. The data will then be pushed in to
+     * the following indices.
+     */
     let ratingsLine=['ratings'];
     let averageLine=['average'];
     let reviewers=['reviewer'];
     let dates=['dates'];
-    vm.ids=['ids'];
-    
-    vm.parent = $scope.$parent.vm;
+    let ids=['ids'];
+    /** an empty variable that the chart will be placed into */
+    let poiChart;
 
-    console.log('cacheRecieved:',vm.parent.cacheRecieved)
+    /**
+     * If the data from the cache has been recieved, draw the chart. Otherwise,
+     * fetch the cache then draw the chart
+     */
     vm.parent.cacheRecieved ? poiChart = drawPoiChart() : 
-      $timeout(() => {
-        poiChart = drawPoiChart();
-        console.log('redrawing chart')
-      }, 100)
-
+      vm.parent.init().then(() => {
+        drawPoiChart();
+      });
+    
+    /**
+     * Event listener that will detect when a new review has been posted in
+     * order to update the graph with the new datapoint.
+     */
     $scope.$on('reviewPosted', () => {
-      console.log('review posted!')
-      vm.parent.reviews.push(vm.parent.reviews.shift())
-      let newRev = vm.parent.reviews[vm.parent.reviews.length-1]
-      ratingsLine.push(newRev.rating),
-      averageLine.push(Math.round(newRev.SumUserRevs / newRev.NumUserRevs * 100)/100),
-      reviewers.push(newRev.reviewer_name),
-      dates.push(newRev.createdAt)
+      /**
+       * The review controller shifts the new review to the head of the reviews
+       * array so that it will show at the top of the review feed. To get the data
+       * to appear at the correct end of the graph, we must unshift and push it to
+       * the tail. We can then push it's information into the ratings and average 
+       * lines.
+       */
+      vm.parent.reviews.push(vm.parent.reviews.shift());
+      let newRev = vm.parent.reviews[vm.parent.reviews.length-1];
+      ratingsLine.push(newRev.rating);
+      averageLine.push(Math.round(newRev.SumUserRevs / newRev.NumUserRevs * 100)/100);
+      reviewers.push(newRev.reviewer_name);
+      dates.push(newRev.createdAt);
       poiChart.load({
         columns: [
           ratingsLine,
           averageLine,
           reviewers,
           dates
-        ],
-      })
-    })
+        ]
+      });
+    });
 
     function drawPoiChart() {
+      /** 
+       * Set the defaults for information that appears at bottom of graph.
+       * These values will be adjusted when the user mouses over datapoints
+       * on the graph.
+       */
       vm.thisReview = vm.parent.genRating;
       vm.thisReviewer = "average rating";
       vm.thisRevTime = null;
+      /** Pull data from the reviews array so that we can use it in the graph */
       vm.parent.reviews.forEach(review => {
         ratingsLine.push(review.rating);
         averageLine.push(Math.round(review.SumUserRevs / review.NumUserRevs * 100)/100);
         reviewers.push(review.reviewer_name);
-        vm.ids.push(review.UserId);
+        ids.push(review.UserId);
+        /** make the dates look pretty */
         dates.push(
           review.createdAt
           .split('Z')[0]
@@ -59,6 +83,7 @@
           .split('.')[0]
           .replace(' ', ' at '));
       })
+      /** generate the chart */
       let chart = c3.generate({
         bindto: '#poiChart',
         data: {
@@ -74,6 +99,10 @@
           },
           onmouseover: data => {
             vm.thisReview = data.value;
+            /**
+             * indices must be incremented to account for the column
+             * name placed at index 0
+             */
             vm.thisReviewer = "rated by: " + reviewers[data.index+1];
             vm.thisRevTime = "on: " + dates[data.index+1];
             $scope.$apply();
@@ -81,12 +110,12 @@
           onmouseout: () => {
             vm.thisReview = vm.parent.genRating;
             vm.thisReviewer = "average rating";
-            vm.thisRevTime = null;
+            vm.thisRevTime = "";
             $scope.$apply();
           },
           onclick: data => {
             $state.go('profile', {
-              id:vm.ids[data.index+1]
+              id:ids[data.index+1]
             });
           }
         },

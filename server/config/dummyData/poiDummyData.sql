@@ -8,19 +8,11 @@
 USE pointblank;
 
 DELETE FROM poi;
-DELETE FROM review;
-DELETE FROM user;
+ALTER TABLE poi AUTO_INCREMENT = 1
 
 -- INSERT into `review` (`review_type`, `review_content`, `rating`, `reviewer_name`, `NumUserRevs`, `SumUserRevs`, `createdAt`, `updatedAt`, `POIId`,`UserId`)
 -- VALUES ('','','','','','',NOW(),NOW(),'','')
 
-INSERT INTO `user` (`name`,`createdAt`, `updatedAt`) VALUES('Khoa', NOW(), NOW());
-INSERT INTO `user` (`name`,`createdAt`, `updatedAt`) VALUES('Nate', NOW(), NOW());
-INSERT INTO `user` (`name`,`createdAt`, `updatedAt`) VALUES('Kevin', NOW(), NOW());
-INSERT INTO `user` (`name`,`createdAt`, `updatedAt`) VALUES('Bruce', NOW(), NOW());
-INSERT INTO `user` (`name`,`createdAt`, `updatedAt`) VALUES('Mark', NOW(), NOW());
-INSERT INTO `user` (`name`,`createdAt`, `updatedAt`) VALUES('JongSu', NOW(), NOW());
-INSERT INTO `user` (`name`,`createdAt`, `updatedAt`) VALUES('Jose', NOW(), NOW());
 
 
 INSERT into `poi` (`createdAt`, `updatedAt`,`name`,`summary`,`profile_image_url`,`general_rating`) VALUES(NOW(), NOW(),
