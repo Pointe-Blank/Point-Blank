@@ -1,6 +1,5 @@
-// Users schema/model.
-// const Sequelize = require('sequelize');
-// const dbConnection = require('../../config/db.config.js');
+
+
 const models = require('../../config/db.config.js');
 
 module.exports = (sequelize, DataTypes) => {

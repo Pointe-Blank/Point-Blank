@@ -46,6 +46,7 @@ exports.addOnePOI = function (req, res) {
   })
   .then(function (poi) {
     res.status(201).json(poi);
+    // reinit the cache since a new POI was created
     return redHelpers.initAll();
   })
   .then(result=>{
@@ -53,5 +54,6 @@ exports.addOnePOI = function (req, res) {
   })
   .catch(function (err) {
     res.status(400).send(err);
+    throw err;
   });
 };
