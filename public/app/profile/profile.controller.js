@@ -9,19 +9,32 @@
 
   function ProfileController ($location, $state, $scope, profileService) {
     let vm = this;
+    /**
+     * set up arrays to be used as columns in the C3 chart. The first index of
+     * the arrays must be the column name. The data will then be pushed in to
+     * the following indices.
+     */
     vm.ratings = ['rating'];
     vm.ratedPois = ['POI'];
     vm.poiIds = ['POI ID'];
     vm.dates = ['date'];
+    /** for calculating the average rating that a user gives */
     vm.numRevs = 0;
     vm.sumRevs = 0;
+    /** 
+     * Set the defaults for information that appears at bottom of graph.
+     * These values will be adjusted when the user mouses over datapoints
+     * on the graph.
+     */
     vm.thisPoi = null;
     vm.thisReview = null;
     vm.thisRevTime = null;
     
     profileService.getCache()
       .then((result) => {
+        /** cache returns [[users], [reviews], [pois]] */
         vm.pois = result[2]
+        /** isolate the desired user's profile from the array */
         vm.profile = result[0].filter(profile => {
           return profile.id === +$state.params.id
         })[0];

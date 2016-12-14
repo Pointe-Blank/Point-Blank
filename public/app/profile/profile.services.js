@@ -8,6 +8,9 @@
 
   function profileService ($http) {
 
+    /**
+     * pull user information from the cache
+     */
     const getCache = function() {
       return $http({
         method: 'GET',
