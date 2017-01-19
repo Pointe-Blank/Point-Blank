@@ -1,47 +1,54 @@
-<div class="jumbotron">
- <h1 id="font" class="text-center">Daily Spotlight</h1>
- <hr>
-  <div class="container">
-<div class="row">
-        <div class="col-md-6">
-        <h1 id="font" class="text-center">POI</h1>
-      </div>
-              <div class="col-md-6">
-        <h1 id="font" class="text-center">POS</h1>
-      </div>
-</div>
 
-    <div class="row">
+<div class="container-fluid text-center">
+    <div class="jumbotron">
+      <h1 id="font" class="text-center">Daily Spotlight</h1>
+      <h6 class="timer">{{vm.hours}} hrs | {{vm.minutes}} mins | {{vm.seconds}} secs</h6>
+      <hr>
+    </div>
+    <div class="row content">
 
-      <div class="col-md-6">
-        <div class="thumbnail">
-          <a ng-href="/#/poi/{{vm.poiName}}">
-            <img src="/assets/images/halo.png" class="img-responsive"/>
-            <img ng-src="{{vm.poiImage}}" class="thumbnail img-responsive customPicture"/>
+      <div class="col-sm-5">
+          <div class="podTitle">
+            <h1 id="font" class="text-center">POI</h1>
+            <img ng-src="http://24.media.tumblr.com/8210fd413c5ce209678ef82d65731443/tumblr_mjphnqLpNy1s5jjtzo1_400.gif" class="gif"/>
+          </div>
+
+          <div ng-click="vm.goPoi(vm.poi.name)">
+            <!--<img src="/assets/images/halo.png" class="thumbnail img-responsive"/>-->
+            <img ng-src="{{vm.poi.profile_image_url}}" class="thumbnail test img-responsive customPicture"/>
             <div class="caption">
-              <h2 id="font" class="text-center">{{vm.poiName}}</h2>
-              <p id="font2" >{{vm.poiSummary}}</p>
+              <h2 id="font" class="text-center">{{vm.poi.name}}</h2>
+              <h5 id="font2" >{{vm.poi.summary}}</h5>
             </div>
-          </a>
-        </div>
+          </div>  
+      
       </div>
 
-      <div class="col-md-6">
-        <div class="thumbnail">
-          <a ng-href="/#/poi/{{vm.posName}}">
-            <img src="/assets/images/poop.png" class="img-responsive" width="159"/>
+      <div class="vsPng col-sm-2">
+        <img src="http://static9.comicvine.com/uploads/original/11129/111299281/5446598-1945215193-52705.png"/>
+      </div>
 
-              <img ng-src="{{vm.posImage}}" class="thumbnail img-responsive customPicture"/>
-
+      <div class="col-sm-5">
+          <div class="podTitle">
+            <h1 id="font" class="text-center">POS</h1>
+            <img ng-src="https://media.giphy.com/media/s3y2GKa8PcGFq/giphy.gif" class="gif"/>
+          </div>
+          
+          <div ng-click="vm.goPoi(vm.pos.name)">
+            <img ng-src="{{vm.pos.profile_image_url}}" class="thumbnail img-responsive customPicture"/>
             <div class="caption">
-              <h2 id="font" class="text-center">{{vm.posName}}</h2>
-              <p id="font2" >{{vm.posSummary}}</p>
+              <h2 id="font" class="text-center">{{vm.pos.name}}</h2>
+              <h5 id="font2" >{{vm.pos.summary}}</h5>
             </div>
-          </a>
-        </div>
+          </div>
       </div>
 
     </div>
 
-  </div>
+
+    
+    <footer class="container-fluid text-center">
+      <p>POWERED BY NAH</p>
+    </footer>
+
 </div>

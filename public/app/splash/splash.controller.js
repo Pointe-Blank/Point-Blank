@@ -5,44 +5,48 @@
     .module('point-blank.splash')
     .controller('splash-controller', SplashController);
 
-  SplashController.$inject = ['splashService', '$location'];
+  SplashController.$inject = ['splashService', '$location', '$state','$timeout','$interval'];
 
-  function SplashController (splashService) {
+  function SplashController (splashService, $location, $state, $timeout, $interval, $stateParams) {
     var vm = this;
-    vm.poiName = '';
-    vm.poiImage = '';
-    vm.poiSummary = '';
-    vm.posName = '';
-    vm.posImage = '';
-    vm.posSummary = '';
-
-    let poiInit = function () {
-      splashService.getPOIList()
-        .then(function (response) {
-          let goodPeople = [];
-          let badPeople = [];
-
-          response.data.forEach(function (person) {
-            if (person.general_rating < 50) {
-              badPeople.push(person);
-            } else {
-              goodPeople.push(person);
-            }
-          });
-
-          let randomPOI = goodPeople[Math.floor(Math.random() * goodPeople.length)];
-          let randomPOS = badPeople[Math.floor(Math.random() * badPeople.length)];
-
-          vm.poiName = randomPOI.name;
-          vm.poiImage = randomPOI.profile_image_url;
-          vm.poiSummary = randomPOI.summary;
-
-          vm.posName = randomPOS.name;
-          vm.posImage = randomPOS.profile_image_url;
-          vm.posSummary = randomPOS.summary;
-        });
+    vm.goPoi = function (input) {
+      $state.go('poi', {
+        name: input
+      });
     };
+    vm.poiInit = function () {
 
-    poiInit();
+      return splashService.getPOD()
+      .then(result=>{
+        if(result){
+          vm.pod = result.data
+          vm.poi = vm.pod[0]
+          vm.pos = vm.pod[1]
+        }
+      })
+      .then(()=>{
+        return splashService.getPODstats()
+      })
+      .then(result=>{
+        if(result) vm.TTL = result.data
+        $interval(()=>{
+          if(vm.TTL>0){
+            vm.TTL--;
+            vm.hours = Math.floor(vm.TTL / 3600);
+            let diff = (vm.TTL/ 3600)-vm.hours;
+            vm.minutes = Math.floor(diff * 60);
+            vm.seconds = Math.floor(((diff * 60)%1)*60);
+          }else{
+            let current = $state.current;
+            let params = angular.copy($stateParams);
+            $state.transitionTo(current, params, { reload: true, inherit: true, notify: true });
+          }
+        }, 1000)
+
+      })
+      .catch(err=>console.log(err));
+
+    };
+    vm.poiInit()
   }
 })();

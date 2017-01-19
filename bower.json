@@ -1,0 +1,36 @@
+{
+  "name": "point-blank",
+  "description": "Point Blank is a platform that bluntly reflects how the general populace feels about public figures.",
+  "main": "app.js",
+  "license": "Apache-2.0",
+  "keywords": [
+    "sequelize",
+    "express",
+    "angular",
+    "node",
+    "postgresql",
+    "crowdsource"
+  ],
+  "homepage": "https://github.com/hartbeatnt/Point-Blank",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "^0.3.2",
+    "angular-jwt": "^0.1.8",
+    "angular-lock": "^1.0.5",
+    "angular": "^1.6.0",
+    "auth0-lock": "^10.7.2",
+    "d3": "^3.5.17",
+    "c3": "^0.4.11",
+    "angular-timer": "^1.3.4"
+  },
+  "resolutions": {
+    "d3": "^4.4.0"
+  }
+}

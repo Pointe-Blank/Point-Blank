@@ -2,15 +2,16 @@
   'use strict';
 
   angular
-        .module('point-blank')
-        .controller('auth-controller', AuthController);
+    .module('point-blank')
+    .controller('auth-controller', AuthController);
 
-  AuthController.$inject = ['$rootScope'];
+  AuthController.$inject = ['$rootScope', '$state', '$stateParams'];
 
-  function AuthController (authFactory) {
-    const vm = this;
-    vm.logIn = function () {
-      authFactory.isLoggedIn = true;
-    };
+  function AuthController(authService) {
+
+    var vm = this;
+
+    vm.authService = authService;
+
   }
 })();

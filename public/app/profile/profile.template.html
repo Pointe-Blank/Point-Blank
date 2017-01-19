@@ -1,0 +1,16 @@
+<div ng-cloak>
+  <h3>{{vm.profile.name}}'s user profile</h3>
+  Average review: {{vm.averageRating}}</p>
+  <div class="col-md-8">
+    <div id="userChart"></div>
+  </div>
+  <div class="col-md-3">
+    <img src={{vm.thisPoi.profile_image_url}} 
+      style="height:300px; width:auto">
+  </div>
+  <div class="col-md-7" ng-show='vm.thisPoi'>
+    {{vm.thisPoi.name}}</br>
+    rated {{vm.thisReview}}</br>
+    on {{vm.thisRevTime}}
+  </div>
+</div>

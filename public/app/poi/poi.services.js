@@ -1,38 +1,94 @@
 (function () {
   'use strict';
   angular
-    .module('point-blank.search')
+    .module('point-blank.poi')
     .factory('poiService', poiService);
 
   poiService.$inject = ['$http'];
 
   function poiService ($http) {
+    
     var addReviewPoiData = function (poireview) {
       return $http({
         method: 'POST',
         url: '/api/review',
         data: poireview
       })
-      .then(function (results) {
+      .then(function(results) {
         return results;
+      })
+      .catch(function(err) {
+        throw error;
       });
     };
 
-    var grabSinglePoiData = function (poiInfo) {
+    const getCache = function() {
       return $http({
         method: 'GET',
-        url: '/api/poi/' + poiInfo,
-        headers: {'Content-Type': 'application/json'},
-        data: {'name': 'poiInfo'}
+        url: '/api/cache/all'
       })
-      .then(function (results) {
-        return results.data;
+      .then(function(returnedCache) {
+        return returnedCache.data;
+      })
+      .catch(function(error) {
+        throw error;
+      })
+    };
+
+    const getGuardianNews = function(poiName) {
+      return $http({
+        method: 'GET',
+        url: '/newsfeed/guardian/:querystring',
+        params: {
+          querystring: poiName
+        }
+      })
+      .then(function(retrievedNews) {
+        return retrievedNews.data;
+      })
+      .catch(function(error) {
+        throw error;
+      });
+    };
+
+    const getNytimesNews = function(poiName) {
+      return $http({
+        method: 'GET',
+        url: '/newsfeed/nytimes/:querystring',
+        params: {
+          querystring: poiName
+        }
+      })
+      .then(function(retrievedNews) {
+        return retrievedNews.data;
+      })
+      .catch(function(error) {
+        throw error;
+      });
+    };
+
+    const getTweets = function(poiName) {
+      return $http({
+        method: 'GET',
+        url: '/newsfeed/twitter/:querystring',
+        params: {
+          querystring: poiName
+        }
+      })
+      .then(function(retrievedTweets) {
+        return retrievedTweets.data;
+      })
+      .catch(function(error) {
+        throw error;
       });
     };
 
     return {
       addReviewPoiData: addReviewPoiData,
-      grabSinglePoiData: grabSinglePoiData
+      getCache: getCache,
+      getGuardianNews: getGuardianNews,
+      getNytimesNews: getNytimesNews,
+      getTweets: getTweets
     };
   }
 })();

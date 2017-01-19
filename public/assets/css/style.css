@@ -1,6 +1,35 @@
 .photoBox {
     border: 2px solid #DCDCDC;
 }
+.podTitle{
+  display: inline-block
+}
+.gif{
+  max-height: 100px;
+  max-width: 100px;
+}
+.vsPng img{
+  margin-top: 300px;
+  max-height: 200px;
+  max-width: 200px;
+}
+
+footer{
+  margin-top: 300px
+}
+
+.timer{
+  text-align: center;
+}
+.thumbnail{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+}
+img{
+  margin: auto
+}
 
 #photo {
     padding-left: 100px;
@@ -39,6 +68,11 @@
   margin: 0 auto;
 }
 
+#poiChart {
+  width:100%;
+  object-fit:contain;
+}
+
 #portrait {
   height: 500px;
   width: 315px;
@@ -51,7 +85,7 @@
 
 .customPicture {
   width: auto;
-  height: 350px !important;
+  max-height: 325px !important;
 }
 
 .margin-right {
@@ -133,4 +167,42 @@
 
 #font2 {
   font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Style the list */
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Float the list items side by side */
+ul.tab li {
+  float: left;
+  /*margin-left: 102px;*/
+}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {background-color: #ddd;}
+
+#inner {
+  margin-left: 155px;
+}
+
+.chartdiv {
+  height: 450px; 
 }

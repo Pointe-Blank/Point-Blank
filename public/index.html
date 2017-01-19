@@ -3,7 +3,7 @@
   <head>
     <title>Point Blank</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Voltaire" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
@@ -30,12 +30,19 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.blue_grey-blue.min.css" />
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
+    <!--Charts-->
+    <link href="/lib/c3/c3.min.css" rel="stylesheet" type="text/css">
+    <script src="/lib/d3/d3.js" charset="utf-8"></script>
+    <script src="/lib/c3/c3.js"></script>
+
     <!-- Angular Dependencies-->
-    <script src="node_modules/angular/angular.js"></script>
-    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 
     <!-- JS -->
     <script src="/app/app.js"></script>
+    <script src="/app/auth/auth.controller.js"></script>
+    <script src="/app/auth/auth.services.js"></script>
 
     <!--shared navbar-->
     <script src="/app/shared/navigation/navBar.controller.js"></script>
@@ -56,10 +63,53 @@
     <script src="/app/poi/poi.controller.js"></script>
     <script src="/app/poi/poi.services.js"></script>
 
+    <!--Review Feed-->
+    <script src="/app/data-view/reviews/reviews.module.js"></script>
+    <script src="/app/data-view/reviews/reviews.controller.js"></script>
+
+    <!--Guardian Newsfeed-->
+    <script src="/app/data-view/guardian/guardian.module.js"></script>
+    <script src="/app/data-view/guardian/guardian.controller.js"></script>
+
+    <!--Nytimes Newsfeed-->
+    <script src="/app/data-view/nytimes/nytimes.module.js"></script>
+    <script src="/app/data-view/nytimes/nytimes.controller.js"></script>
+
+    <!--Twitter Newsfeed-->
+    <script src="/app/data-view/twitter/twitter.module.js"></script>
+    <script src="/app/data-view/twitter/twitter.controller.js"></script>
+    <script>
+      window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+
+        return t;
+      }(document, "script", "twitter-wjs"));
+    </script>
+
+    <!--Data Feed-->
+    <script src="/app/data-view/data/data.module.js"></script>
+    <script src="/app/data-view/data/data.controller.js"></script>
+
+    <!--Profile Page-->
+    <script src="/app/profile/profile.module.js"></script>
+    <script src="/app/profile/profile.controller.js"></script>
+    <script src="/app/profile/profile.services.js"></script>
+
     <!-- Authentication -->
-    <script src="/app/auth/auth.module.js"></script>
-    <!--<script src="/app/auth/auth.controller.js"></script>-->
-    <script src="/app/auth/auth.services.js"></script>
+    <script src="/lib/auth0-lock/build/lock.js"></script>
+    <script src="/lib/angular-lock/dist/angular-lock.js"></script>
+    <script src="/lib/angular-jwt/dist/angular-jwt.js"></script>
 
   </body>
 </html>

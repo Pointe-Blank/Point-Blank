@@ -1,8 +1,8 @@
-require('../../config/db.config.js');
-const Review = require('./reviews.model.js');
+const models = require('../../config/db.config.js');
+const redHelpers = require('../redis/redis.helpers.js');
 
 exports.getAllReviews = function (req, res) {
-  Review.findAll()
+  models.Review.findAll()
     .then(function (review) {
       res.status(200).json(review);
     })
@@ -13,7 +13,11 @@ exports.getAllReviews = function (req, res) {
 
 exports.getOneReviewByName = function (req, res) {
   const reviewId = req.params.id;
-  Review.findOne({ where: {name: reviewId} })
+  models.Review.findOne({ 
+    where: {
+      name: reviewId
+    } 
+  })
     .then(function (review) {
       res.status(200).json(review);
     })
@@ -23,25 +27,26 @@ exports.getOneReviewByName = function (req, res) {
 };
 
 exports.addOneReview = function (req, res) {
-  const reviewType = req.body.reviewType; // MUST BE 'general' OR 'personal'
-  const reviewContent = req.body.review_content;
-  const rating = req.body.rating || 10;
-  const userId = req.body.userId;
-  const poiId = req.body.poiId;
-  const reviewerName = req.body.reviewer_name;
 
-  Review.create({
-    review_type: reviewType,
-    review_content: reviewContent,
-    rating: rating,
-    userId: userId,
-    poiId: poiId,
-    reviewer_name: reviewerName
+  models.Review.create({
+    review_type: req.body.reviewType, // MUST BE 'general' OR 'personal'
+    review_content: req.body.review_content,
+    rating: req.body.rating,
+    UserId: req.body.UserId,
+    POIId: req.body.poiId,
+    reviewer_name: req.body.reviewer_name,
+    NumUserRevs: req.body.NumUserRevs,
+    SumUserRevs: req.body.SumUserRevs
+
   })
-    .then(function (review) {
-      res.status(201).json(review);
-    })
-    .catch(function (err) {
-      res.status(400).send(err);
-    });
+  .then(function (review) {
+    res.status(201).json(review);
+    return redHelpers.initAll();
+  })
+  .then(result=>{
+    if(result) console.log("Updated Review cache: ", result)
+  })
+  .catch(function (err) {
+    res.status(400).send(err);
+  });
 };
